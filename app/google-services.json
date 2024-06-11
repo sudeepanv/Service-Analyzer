@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "630000294730",
+    "project_id": "ifix-45c77",
+    "storage_bucket": "ifix-45c77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630000294730:android:0de07c4bd42c12d583ffb3",
+        "android_client_info": {
+          "package_name": "com.example.ifix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzWOBl45TilO9LsP5To_IzKBTNJijY5EU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
