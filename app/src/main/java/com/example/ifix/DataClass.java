@@ -32,9 +32,7 @@ public class DataClass {
     public String getDataBrand() {
         return dataBrand;
     }
-    public String getDataModel() {
-        return dataModel;
-    }
+    public String getDataModel() {return dataModel;}
     public String getDataColour() {
         return dataColour;
     }
@@ -50,10 +48,14 @@ public class DataClass {
         return dataImage;
     }
 
-    public DataClass(String dataTitle, String dataDesc, String dataLang, String dataImage) {
+    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataImage) {
         this.dataName = dataName;
         this.dataPhone = dataPhone;
         this.dataBrand = dataBrand;
+        this.dataModel = dataModel;
+        this.dataColour = dataColour;
+        this.dataPassword = dataPassword;
+        this.dataComplaint = dataComplaint;
         this.dataImage = dataImage;
     }
     public DataClass(){

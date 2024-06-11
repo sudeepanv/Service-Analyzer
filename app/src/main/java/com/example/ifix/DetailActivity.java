@@ -19,7 +19,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class DetailActivity extends AppCompatActivity {
 
-    TextView detailDesc, detailTitle, detailLang;
+    TextView detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint;
     ImageView detailImage;
     FloatingActionButton deleteButton, editButton;
     String key = "";
@@ -30,18 +30,28 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        detailDesc = findViewById(R.id.detailDesc);
+        detailPhone = findViewById(R.id.detailPhone);
         detailImage = findViewById(R.id.detailImage);
-        detailTitle = findViewById(R.id.detailTitle);
+        detailName = findViewById(R.id.detailName);
         deleteButton = findViewById(R.id.deleteButton);
         editButton = findViewById(R.id.editButton);
-        detailLang = findViewById(R.id.detailLang);
+        detailBrand = findViewById(R.id.detailBrand);
+        detailModel = findViewById(R.id.detailModel);
+        detailColour = findViewById(R.id.detailColour);
+        detailPassword = findViewById(R.id.detailPassword);
+        detailComplaint = findViewById(R.id.detailComplaint);
+
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
-            detailDesc.setText(bundle.getString("Description"));
-            detailTitle.setText(bundle.getString("Title"));
-            detailLang.setText(bundle.getString("Language"));
+            detailPhone.setText(bundle.getString("Phone"));
+            detailName.setText(bundle.getString("Name"));
+            detailBrand.setText(bundle.getString("Brand"));
+            detailModel.setText(bundle.getString("Model"));
+            detailColour.setText(bundle.getString("Colour"));
+            detailPassword.setText(bundle.getString("Password"));
+            detailComplaint.setText(bundle.getString("Complaint"));
+
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             Glide.with(this).load(bundle.getString("Image")).into(detailImage);
@@ -68,9 +78,13 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailActivity.this, UpdateActivity.class)
-                        .putExtra("Title", detailTitle.getText().toString())
-                        .putExtra("Description", detailDesc.getText().toString())
-                        .putExtra("Language", detailLang.getText().toString())
+                        .putExtra("Name", detailName.getText().toString())
+                        .putExtra("Phone", detailPhone.getText().toString())
+                        .putExtra("Brand", detailBrand.getText().toString())
+                        .putExtra("Model", detailModel.getText().toString())
+                        .putExtra("Colour", detailColour.getText().toString())
+                        .putExtra("Password", detailPassword.getText().toString())
+                        .putExtra("Complaint", detailComplaint.getText().toString())
                         .putExtra("Image", imageUrl)
                         .putExtra("Key", key);
                 startActivity(intent);

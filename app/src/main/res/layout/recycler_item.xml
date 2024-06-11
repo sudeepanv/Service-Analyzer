@@ -27,37 +27,60 @@
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"/>
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:id="@+id/recTitle"
-            android:text="Title"
+            android:id="@+id/recName"
+            android:text="Name"
             android:textColor="@color/lavender"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@id/recImage"/>
 
         <TextView
+            android:id="@+id/recPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/recName"
+            android:text="Phone"
+            android:textAlignment="center"
+            android:textColor="@color/lavender"
+            android:textSize="16sp" />
+
+        <TextView
             android:layout_width="80dp"
             android:layout_height="30dp"
-            android:id="@+id/recLang"
-            android:text="priority"
-            android:layout_toEndOf="@id/recTitle"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="90dp"
+            android:id="@+id/recComplaint"
+            android:text="complaint"
+            android:layout_toEndOf="@id/recModel"
+            android:layout_below="@id/recPhone"
             android:textAlignment="center"
             android:textColor="@color/lavender"
             android:textSize="16sp"/>
 
         <TextView
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/recDesc"
-            android:text="desc"
+            android:id="@+id/recBrand"
+            android:text="Brand"
             android:textColor="@color/lavender"
             android:textSize="14sp"
             android:layout_toEndOf="@id/recImage"
-            android:layout_below="@id/recTitle"
+            android:layout_below="@id/recName"
+            android:layout_marginStart="20dp"
+            android:maxLines="1"
+            android:layout_marginBottom="12dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/recModel"
+            android:text="model"
+            android:textColor="@color/lavender"
+            android:textSize="14sp"
+            android:layout_toEndOf="@id/recBrand"
+            android:layout_below="@id/recName"
             android:layout_marginStart="20dp"
             android:maxLines="1"
             android:layout_marginBottom="12dp"/>

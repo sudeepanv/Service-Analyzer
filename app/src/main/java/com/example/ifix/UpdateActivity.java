@@ -35,7 +35,7 @@ public class UpdateActivity extends AppCompatActivity {
 
     ImageView updateImage;
     Button updateButton;
-    EditText updateDesc, updateTitle, updateLang;
+    EditText updateName, updatePhone, updateBrand, updateModel, updateColour,updatePassword,updateComplaint;
     String title, desc, lang;
     String imageUrl;
     String key, oldImageURL;
@@ -49,10 +49,15 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
 
         updateButton = findViewById(R.id.updateButton);
-        updateDesc = findViewById(R.id.updateDesc);
+
         updateImage = findViewById(R.id.updateImage);
-        updateLang = findViewById(R.id.updateLang);
-        updateTitle = findViewById(R.id.updateTitle);
+        updateName = findViewById(R.id.updateName);
+        updatePhone = findViewById(R.id.updatePhone);
+        updateBrand = findViewById(R.id.updateBrand);
+        updateModel = findViewById(R.id.updateModel);
+        updateColour= findViewById(R.id.updateColour);
+        updatePassword = findViewById(R.id.updatePassword);
+        updateComplaint = findViewById(R.id.updateComplaint);
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -72,9 +77,13 @@ public class UpdateActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
             Glide.with(UpdateActivity.this).load(bundle.getString("Image")).into(updateImage);
-            updateTitle.setText(bundle.getString("Title"));
-            updateDesc.setText(bundle.getString("Description"));
-            updateLang.setText(bundle.getString("Language"));
+            updateName.setText(bundle.getString("Name"));
+            updatePhone.setText(bundle.getString("Phone"));
+            updateBrand.setText(bundle.getString("Brand"));
+            updateModel.setText(bundle.getString("Model"));
+            updateColour.setText(bundle.getString("Colour"));
+            updatePassword.setText(bundle.getString("Password"));
+            updateComplaint.setText(bundle.getString("Complaint"));
             key = bundle.getString("Key");
             oldImageURL = bundle.getString("Image");
         }
@@ -131,11 +140,15 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     public void updateData(){
-        title = updateTitle.getText().toString().trim();
-        desc = updateDesc.getText().toString().trim();
-        lang = updateLang.getText().toString().trim();
+        String Name = updateName.getText().toString();
+        String Phone = updatePhone.getText().toString();
+        String Brand = updateBrand.getText().toString();
+        String Model = updateModel.getText().toString();
+        String Colour = updateColour.getText().toString();
+        String Password = updatePassword.getText().toString();
+        String Complaint = updateComplaint.getText().toString();
 
-        DataClass dataClass = new DataClass(title, desc, lang, imageUrl);
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint, imageUrl);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

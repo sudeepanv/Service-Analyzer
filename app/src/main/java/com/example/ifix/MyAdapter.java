@@ -37,19 +37,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
-        holder.recTitle.setText(dataList.get(position).getDataName());
-        holder.recDesc.setText(dataList.get(position).getDataPhone());
-        holder.recLang.setText(dataList.get(position).getDataBrand());
+        holder.recName.setText(dataList.get(position).getDataName());
+        holder.recPhone.setText(dataList.get(position).getDataPhone());
+        holder.recBrand.setText(dataList.get(position).getDataBrand());
+        holder.recModel.setText(dataList.get(position).getDataModel());
+        holder.recComplaint.setText(dataList.get(position).getDataComplaint());
 
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
-                intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataPhone());
-                intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataName());
+                intent.putExtra("Phone", dataList.get(holder.getAdapterPosition()).getDataPhone());
+                intent.putExtra("Name", dataList.get(holder.getAdapterPosition()).getDataName());
                 intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
-                intent.putExtra("Language", dataList.get(holder.getAdapterPosition()).getDataBrand());
+                intent.putExtra("Brand", dataList.get(holder.getAdapterPosition()).getDataBrand());
+                intent.putExtra("Model", dataList.get(holder.getAdapterPosition()).getDataModel());
+                intent.putExtra("Colour", dataList.get(holder.getAdapterPosition()).getDataColour());
+                intent.putExtra("Password", dataList.get(holder.getAdapterPosition()).getDataPassword());
+                intent.putExtra("Complaint", dataList.get(holder.getAdapterPosition()).getDataComplaint());
                 context.startActivity(intent);
             }
         });
@@ -69,7 +75,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 class MyViewHolder extends RecyclerView.ViewHolder{
 
     ImageView recImage;
-    TextView recTitle, recDesc, recLang;
+    TextView recName, recPhone, recBrand, recModel, recComplaint;
     CardView recCard;
 
     public MyViewHolder(@NonNull View itemView) {
@@ -77,8 +83,10 @@ class MyViewHolder extends RecyclerView.ViewHolder{
 
         recImage = itemView.findViewById(R.id.recImage);
         recCard = itemView.findViewById(R.id.recCard);
-        recDesc = itemView.findViewById(R.id.recDesc);
-        recLang = itemView.findViewById(R.id.recLang);
-        recTitle = itemView.findViewById(R.id.recTitle);
+        recPhone = itemView.findViewById(R.id.recPhone);
+        recBrand = itemView.findViewById(R.id.recBrand);
+        recModel = itemView.findViewById(R.id.recModel);
+        recName = itemView.findViewById(R.id.recName);
+        recComplaint = itemView.findViewById(R.id.recComplaint);
     }
 }

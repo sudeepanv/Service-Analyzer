@@ -35,7 +35,7 @@ public class UploadActivity extends AppCompatActivity {
 
     ImageView uploadImage;
     Button saveButton;
-    EditText uploadTopic, uploadDesc, uploadLang, uploadModel, uploadColour,uploadPassword, uploadComplaint;
+    EditText uploadBrand, uploadName, uploadPhone, uploadModel, uploadColour,uploadPassword, uploadComplaint;
     String imageURL;
     Uri uri;
 
@@ -45,9 +45,9 @@ public class UploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload); // Ensure this matches your XML layout file name
 
         uploadImage = findViewById(R.id.uploadImage);
-        uploadDesc = findViewById(R.id.uploadName);
-        uploadTopic = findViewById(R.id.uploadPhone);
-        uploadLang = findViewById(R.id.uploadBrand);
+        uploadName = findViewById(R.id.uploadName);
+        uploadPhone = findViewById(R.id.uploadPhone);
+        uploadBrand = findViewById(R.id.uploadBrand);
         uploadModel = findViewById(R.id.uploadModel);
         uploadColour= findViewById(R.id.uploadColour);
         uploadPassword = findViewById(R.id.uploadPassword);
@@ -126,16 +126,20 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     public void uploadData() {
-        String title = uploadTopic.getText().toString();
-        String desc = uploadDesc.getText().toString();
-        String lang = uploadLang.getText().toString();
+        String Name = uploadName.getText().toString();
+        String Phone = uploadPhone.getText().toString();
+        String Brand = uploadBrand.getText().toString();
+        String Model = uploadModel.getText().toString();
+        String Colour = uploadColour.getText().toString();
+        String Password = uploadPassword.getText().toString();
+        String Complaint = uploadComplaint.getText().toString();
 
-        if (title.isEmpty() || desc.isEmpty() || lang.isEmpty()) {
+        if (Name.isEmpty() || Phone.isEmpty() || Brand.isEmpty()) {
             Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        DataClass dataClass = new DataClass(title, desc, lang, imageURL);
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint, imageURL);
 
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
