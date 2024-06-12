@@ -9,4 +9,10 @@
         <item>NOT OK BOX</item>
         <item>DELIVERED</item>
     </string-array>
+    <string-array name="Paymentlist">
+        <item>CASH</item>
+        <item>G-PAY</item>
+        <item>PHONEPE</item>
+        <item>BOTH</item>
+    </string-array>
 </resources>

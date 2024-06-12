@@ -57,6 +57,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("Password", dataList.get(holder.getAdapterPosition()).getDataPassword());
                 intent.putExtra("Complaint", dataList.get(holder.getAdapterPosition()).getDataComplaint());
                 intent.putExtra("Status", dataList.get(holder.getAdapterPosition()).getDataStatus());
+                intent.putExtra("Expense", dataList.get(holder.getAdapterPosition()).getDataExpense());
+                intent.putExtra("Amount", dataList.get(holder.getAdapterPosition()).getDataAmount());
+                intent.putExtra("Payment", dataList.get(holder.getAdapterPosition()).getDataPaymentVia());
+
                 context.startActivity(intent);
             }
         });

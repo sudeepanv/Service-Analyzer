@@ -26,7 +26,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class DetailActivity extends AppCompatActivity {
 
-    EditText detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus;
+    TextView detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus,detailExpense,detailAmount,detailPayment;
 
     ImageView detailImage;
     Button deleteButton, editButton, deliveredButton;
@@ -40,30 +40,24 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         detailPhone = findViewById(R.id.detailPhone);
-        detailPhone.setEnabled(false);
         detailImage = findViewById(R.id.detailImage);
-        detailImage.setEnabled(false);
         detailName = findViewById(R.id.detailName);
-        detailName.setEnabled(false);
         detailBrand = findViewById(R.id.detailBrand);
-        detailBrand.setEnabled(false);
         detailModel = findViewById(R.id.detailModel);
-        detailModel.setEnabled(false);
         detailColour = findViewById(R.id.detailColour);
-        detailColour.setEnabled(false);
         detailPassword = findViewById(R.id.detailPassword);
-        detailPassword.setEnabled(false);
         detailComplaint = findViewById(R.id.detailComplaint);
-        detailComplaint.setEnabled(false);
         detailStatus = findViewById(R.id.detailStatus);
-        detailStatus.setEnabled(false);
+        detailExpense = findViewById(R.id.detailExpense);
+        detailAmount = findViewById(R.id.detailAmount);
+        detailPayment = findViewById(R.id.detailPayment);
+
         deleteButton = findViewById(R.id.deleteButton);
         editButton = findViewById(R.id.editButton);
-        deliveredButton=findViewById(R.id.deliveredButton);
-
+        deliveredButton = findViewById(R.id.deliveredButton);
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
+        if (bundle != null) {
             detailPhone.setText(bundle.getString("Phone"));
             detailName.setText(bundle.getString("Name"));
             detailBrand.setText(bundle.getString("Brand"));
@@ -72,6 +66,9 @@ public class DetailActivity extends AppCompatActivity {
             detailPassword.setText(bundle.getString("Password"));
             detailComplaint.setText(bundle.getString("Complaint"));
             detailStatus.setText(bundle.getString("Status"));
+            detailExpense.setText(bundle.getString("Expense"));
+            detailAmount.setText(bundle.getString("Amount"));
+            detailPayment.setText(bundle.getString("Payment"));
 
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
@@ -107,6 +104,7 @@ public class DetailActivity extends AppCompatActivity {
                         .putExtra("Colour", detailColour.getText().toString())
                         .putExtra("Password", detailPassword.getText().toString())
                         .putExtra("Complaint", detailComplaint.getText().toString())
+                        .putExtra("Status", detailStatus.getText().toString())
                         .putExtra("Image", imageUrl)
                         .putExtra("Key", key);
                 startActivity(intent);
@@ -115,33 +113,21 @@ public class DetailActivity extends AppCompatActivity {
         deliveredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateData();
-            }
-        });
-    }
-    public void updateData(){
-        String Name = detailName.getText().toString();
-        String Phone = detailPhone.getText().toString();
-        String Brand = detailBrand.getText().toString();
-        String Model = detailModel.getText().toString();
-        String Colour = detailColour.getText().toString();
-        String Password = detailPassword.getText().toString();
-        String Complaint = detailComplaint.getText().toString();
-        String Status = "DELIVERED";
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status, imageUrl);
-
-        databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(DetailActivity.this, "Delivered", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(DetailActivity.this, "Not Delivered", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DetailActivity.this, Delivery.class)
+                        .putExtra("Name", detailName.getText().toString())
+                        .putExtra("Phone", detailPhone.getText().toString())
+                        .putExtra("Brand", detailBrand.getText().toString())
+                        .putExtra("Model", detailModel.getText().toString())
+                        .putExtra("Colour", detailColour.getText().toString())
+                        .putExtra("Password", detailPassword.getText().toString())
+                        .putExtra("Complaint", detailComplaint.getText().toString())
+                        .putExtra("Status", detailStatus.getText().toString())
+                        .putExtra("Expense", detailExpense.getText().toString())
+                        .putExtra("Amount", detailAmount.getText().toString())
+                        .putExtra("Payment", detailPayment.getText().toString())
+                        .putExtra("Image", imageUrl)
+                        .putExtra("Key", key);
+                startActivity(intent);
             }
         });
     }
