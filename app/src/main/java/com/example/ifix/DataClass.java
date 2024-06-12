@@ -10,6 +10,7 @@ public class DataClass {
     private String dataColour;
     private String dataPassword;
     private String dataComplaint;
+    private String dataStatus;
     private String dataImage;
     private String key;
 
@@ -42,7 +43,7 @@ public class DataClass {
     public String getDataComplaint() {
         return dataComplaint;
     }
-
+    public String getDataStatus(){return dataStatus;}
 
     public String getDataImage() {
         return dataImage;
@@ -57,6 +58,7 @@ public class DataClass {
         this.dataPassword = dataPassword;
         this.dataComplaint = dataComplaint;
         this.dataImage = dataImage;
+
     }
     public DataClass(){
 

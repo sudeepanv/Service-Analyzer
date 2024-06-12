@@ -13,22 +13,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="20dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center_horizontal"
-                android:padding="10dp"
-                android:background="@drawable/lavender_border">
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -40,10 +30,11 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:src="@drawable/uploadimg"
                     android:id="@+id/detailImage"
                     android:layout_marginTop="10dp"
+                    android:background="@drawable/lavender_border"
                     android:scaleType="fitXY"/>
 
                 <TextView
@@ -85,6 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/detailModel"
+                        android:layout_marginLeft="10dp"
                         android:hint="Model"
                         android:gravity="start|center_vertical"
                         android:textColor="@color/lavender"/>
@@ -92,6 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/detailColour"
+                        android:layout_marginLeft="10dp"
                         android:hint="Colour"
                         android:gravity="start|center_vertical"
                         android:textColor="@color/lavender"/>
@@ -118,52 +111,37 @@
                     android:hint="Complaint"
                     android:gravity="start|center_vertical"
                     android:textColor="@color/lavender"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EDIT"
+                        android:backgroundTint="@color/green"
+                        android:id="@+id/editButton"
+                        />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DELETE"
+                        android:backgroundTint="@color/red"
+                        android:id="@+id/deleteButton"
+
+                        />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DELIVERED"
+                        android:backgroundTint="@color/red"
+                        android:id="@+id/deliveredButton"
+
+                        />
+                </LinearLayout>
+
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
-
     </ScrollView>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.github.clans.fab.FloatingActionMenu
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            app:menu_fab_size="normal"
-            android:layout_marginBottom="20dp"
-            android:layout_marginEnd="20dp"
-            app:menu_colorPressed="@color/lavender"
-            app:menu_colorNormal="@color/lavender"
-            app:menu_icon="@drawable/format_list_bulleted"
-            app:menu_openDirection="up"
-            app:menu_showShadow="true">
-
-            <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editButton"
-                android:src="@drawable/edit"
-                app:fab_showShadow="true"
-                app:fab_colorNormal="@color/green"
-                app:fab_size="mini"/>
-
-            <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/deleteButton"
-                android:src="@drawable/ic_delete"
-                app:fab_showShadow="true"
-                app:fab_colorNormal="@color/red"
-                app:fab_size="mini"/>
-
-        </com.github.clans.fab.FloatingActionMenu>
-
-    </RelativeLayout>
 
 </LinearLayout>
