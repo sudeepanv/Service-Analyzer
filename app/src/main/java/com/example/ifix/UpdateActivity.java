@@ -13,9 +13,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -36,10 +40,11 @@ public class UpdateActivity extends AppCompatActivity {
     ImageView updateImage;
     Button updateButton;
     EditText updateName, updatePhone, updateBrand, updateModel, updateColour,updatePassword,updateComplaint;
-    String title, desc, lang;
-    String imageUrl;
+    String imageUrl,Status;
     String key, oldImageURL;
     Uri uri;
+    AutoCompleteTextView updateStatus;
+    ArrayAdapter<String> arrayAdapter;
     DatabaseReference databaseReference;
     StorageReference storageReference;
 
@@ -58,6 +63,24 @@ public class UpdateActivity extends AppCompatActivity {
         updateColour= findViewById(R.id.updateColour);
         updatePassword = findViewById(R.id.updatePassword);
         updateComplaint = findViewById(R.id.updateComplaint);
+        String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Statuslist);
+        updateStatus =findViewById(R.id.updateStatus);
+        updateStatus.setAdapter(arrayAdapter);
+        updateStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Status=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        updateStatus.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                updateStatus.showDropDown();
+            }
+        });
+
+        // Show suggestions when the field is clicked
+        updateStatus.setOnClickListener(v -> updateStatus.showDropDown());
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -84,10 +107,11 @@ public class UpdateActivity extends AppCompatActivity {
             updateColour.setText(bundle.getString("Colour"));
             updatePassword.setText(bundle.getString("Password"));
             updateComplaint.setText(bundle.getString("Complaint"));
+            updateStatus.setText(bundle.getString("Status"));
             key = bundle.getString("Key");
             oldImageURL = bundle.getString("Image");
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("Android Tutorials").child(key);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(key);
 
         updateImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,8 +171,8 @@ public class UpdateActivity extends AppCompatActivity {
         String Colour = updateColour.getText().toString();
         String Password = updatePassword.getText().toString();
         String Complaint = updateComplaint.getText().toString();
-
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint, imageUrl);
+        String Status = updateStatus.getText().toString();
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status, imageUrl);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

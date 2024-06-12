@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,134 +8,168 @@
     android:orientation="vertical"
     tools:context=".DetailActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:padding="20dp">
 
-            <LinearLayout
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Details"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textColor="@color/lavender"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/uploadimg"
+            android:id="@+id/detailImage"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitCenter"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/lavender"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                android:padding="10dp">
+                android:layout_height="match_parent"
+                android:id="@+id/detailName"
+                android:singleLine="true"
+                android:hint="Name"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Details"
-                    android:textSize="30sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/lavender"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/lavender"
+            android:layout_marginTop="20dp">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/uploadimg"
-                    android:id="@+id/detailImage"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/lavender_border"
-                    android:scaleType="fitXY"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/detailPhone"
+                android:singleLine="true"
+                android:hint="Phone No"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/lavender"
+            android:layout_marginTop="20dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:id="@+id/detailName"
-                    android:background="@drawable/lavender_border"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:hint="Name"
-                    android:gravity="start|center_vertical"
-                    android:textColor="@color/lavender"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/detailBrand"
+                android:singleLine="true"
+                android:hint="Brand"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/lavender"
+            android:layout_marginTop="20dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:id="@+id/detailPhone"
-                    android:background="@drawable/lavender_border"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:hint="Phone No"
-                    android:gravity="start|center_vertical"
-                    android:textColor="@color/lavender"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:id="@+id/detailModel"
+                android:hint="Model"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/lavender"
+            android:layout_marginTop="20dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/lavender_border"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:id="@+id/detailBrand"
-                        android:hint="Brand"
-                        android:gravity="start|center_vertical"
-                        android:textColor="@color/lavender"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:id="@+id/detailModel"
-                        android:layout_marginLeft="10dp"
-                        android:hint="Model"
-                        android:gravity="start|center_vertical"
-                        android:textColor="@color/lavender"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/detailColour"
-                        android:layout_marginLeft="10dp"
-                        android:hint="Colour"
-                        android:gravity="start|center_vertical"
-                        android:textColor="@color/lavender"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/detailColour"
+                android:singleLine="true"
+                android:hint="Colour"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/lavender"
+            android:layout_marginTop="20dp">
 
-                </LinearLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/detailPassword"
+                android:singleLine="true"
+                android:hint="Password"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/lavender"
+            android:layout_marginTop="20dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:id="@+id/detailPassword"
-                    android:background="@drawable/lavender_border"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:hint="Password"
-                    android:gravity="start|center_vertical"
-                    android:textColor="@color/lavender"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:id="@+id/detailComplaint"
-                    android:background="@drawable/lavender_border"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    android:hint="Complaint"
-                    android:gravity="start|center_vertical"
-                    android:textColor="@color/lavender"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/detailComplaint"
+                android:singleLine="true"
+                android:hint="Complaint"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/lavender"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/detailStatus"
+                android:singleLine="true"
+                android:hint="Status"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
                     <Button
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="EDIT"
                         android:backgroundTint="@color/green"
                         android:id="@+id/editButton"
+                        android:layout_weight="1"
                         />
                     <Button
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="DELETE"
                         android:backgroundTint="@color/red"
                         android:id="@+id/deleteButton"
+                        android:layout_weight="1"
 
                         />
                     <Button
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="DELIVERED"
                         android:backgroundTint="@color/red"
                         android:id="@+id/deliveredButton"
-
+                        android:layout_weight="1"
                         />
                 </LinearLayout>
 
@@ -143,5 +177,3 @@
             </LinearLayout>
 
     </ScrollView>
-
-</LinearLayout>

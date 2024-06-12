@@ -49,7 +49,7 @@ public class DataClass {
         return dataImage;
     }
 
-    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataImage) {
+    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, String dataImage) {
         this.dataName = dataName;
         this.dataPhone = dataPhone;
         this.dataBrand = dataBrand;
@@ -58,7 +58,7 @@ public class DataClass {
         this.dataPassword = dataPassword;
         this.dataComplaint = dataComplaint;
         this.dataImage = dataImage;
-
+        this.dataStatus = dataStatus;
     }
     public DataClass(){
 

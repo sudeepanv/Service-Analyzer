@@ -56,6 +56,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("Colour", dataList.get(holder.getAdapterPosition()).getDataColour());
                 intent.putExtra("Password", dataList.get(holder.getAdapterPosition()).getDataPassword());
                 intent.putExtra("Complaint", dataList.get(holder.getAdapterPosition()).getDataComplaint());
+                intent.putExtra("Status", dataList.get(holder.getAdapterPosition()).getDataStatus());
                 context.startActivity(intent);
             }
         });

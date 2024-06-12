@@ -9,10 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,7 +40,8 @@ public class UploadActivity extends AppCompatActivity {
     ImageView uploadImage;
     Button saveButton;
     EditText uploadBrand, uploadName, uploadPhone, uploadModel, uploadColour,uploadPassword, uploadComplaint;
-    String imageURL;
+    String imageURL,Status;
+    AutoCompleteTextView uploadStatus;
     Uri uri;
 
     @Override
@@ -52,8 +57,27 @@ public class UploadActivity extends AppCompatActivity {
         uploadColour= findViewById(R.id.uploadColour);
         uploadPassword = findViewById(R.id.uploadPassword);
         uploadComplaint = findViewById(R.id.uploadComplaint);
-
+        String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, Statuslist);
+//         Get reference to the autocomplete text view
+        uploadStatus = findViewById(R.id.uploadStatus);
+//         Set adapter to the autocomplete text view to the arrayAdapter
+        uploadStatus.setAdapter(arrayAdapter);
         saveButton = findViewById(R.id.saveButton);
+        uploadStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Status=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        uploadStatus.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                uploadStatus.showDropDown();
+            }
+        });
+
+        // Show suggestions when the field is clicked
+        uploadStatus.setOnClickListener(v -> uploadStatus.showDropDown());
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -90,7 +114,8 @@ public class UploadActivity extends AppCompatActivity {
                 if (uri != null) {
                     saveData();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
+                    uploadData();
+//                    Toast.makeText(UploadActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -133,17 +158,18 @@ public class UploadActivity extends AppCompatActivity {
         String Colour = uploadColour.getText().toString();
         String Password = uploadPassword.getText().toString();
         String Complaint = uploadComplaint.getText().toString();
+        Status = uploadStatus.getText().toString();
 
         if (Name.isEmpty() || Phone.isEmpty() || Brand.isEmpty()) {
             Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint, imageURL);
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status, imageURL);
 
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
-        FirebaseDatabase.getInstance().getReference("Android Tutorials").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("Entry List").child(currentDate)
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MyAdapter(MainActivity.this, dataList);
         recyclerView.setAdapter(adapter);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Android Tutorials");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List");
         dialog.show();
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     public void searchList(String text){
         ArrayList<com.example.ifix.DataClass> searchList = new ArrayList<>();
         for (com.example.ifix.DataClass dataClass: dataList){
-            if (dataClass.getDataName().toLowerCase().contains(text.toLowerCase())){
+            if (dataClass.getDataPhone().toLowerCase().contains(text.toLowerCase())){
                 searchList.add(dataClass);
             }
         }
