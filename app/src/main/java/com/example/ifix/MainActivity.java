@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         searchView = findViewById(R.id.search);
         searchView.clearFocus();
+        Toolbar tool=findViewById(R.id.toolbar);
+        setSupportActionBar(tool);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -98,6 +104,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.accountmenu) {
+            Intent intent = new Intent(MainActivity.this, Accounts.class);
+            startActivity(intent);
+        }
+        return true;
     }
     public void searchList(String text){
         ArrayList<com.example.ifix.DataClass> searchList = new ArrayList<>();
