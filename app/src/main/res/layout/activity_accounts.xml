@@ -99,7 +99,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:id="@+id/accountExpense"
+                        android:id="@+id/accountProfit"
                         android:layout_height="wrap_content"
                         android:hint=""
                         android:textSize="25dp"/>
@@ -115,7 +115,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:id="@+id/accountProfit"
+                        android:id="@+id/accountExpense"
                         android:layout_height="wrap_content"
                         android:hint=""
                         android:textSize="25dp"/>
