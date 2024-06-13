@@ -12,9 +12,11 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
@@ -36,17 +38,39 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
+//        Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
         holder.recName.setText(dataList.get(position).getDataName());
         holder.recPhone.setText(dataList.get(position).getDataPhone());
         holder.recBrand.setText(dataList.get(position).getDataBrand());
         holder.recModel.setText(dataList.get(position).getDataModel());
         holder.recComplaint.setText(dataList.get(position).getDataComplaint());
+        String Status=dataList.get(position).getDataStatus();
+        if(Objects.equals(Status, "DELIVERED")){
+            int color = context.getResources().getColor(R.color.lightgrey);
+            holder.recCard.setCardBackgroundColor(color);
+        } else if (Objects.equals(Status, "NOT OK BOX")) {
+            int color = context.getResources().getColor(R.color.green);
+            holder.recCard.setCardBackgroundColor(color);
+        }else if (Objects.equals(Status, "SERVICE")) {
+            int color = context.getResources().getColor(R.color.yellow);
+            holder.recCard.setCardBackgroundColor(color);
+        }else if (Objects.equals(Status, "WAITING SPARE")) {
+            int color = context.getResources().getColor(R.color.darkyellow);
+            holder.recCard.setCardBackgroundColor(color);
+        }else if (Objects.equals(Status, "OK BOX")) {
+            int color = context.getResources().getColor(R.color.darkgreen);
+            holder.recCard.setCardBackgroundColor(color);
+        }else if (Objects.equals(Status, "DRAWER")) {
+            int color = context.getResources().getColor(R.color.red);
+            holder.recCard.setCardBackgroundColor(color);
+        }
+
 
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("Time", dataList.get(holder.getAdapterPosition()).getDataTime());
                 intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
                 intent.putExtra("Phone", dataList.get(holder.getAdapterPosition()).getDataPhone());
                 intent.putExtra("Name", dataList.get(holder.getAdapterPosition()).getDataName());
@@ -86,7 +110,7 @@ class MyViewHolder extends RecyclerView.ViewHolder{
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        recImage = itemView.findViewById(R.id.recImage);
+//        recImage = itemView.findViewById(R.id.recImage);
         recCard = itemView.findViewById(R.id.recCard);
         recPhone = itemView.findViewById(R.id.recPhone);
         recBrand = itemView.findViewById(R.id.recBrand);

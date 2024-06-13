@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Accounts extends AppCompatActivity {
 
@@ -41,7 +42,7 @@ public class Accounts extends AppCompatActivity {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     DataClass dataClass = itemSnapshot.getValue(DataClass.class);
-                    dataClass.setKey(itemSnapshot.getKey());
+                    Objects.requireNonNull(dataClass).setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
                 }
                 // Calculate profit after data is fetched

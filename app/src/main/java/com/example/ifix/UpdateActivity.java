@@ -183,13 +183,15 @@ public class UpdateActivity extends AppCompatActivity {
                         reference.delete();
                     }
                     Toast.makeText(UpdateActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(UpdateActivity.this,MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UpdateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateActivity.this, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

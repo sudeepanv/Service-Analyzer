@@ -26,11 +26,11 @@ import com.google.firebase.storage.StorageReference;
 
 public class DetailActivity extends AppCompatActivity {
 
-    TextView detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus,detailExpense,detailAmount,detailPayment;
+    TextView detailTime,detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus,detailExpense,detailAmount,detailPayment;
 
     ImageView detailImage;
     Button deleteButton, editButton, deliveredButton;
-    String key = "";
+    String key;
     DatabaseReference databaseReference;
     String imageUrl = "";
 
@@ -38,7 +38,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
+        detailTime=findViewById(R.id.detailTime);
         detailPhone = findViewById(R.id.detailPhone);
         detailImage = findViewById(R.id.detailImage);
         detailName = findViewById(R.id.detailName);
@@ -69,28 +69,45 @@ public class DetailActivity extends AppCompatActivity {
             detailExpense.setText(bundle.getString("Expense"));
             detailAmount.setText(bundle.getString("Amount"));
             detailPayment.setText(bundle.getString("Payment"));
-
+            detailTime.setText(bundle.getString("Time"));
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
-            Glide.with(this).load(bundle.getString("Image")).into(detailImage);
+            if (imageUrl != null && !imageUrl.isEmpty()) {
+                Glide.with(this).load(imageUrl).into(detailImage);
+            } else {
+                detailImage.setImageResource(R.drawable.uploadimg); // Set a placeholder image if there is no image URL
+            }
         }
         databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(key);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Entry List");
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-
-                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
-                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        reference.child(key).removeValue();
-                        Toast.makeText(DetailActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
-                    }
-                });
+                if (imageUrl != null && !imageUrl.isEmpty()) {
+                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                    StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            reference.child(key).removeValue();
+                            Toast.makeText(DetailActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(DetailActivity.this, "Failed to delete image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    reference.child(key).removeValue();
+                    Toast.makeText(DetailActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -126,9 +143,10 @@ public class DetailActivity extends AppCompatActivity {
                         .putExtra("Amount", detailAmount.getText().toString())
                         .putExtra("Payment", detailPayment.getText().toString())
                         .putExtra("Image", imageUrl)
-                        .putExtra("Key", key);
+                        .putExtra("Time", key);
                 startActivity(intent);
             }
         });
     }
 }
+

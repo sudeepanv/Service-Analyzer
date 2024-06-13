@@ -2,9 +2,9 @@
     <string name="app_name">iFix</string>
 
     <string-array name="Statuslist">
-        <item>Drawer</item>
+        <item>DRAWER</item>
         <item>SERVICE</item>
-        <item>Waiting for Spare</item>
+        <item>WAITING SPARE</item>
         <item>OK BOX</item>
         <item>NOT OK BOX</item>
         <item>DELIVERED</item>

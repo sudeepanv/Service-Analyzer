@@ -6,6 +6,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -121,6 +123,7 @@ public class UploadActivity extends AppCompatActivity {
         });
     }
 
+
     public void saveData() {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
                 .child(Objects.requireNonNull(uri.getLastPathSegment()));
@@ -159,22 +162,22 @@ public class UploadActivity extends AppCompatActivity {
         String Password = uploadPassword.getText().toString();
         String Complaint = uploadComplaint.getText().toString();
         Status = uploadStatus.getText().toString();
+        String Time = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
         if (Name.isEmpty() || Phone.isEmpty() || Brand.isEmpty()) {
             Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
             return;
         }
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status, imageURL,Time);
 
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status, imageURL);
-
-        String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-
-        FirebaseDatabase.getInstance().getReference("Entry List").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("Entry List").child(Time)
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(UploadActivity.this,MainActivity.class);
+                            startActivity(intent);
                             finish();
                         } else {
                             Toast.makeText(UploadActivity.this, "Failed to save data", Toast.LENGTH_SHORT).show();
@@ -183,7 +186,7 @@ public class UploadActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(UploadActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UploadActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
