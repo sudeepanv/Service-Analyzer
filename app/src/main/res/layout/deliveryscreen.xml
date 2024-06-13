@@ -181,6 +181,7 @@
                 android:inputType="numberSigned"
                 android:id="@+id/expense"
                 android:hint="Expense"/>
+            <requestFocus/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
@@ -196,6 +197,7 @@
                 android:inputType="number"
                 android:id="@+id/amount"
                 android:hint="Amount"/>
+            <requestFocus/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
@@ -206,12 +208,11 @@
         android:layout_height="60dp"
         android:gravity="start|center_vertical"
         android:layout_margin="20dp"
-        android:hint="Payment Mode"
-        style="@style/Widget.AppCompat.Spinner.DropDown">
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <AutoCompleteTextView
             android:id="@+id/payment"
             android:layout_width="match_parent"
-            android:singleLine="true"
+            android:hint="Payment Mode"
             android:layout_height="match_parent"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -221,5 +222,5 @@
         android:layout_margin="20dp"
         android:id="@+id/deliver"
         android:text="DELIVER"
-        android:backgroundTint="@color/darkgreen"/>
+        android:backgroundTint="@color/ifixblue"/>
 </LinearLayout>

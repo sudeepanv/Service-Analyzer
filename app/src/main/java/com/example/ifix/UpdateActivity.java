@@ -39,11 +39,11 @@ public class UpdateActivity extends AppCompatActivity {
 
     ImageView updateImage;
     Button updateButton;
-    EditText updateName, updatePhone, updateBrand, updateModel, updateColour,updatePassword,updateComplaint;
-    String imageUrl,Status;
+    EditText updateName, updatePhone, updateBrand, updateModel,updatePassword,updateComplaint;
+    String imageUrl,Status,Colour;
     String key, oldImageURL, jobno;
     Uri uri;
-    AutoCompleteTextView updateStatus;
+    AutoCompleteTextView updateStatus,updateColour;
     ArrayAdapter<String> arrayAdapter;
     DatabaseReference databaseReference;
     StorageReference storageReference;
@@ -63,6 +63,7 @@ public class UpdateActivity extends AppCompatActivity {
         updateColour= findViewById(R.id.updateColour);
         updatePassword = findViewById(R.id.updatePassword);
         updateComplaint = findViewById(R.id.updateComplaint);
+
         String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Statuslist);
         updateStatus =findViewById(R.id.updateStatus);
@@ -78,9 +79,23 @@ public class UpdateActivity extends AppCompatActivity {
                 updateStatus.showDropDown();
             }
         });
-
-        // Show suggestions when the field is clicked
         updateStatus.setOnClickListener(v -> updateStatus.showDropDown());
+
+        String[] Colourlist = getResources().getStringArray(R.array.Colourlist);
+        ArrayAdapter<String> ColourAdapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, Colourlist);
+        updateColour.setAdapter(ColourAdapter);
+        updateColour.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Colour=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        updateColour.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                updateColour.showDropDown();
+            }
+        });
+        updateColour.setOnClickListener(v -> updateColour.showDropDown());
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),

@@ -48,6 +48,7 @@ public class Accounts extends AppCompatActivity {
                     DataClass dataClass = itemSnapshot.getValue(DataClass.class);
                     Objects.requireNonNull(dataClass).setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
+                    entry+=1;
                 }
 
                 // Calculate profit after data is fetched
@@ -62,7 +63,6 @@ public class Accounts extends AppCompatActivity {
                         totalProfit += individualProfit;
                         int individualAmount = Integer.parseInt(dataClass.getDataAmount());
                         totalAmount += individualAmount;
-                        entry+=1;
                         if (Objects.equals(dataClass.getDataStatus(), "DELIVERED"))
                             delivered+=1;
                     } catch (NumberFormatException e) {

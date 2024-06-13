@@ -17,7 +17,7 @@ public class DataClass {
     private String dataTime;
     private String dataDeliveryTime;
     private String key;
-    private static int dataJobNO;
+    private String dataJobNo;
 
     public String getKey() {
         return key;
@@ -54,12 +54,12 @@ public class DataClass {
     public String getDataPaymentVia(){return dataPaymentVia;}
     public String getDataTime(){return dataTime;}
     public String getDataDeliveryTime(){return dataDeliveryTime;}
-    public int setDataJobNo(){
-        ++dataJobNO;
-        return dataJobNO;
+    public String setDataJobNo(){
+        dataJobNo= Integer.toString(Integer.parseInt(dataJobNo)+1);
+        return dataJobNo;
     }
     public String getDataJobNo(){
-        return Integer.toString(dataJobNO);
+        return Integer.toString(Integer.parseInt(dataJobNo));
     }
 
 
@@ -67,21 +67,21 @@ public class DataClass {
     public String getDataImage() {
         return dataImage;
     }
-    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, String dataImage,String dataTime, String dataJobNo) {
-        this.dataName = dataName;
-        this.dataPhone = dataPhone;
-        this.dataBrand = dataBrand;
-        this.dataModel = dataModel;
-        this.dataColour = dataColour;
-        this.dataPassword = dataPassword;
-        this.dataComplaint = dataComplaint;
-        this.dataImage = dataImage;
-        this.dataStatus = dataStatus;
-        this.dataTime=dataTime;
-        this.dataJobNO = Integer.parseInt(dataJobNo);
-    }
+//    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, String dataImage,String dataTime, String dataJobNo) {
+//        this.dataName = dataName;
+//        this.dataPhone = dataPhone;
+//        this.dataBrand = dataBrand;
+//        this.dataModel = dataModel;
+//        this.dataColour = dataColour;
+//        this.dataPassword = dataPassword;
+//        this.dataComplaint = dataComplaint;
+//        this.dataImage = dataImage;
+//        this.dataStatus = dataStatus;
+//        this.dataTime=dataTime;
+//        this.dataJobNo = dataJobNo;
+//    }
 //new entry
-    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, String dataImage,String dataTime) {
+    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, String dataImage,String dataTime,String maxjob) {
         this.dataName = dataName;
         this.dataPhone = dataPhone;
         this.dataBrand = dataBrand;
@@ -92,7 +92,7 @@ public class DataClass {
         this.dataImage = dataImage;
         this.dataStatus = dataStatus;
         this.dataTime=dataTime;
-        this.dataJobNO=setDataJobNo();
+        this.dataJobNo=maxjob;
     }
     //delivery
     public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus,String dataTime, String dataImage,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime,String jobno) {
@@ -110,7 +110,7 @@ public class DataClass {
         this.dataAmount= dataAmount;
         this.dataPaymentVia =dataPaymentvia;
         this.dataDeliveryTime=dataDeliveryTime;
-        this.dataJobNO= Integer.parseInt(jobno);
+        this.dataJobNo= jobno;
 
     }
     public DataClass(){

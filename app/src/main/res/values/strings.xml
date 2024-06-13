@@ -6,14 +6,21 @@
         <item>STARTED</item>
         <item>WAITING SPARE</item>
         <item>OUTSIDE</item>
-        <item>READY</item>
-        <item>NOT READY</item>
-        <item>DELIVERED</item>
+        <item>OK</item>
+        <item>NOT OK</item>
     </string-array>
     <string-array name="Paymentlist">
         <item>CASH</item>
         <item>G-PAY</item>
         <item>PHONEPE</item>
         <item>BOTH</item>
+    </string-array>
+    <string-array name="Colourlist">
+        <item>RED</item>
+        <item>BLUE</item>
+        <item>GOLD</item>
+        <item>BLACK</item>
+        <item>WHITE</item>
+        <item>YELLOW</item>
     </string-array>
 </resources>

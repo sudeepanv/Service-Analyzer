@@ -16,5 +16,6 @@
     <color name="grey">#808080</color>
     <color name="orange">#FF4F00</color>
     <color name="lightgrey">#EFF3F5</color>
+    <color name="ifixblue">#0b7edb</color>
 
 </resources>

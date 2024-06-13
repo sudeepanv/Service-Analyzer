@@ -22,7 +22,7 @@
                 android:text="Update Data"
                 android:textSize="30sp"
                 android:textAlignment="center"
-                android:textColor="@color/lavender"/>
+                android:textColor="@color/ifixblue"/>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -43,6 +43,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/updateName"
                     android:singleLine="true"
+                    android:inputType="textCapCharacters"
                     android:hint="Name"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,6 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/updateBrand"
+                    android:inputType="textCapCharacters"
                     android:singleLine="true"
                     android:hint="Brand"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -86,6 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:singleLine="true"
+                    android:inputType="textCapCharacters"
                     android:id="@+id/updateModel"
                     android:hint="Model"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,13 +97,14 @@
                 android:layout_height="60dp"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
+                android:layout_marginTop="20dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/updateColour"
                     android:singleLine="true"
+                    android:inputType="textCapCharacters"
                     android:hint="Colour"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -128,6 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/updateComplaint"
+                    android:inputType="textCapCharacters"
                     android:singleLine="true"
                     android:hint="Complaint"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -136,16 +141,14 @@
                 android:layout_height="60dp"
                 android:gravity="start|center_vertical"
                 android:layout_marginTop="20dp"
-                android:hint="Status"
-                style="@style/Widget.AppCompat.Spinner.DropDown"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 >
-
                 <AutoCompleteTextView
                     android:id="@+id/updateStatus"
                     android:layout_width="match_parent"
-                    android:singleLine="true"
                     android:layout_height="match_parent"
-                    android:inputType="none" />
+                    android:hint="Status"
+                    android:inputType="textCapCharacters" />
             </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -48,19 +48,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         if(Objects.equals(Status, "DELIVERED")){
             int color = context.getResources().getColor(R.color.grey);
             holder.recCard.setCardBackgroundColor(color);
-        } else if (Objects.equals(Status, "NOT OK BOX")) {
+        } else if (Objects.equals(Status, "NOT OK")) {
             int color = context.getResources().getColor(R.color.green);
             holder.recCard.setCardBackgroundColor(color);
-        }else if (Objects.equals(Status, "SERVICE")) {
+        }else if (Objects.equals(Status, "WAITING SPARE")) {
             int color = context.getResources().getColor(R.color.yellow);
             holder.recCard.setCardBackgroundColor(color);
-        }else if (Objects.equals(Status, "WAITING SPARE")) {
+        }else if (Objects.equals(Status, "STARTED")) {
+            int color = context.getResources().getColor(R.color.yellow);
+            holder.recCard.setCardBackgroundColor(color);
+        }else if (Objects.equals(Status, "OUTSIDE")) {
             int color = context.getResources().getColor(R.color.darkyellow);
             holder.recCard.setCardBackgroundColor(color);
-        }else if (Objects.equals(Status, "OK BOX")) {
+        }else if (Objects.equals(Status, "OK")) {
             int color = context.getResources().getColor(R.color.darkgreen);
             holder.recCard.setCardBackgroundColor(color);
-        }else if (Objects.equals(Status, "DRAWER")) {
+        }else if (Objects.equals(Status, "NOT STARTED")) {
             int color = context.getResources().getColor(R.color.red);
             holder.recCard.setCardBackgroundColor(color);
         }
