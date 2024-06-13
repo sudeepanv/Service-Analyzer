@@ -28,7 +28,7 @@
                     android:layout_width="wrap_content"
                     android:id="@+id/deliveryName"
                     android:layout_height="wrap_content"
-                    android:hint="John Wick"
+                    android:hint="-"
                     android:textSize="25dp"/>
             </LinearLayout>
             <LinearLayout
@@ -43,7 +43,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="+91"
+                    android:hint="-"
                     android:id="@+id/deliveryPhone"
                     android:textSize="25dp"/>
             </LinearLayout>
@@ -59,7 +59,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="iPhone"
+                    android:hint="-"
                     android:id="@+id/deliveryBrand"
                     android:textSize="25dp"/>
             </LinearLayout>
@@ -75,7 +75,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="15"
+                    android:hint="-"
                     android:id="@+id/deliveryModel"
                     android:textSize="25dp"/>
             </LinearLayout>
@@ -91,7 +91,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Black"
+                    android:hint="-"
                     android:id="@+id/deliveryColour"
                     android:textSize="25dp"/>
             </LinearLayout>
@@ -107,7 +107,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="password"
+                    android:hint="-"
                     android:id="@+id/deliveryPassword"
                     android:textSize="25dp"/>
             </LinearLayout>
@@ -123,7 +123,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Display"
+                    android:hint="-"
                     android:id="@+id/deliveryComplaint"
                     android:textSize="25dp"/>
             </LinearLayout>
@@ -139,7 +139,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="OK BOX"
+                    android:hint="-"
                     android:id="@+id/deliveryStatus"
                     android:textSize="25dp"/>
             </LinearLayout>
@@ -216,10 +216,11 @@
             android:layout_height="match_parent"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_margin="20dp"
+        app:cornerRadius="20dp"
         android:id="@+id/deliver"
         android:text="DELIVER"
         android:backgroundTint="@color/ifixblue"/>

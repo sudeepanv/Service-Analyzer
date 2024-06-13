@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -43,29 +44,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recPhone.setText(dataList.get(position).getDataPhone());
         holder.recBrand.setText(dataList.get(position).getDataBrand());
         holder.recModel.setText(dataList.get(position).getDataModel());
+        holder.recJob.setText(dataList.get(position).getDataJobNo());
         holder.recComplaint.setText(dataList.get(position).getDataComplaint());
         String Status=dataList.get(position).getDataStatus();
         if(Objects.equals(Status, "DELIVERED")){
             int color = context.getResources().getColor(R.color.grey);
-            holder.recCard.setCardBackgroundColor(color);
+            holder.recColorbar.setBackgroundColor(color);
         } else if (Objects.equals(Status, "NOT OK")) {
             int color = context.getResources().getColor(R.color.green);
-            holder.recCard.setCardBackgroundColor(color);
+            holder.recColorbar.setBackgroundColor(color);
         }else if (Objects.equals(Status, "WAITING SPARE")) {
             int color = context.getResources().getColor(R.color.yellow);
-            holder.recCard.setCardBackgroundColor(color);
+            holder.recColorbar.setBackgroundColor(color);
         }else if (Objects.equals(Status, "STARTED")) {
             int color = context.getResources().getColor(R.color.yellow);
-            holder.recCard.setCardBackgroundColor(color);
+            holder.recColorbar.setBackgroundColor(color);
         }else if (Objects.equals(Status, "OUTSIDE")) {
             int color = context.getResources().getColor(R.color.darkyellow);
-            holder.recCard.setCardBackgroundColor(color);
+            holder.recColorbar.setBackgroundColor(color);
         }else if (Objects.equals(Status, "OK")) {
             int color = context.getResources().getColor(R.color.darkgreen);
-            holder.recCard.setCardBackgroundColor(color);
+            holder.recColorbar.setBackgroundColor(color);
         }else if (Objects.equals(Status, "NOT STARTED")) {
             int color = context.getResources().getColor(R.color.red);
-            holder.recCard.setCardBackgroundColor(color);
+            holder.recColorbar.setBackgroundColor(color);
         }
 
 
@@ -108,7 +110,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 class MyViewHolder extends RecyclerView.ViewHolder{
 
     ImageView recImage;
-    TextView recName, recPhone, recBrand, recModel, recComplaint;
+    TextView recName, recPhone, recBrand, recModel, recComplaint,recJob;
+    LinearLayout recColorbar;
     CardView recCard;
 
     public MyViewHolder(@NonNull View itemView) {
@@ -121,5 +124,7 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         recModel = itemView.findViewById(R.id.recModel);
         recName = itemView.findViewById(R.id.recName);
         recComplaint = itemView.findViewById(R.id.recComplaint);
+        recJob=itemView.findViewById(R.id.jobno);
+        recColorbar=itemView.findViewById(R.id.colourbar);
     }
 }

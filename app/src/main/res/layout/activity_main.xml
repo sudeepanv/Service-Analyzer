@@ -9,12 +9,12 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_height="40dp"
+        android:background="@color/ifixblue"
+        android:theme="@style/Widget.AppCompat.ActionBar"
         app:popupTheme="@style/Theme.AppCompat"
-        app:title="iFix"
-        app:titleMarginStart="30dp" />
+        app:title="iFix Mobiles"
+        app:titleMarginStart="23dp" />
 
     <androidx.appcompat.widget.SearchView
         android:layout_width="match_parent"
