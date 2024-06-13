@@ -26,7 +26,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class DetailActivity extends AppCompatActivity {
 
-    TextView detailTime,detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus,detailExpense,detailAmount,detailPayment;
+    TextView detailJobNo,detailDelivery,detailTime,detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus,detailExpense,detailAmount,detailPayment;
 
     ImageView detailImage;
     Button deleteButton, editButton, deliveredButton;
@@ -51,10 +51,11 @@ public class DetailActivity extends AppCompatActivity {
         detailExpense = findViewById(R.id.detailExpense);
         detailAmount = findViewById(R.id.detailAmount);
         detailPayment = findViewById(R.id.detailPayment);
-
+        detailDelivery=findViewById(R.id.detailDelivery);
         deleteButton = findViewById(R.id.deleteButton);
         editButton = findViewById(R.id.editButton);
         deliveredButton = findViewById(R.id.deliveredButton);
+        detailJobNo=findViewById(R.id.detailJobNo);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -70,6 +71,8 @@ public class DetailActivity extends AppCompatActivity {
             detailAmount.setText(bundle.getString("Amount"));
             detailPayment.setText(bundle.getString("Payment"));
             detailTime.setText(bundle.getString("Time"));
+            detailDelivery.setText(bundle.getString("Delivery"));
+            detailJobNo.setText(bundle.getString("Job"));
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
             if (imageUrl != null && !imageUrl.isEmpty()) {
@@ -122,6 +125,7 @@ public class DetailActivity extends AppCompatActivity {
                         .putExtra("Password", detailPassword.getText().toString())
                         .putExtra("Complaint", detailComplaint.getText().toString())
                         .putExtra("Status", detailStatus.getText().toString())
+                        .putExtra("Job",detailJobNo.getText().toString())
                         .putExtra("Image", imageUrl)
                         .putExtra("Key", key);
                 startActivity(intent);
@@ -143,7 +147,8 @@ public class DetailActivity extends AppCompatActivity {
                         .putExtra("Amount", detailAmount.getText().toString())
                         .putExtra("Payment", detailPayment.getText().toString())
                         .putExtra("Image", imageUrl)
-                        .putExtra("Time", key);
+                        .putExtra("Job",detailJobNo.getText().toString())
+                        .putExtra("Key", key);
                 startActivity(intent);
             }
         });

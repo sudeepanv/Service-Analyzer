@@ -41,7 +41,7 @@ public class UpdateActivity extends AppCompatActivity {
     Button updateButton;
     EditText updateName, updatePhone, updateBrand, updateModel, updateColour,updatePassword,updateComplaint;
     String imageUrl,Status;
-    String key, oldImageURL;
+    String key, oldImageURL, jobno;
     Uri uri;
     AutoCompleteTextView updateStatus;
     ArrayAdapter<String> arrayAdapter;
@@ -108,6 +108,7 @@ public class UpdateActivity extends AppCompatActivity {
             updatePassword.setText(bundle.getString("Password"));
             updateComplaint.setText(bundle.getString("Complaint"));
             updateStatus.setText(bundle.getString("Status"));
+            jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
             oldImageURL = bundle.getString("Image");
         }
@@ -172,7 +173,7 @@ public class UpdateActivity extends AppCompatActivity {
         String Password = updatePassword.getText().toString();
         String Complaint = updateComplaint.getText().toString();
         String Status = updateStatus.getText().toString();
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status, imageUrl);
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,imageUrl,key,jobno);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

@@ -22,12 +22,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 public class Delivery extends AppCompatActivity {
-TextView deliveryName,deliveryPhone,deliveryBrand,deliveryModel,deliveryColour,deliveryPassword,deliveryComplaint,deliveryStatus;
+TextView deliveryName,deliveryPhone,deliveryBrand,deliveryModel,deliveryColour,deliveryPassword,deliveryComplaint,deliveryStatus,deliveryTime;
 EditText deliveryExpense,deliveryAmount;
 AutoCompleteTextView payment;
 Button deliver;
-String Payment,key,oldImageURL;
+String Payment,key,oldImageURL,jobno;
 ArrayAdapter<String> arrayAdapter;
 DatabaseReference databaseReference;
 StorageReference storageReference;
@@ -43,6 +46,7 @@ StorageReference storageReference;
         deliveryPassword=findViewById(R.id.deliveryPassword);
         deliveryComplaint=findViewById(R.id.deliveryComplaint);
         deliveryStatus=findViewById(R.id.deliveryStatus);
+        deliveryTime=findViewById(R.id.deliveryTime);
         deliveryExpense=findViewById(R.id.expense);
         deliveryAmount=findViewById(R.id.amount);
         payment=findViewById(R.id.payment);
@@ -77,9 +81,11 @@ StorageReference storageReference;
             deliveryPassword.setText(bundle.getString("Password"));
             deliveryComplaint.setText(bundle.getString("Complaint"));
             deliveryStatus.setText(bundle.getString("Status"));
+            deliveryTime.setText(DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
             deliveryExpense.setText(bundle.getString("Expense"));
             deliveryAmount.setText(bundle.getString("Amount"));
             payment.setText(bundle.getString("Payment"));
+            jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
             oldImageURL = bundle.getString("Image");
         }
@@ -104,7 +110,8 @@ StorageReference storageReference;
         String Expense=deliveryExpense.getText().toString();
         String Amount=deliveryAmount.getText().toString();
         String Payment=payment.getText().toString();
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status, oldImageURL,Expense,Amount,Payment);
+        String Time= deliveryTime.getText().toString();
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,key,oldImageURL,Expense,Amount,Payment,Time,jobno);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

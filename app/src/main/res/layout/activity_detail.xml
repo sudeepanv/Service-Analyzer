@@ -47,7 +47,23 @@
                     <TextView
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:text="TIME "
+                        android:text="JOB NO "
+                        android:textSize="25dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/detailJobNo"
+                        android:layout_height="wrap_content"
+                        android:hint=""
+                        android:textSize="25dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:text="ENTRY "
                         android:textSize="25dp"/>
 
                     <TextView
@@ -117,7 +133,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint=""
+                        android:hint="-"
                         android:id="@+id/detailModel"
                         android:textSize="25dp"/>
                 </LinearLayout>
@@ -149,7 +165,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint=""
+                        android:hint="-"
                         android:id="@+id/detailPassword"
                         android:textSize="25dp"/>
                 </LinearLayout>
@@ -233,6 +249,22 @@
                         android:id="@+id/detailPayment"
                         android:textSize="25dp"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:text="DELIVERY"
+                        android:textSize="25dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="-"
+                        android:id="@+id/detailDelivery"
+                        android:textSize="25dp"/>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -245,7 +277,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="EDIT"
-                        android:backgroundTint="@color/green"
+                        android:backgroundTint="@color/darkgreen"
                         android:id="@+id/editButton"
                         android:layout_weight="1"
                         />
@@ -262,7 +294,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="DELIVERED"
-                        android:backgroundTint="@color/red"
+                        android:backgroundTint="@color/darkgreen"
                         android:id="@+id/deliveredButton"
                         android:layout_weight="1"
                         />

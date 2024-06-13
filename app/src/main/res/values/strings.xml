@@ -2,11 +2,12 @@
     <string name="app_name">iFix</string>
 
     <string-array name="Statuslist">
-        <item>DRAWER</item>
-        <item>SERVICE</item>
+        <item>NOT STARTED</item>
+        <item>STARTED</item>
         <item>WAITING SPARE</item>
-        <item>OK BOX</item>
-        <item>NOT OK BOX</item>
+        <item>OUTSIDE</item>
+        <item>READY</item>
+        <item>NOT READY</item>
         <item>DELIVERED</item>
     </string-array>
     <string-array name="Paymentlist">

@@ -46,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recComplaint.setText(dataList.get(position).getDataComplaint());
         String Status=dataList.get(position).getDataStatus();
         if(Objects.equals(Status, "DELIVERED")){
-            int color = context.getResources().getColor(R.color.lightgrey);
+            int color = context.getResources().getColor(R.color.grey);
             holder.recCard.setCardBackgroundColor(color);
         } else if (Objects.equals(Status, "NOT OK BOX")) {
             int color = context.getResources().getColor(R.color.green);
@@ -84,7 +84,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("Expense", dataList.get(holder.getAdapterPosition()).getDataExpense());
                 intent.putExtra("Amount", dataList.get(holder.getAdapterPosition()).getDataAmount());
                 intent.putExtra("Payment", dataList.get(holder.getAdapterPosition()).getDataPaymentVia());
-
+                intent.putExtra("Delivery", dataList.get(holder.getAdapterPosition()).getDataDeliveryTime());
+                intent.putExtra("Job", dataList.get(holder.getAdapterPosition()).getDataJobNo());
                 context.startActivity(intent);
             }
         });
