@@ -5,16 +5,18 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,9 +39,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,85 +56,42 @@ public class UploadActivity extends AppCompatActivity {
     int maxjob;
     List<DataClass> dataList = new ArrayList<>();
 
-    EditText uploadBrand, uploadName, uploadPhone, uploadModel,uploadPassword, uploadComplaint;
-    String imageURL,Status,Colour;
-    AutoCompleteTextView uploadStatus,uploadColour;
+    EditText uploadBrand, uploadName, uploadPhone, uploadModel, uploadPassword, uploadComplaint;
+    String imageURL, Status, Colour;
+    AutoCompleteTextView uploadStatus, uploadColour;
     Uri uri;
+
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    String currentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload); // Ensure this matches your XML layout file name
+        setContentView(R.layout.activity_upload);
 
         uploadImage = findViewById(R.id.uploadImage);
         uploadName = findViewById(R.id.uploadName);
         uploadPhone = findViewById(R.id.uploadPhone);
         uploadBrand = findViewById(R.id.uploadBrand);
         uploadModel = findViewById(R.id.uploadModel);
-        uploadColour= findViewById(R.id.uploadColour);
+        uploadColour = findViewById(R.id.uploadColour);
         uploadPassword = findViewById(R.id.uploadPassword);
         uploadComplaint = findViewById(R.id.uploadComplaint);
         uploadStatus = findViewById(R.id.uploadStatus);
         saveButton = findViewById(R.id.saveButton);
+
         String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, Statuslist);
         uploadStatus.setAdapter(arrayAdapter);
-        uploadStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Status=adapterView.getItemAtPosition(position).toString();
-            }
-        });
-        uploadStatus.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                uploadStatus.showDropDown();
-            }
-        });
-        uploadStatus.setOnClickListener(v -> uploadStatus.showDropDown());
 
         String[] Colourlist = getResources().getStringArray(R.array.Colourlist);
         ArrayAdapter<String> ColourAdapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, Colourlist);
         uploadColour.setAdapter(ColourAdapter);
-        uploadColour.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Colour=adapterView.getItemAtPosition(position).toString();
-            }
-        });
-        uploadColour.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                uploadColour.showDropDown();
-            }
-        });
-        uploadColour.setOnClickListener(v -> uploadColour.showDropDown());
-
-
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            Intent data = result.getData();
-                            if (data != null) {
-                                uri = data.getData();
-                                uploadImage.setImageURI(uri);
-                            } else {
-                                Toast.makeText(UploadActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(UploadActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-        );
 
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent photoPicker = new Intent(Intent.ACTION_PICK);
-                photoPicker.setType("image/*");
-                activityResultLauncher.launch(photoPicker);
+                dispatchTakePictureIntent();
             }
         });
 
@@ -138,13 +101,13 @@ public class UploadActivity extends AppCompatActivity {
                 if (uri != null) {
                     saveData();
                 } else {
-                    uploadData();
-//                    Toast.makeText(UploadActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         fetchDataList();
     }
+
     private void fetchDataList() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -175,6 +138,52 @@ public class UploadActivity extends AppCompatActivity {
         });
     }
 
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Toast.makeText(UploadActivity.this, "Error creating file", Toast.LENGTH_SHORT).show();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                uri = FileProvider.getUriForFile(this,
+                        "com.example.ifix.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            uploadImage.setImageURI(uri);
+        }
+    }
     public void saveData() {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
                 .child(Objects.requireNonNull(uri.getLastPathSegment()));
