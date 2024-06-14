@@ -48,16 +48,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recComplaint.setText(dataList.get(position).getDataComplaint());
         String Status=dataList.get(position).getDataStatus();
         if(Objects.equals(Status, "DELIVERED")){
-            int color = context.getResources().getColor(R.color.grey);
+            int color = context.getResources().getColor(R.color.ifixblue);
             holder.recColorbar.setBackgroundColor(color);
         } else if (Objects.equals(Status, "NOT OK")) {
             int color = context.getResources().getColor(R.color.green);
             holder.recColorbar.setBackgroundColor(color);
         }else if (Objects.equals(Status, "WAITING SPARE")) {
-            int color = context.getResources().getColor(R.color.yellow);
+            int color = context.getResources().getColor(R.color.red);
             holder.recColorbar.setBackgroundColor(color);
         }else if (Objects.equals(Status, "STARTED")) {
-            int color = context.getResources().getColor(R.color.yellow);
+            int color = context.getResources().getColor(R.color.red);
             holder.recColorbar.setBackgroundColor(color);
         }else if (Objects.equals(Status, "OUTSIDE")) {
             int color = context.getResources().getColor(R.color.darkyellow);

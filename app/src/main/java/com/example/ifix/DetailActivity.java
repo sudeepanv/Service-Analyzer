@@ -78,7 +78,7 @@ public class DetailActivity extends AppCompatActivity {
             if (imageUrl != null && !imageUrl.isEmpty()) {
                 Glide.with(this).load(imageUrl).into(detailImage);
             } else {
-                detailImage.setImageResource(R.drawable.uploadimg); // Set a placeholder image if there is no image URL
+                detailImage.setImageResource(R.drawable.imgupload); // Set a placeholder image if there is no image URL
             }
         }
         databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(key);

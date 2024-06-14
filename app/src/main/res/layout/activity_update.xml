@@ -7,6 +7,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".UpdateActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/ifixblue"
+            android:theme="@style/Widget.AppCompat.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat"
+            app:title="Edit Entry"
+            app:titleMarginStart="23dp" />
 
 
         <LinearLayout
@@ -16,18 +30,10 @@
             android:layout_gravity="center_horizontal"
             android:padding="20dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Update Data"
-                android:textSize="30sp"
-                android:textAlignment="center"
-                android:textColor="@color/ifixblue"/>
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:src="@drawable/uploadimg"
+                android:src="@drawable/imgupload"
                 android:id="@+id/updateImage"
                 android:layout_marginTop="10dp"
                 android:scaleType="fitCenter"/>
@@ -162,5 +168,7 @@
                 app:cornerRadius = "20dp"/>
 
         </LinearLayout>
+
+    </LinearLayout>
 
 </ScrollView>

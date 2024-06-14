@@ -83,10 +83,35 @@ public class UploadActivity extends AppCompatActivity {
         String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, Statuslist);
         uploadStatus.setAdapter(arrayAdapter);
+        uploadStatus.setText(Statuslist[0], false);
+        uploadStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Status=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        uploadStatus.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                uploadStatus.showDropDown();
+            }
+        });
+        uploadStatus.setOnClickListener(v -> uploadStatus.showDropDown());
 
         String[] Colourlist = getResources().getStringArray(R.array.Colourlist);
         ArrayAdapter<String> ColourAdapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, Colourlist);
         uploadColour.setAdapter(ColourAdapter);
+        uploadColour.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Colour=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        uploadColour.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                uploadColour.showDropDown();
+            }
+        });
+        uploadColour.setOnClickListener(v -> uploadColour.showDropDown());
 
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +126,8 @@ public class UploadActivity extends AppCompatActivity {
                 if (uri != null) {
                     saveData();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(UploadActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
+                    uploadData();
                 }
             }
         });
