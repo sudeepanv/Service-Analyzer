@@ -23,6 +23,23 @@
         <item>WHITE</item>
         <item>YELLOW</item>
     </string-array>
+    <string-array name="Complaintlist">
+        <item>DISPLAY</item>
+        <item>BATTERY</item>
+        <item>CC</item>
+        <item>CHARGING</item>
+        <item>ON/OFF</item>
+        <item>SPEAKER</item>
+            <item>MIC</item>
+            <item>RINGER</item>
+            <item>BUTTONS</item>
+            <item>GLASS CHANGE</item>
+            <item>SOFTWARE</item>
+            <item>CPU</item>
+            <item>EMMC</item>
+            <item>CAMERA</item>
+            <item>BACKDOOR</item>
+    </string-array>
     <string-array name="Brandlist">
         <item>SAMSUNG</item>
         <item>MI</item>
@@ -47,7 +64,7 @@
         <item>INFINIX</item>
         <item>SONY</item>
     </string-array>
-    <string-array name="SamsungModels">
+    <string-array name="SAMSUNG">
             <item>S21</item>
             <item>S21 ULTRA</item>
             <item>NOTE 20</item>
@@ -144,7 +161,7 @@
             <item>J7 CORE</item>
             <item>J8 PLUS</item>
         </string-array>
-    <string-array name="XiaomiModels">
+    <string-array name="MI">
             <item>11 ULTRA</item>
             <item>11 PRO</item>
             <item>11X PRO</item>
@@ -241,7 +258,7 @@
             <item>NOTE PRIME</item>
             <item>NOTE</item>
         </string-array>
-    <string-array name="OppoModels">
+    <string-array name="OPPO">
             <item>FIND X3 PRO</item>
             <item>FIND X3 NEO</item>
             <item>FIND X3 LITE</item>
@@ -322,7 +339,7 @@
             <item>N3</item>
             <item>N1 MINI</item>
         </string-array>
-    <string-array name="VivoModels">
+    <string-array name="VIVO">
             <item>V21</item>
             <item>V21E</item>
             <item>V20</item>
@@ -415,7 +432,7 @@
             <item>IQOO 5</item>
             <item>IQOO 5 PRO</item>
         </string-array>
-    <string-array name="RealmeModels">
+    <string-array name="REALME">
             <item>1</item>
             <item>2</item>
             <item>2 PRO</item>
@@ -514,7 +531,7 @@
             <item>C21Y</item>
             <item>C25Y</item>
         </string-array>
-    <string-array name="apple_models">
+    <string-array name="IPHONE">
         <item>3G</item>
         <item>3GS</item>
         <item>4</item>
@@ -544,7 +561,7 @@
         <item>12 PRO</item>
         <item>12 PRO MAX</item>
     </string-array>
-    <string-array name="OnePlusModels">
+    <string-array name="ONEPLUS">
         <item>One</item>
         <item>2</item>
         <item>X</item>
@@ -570,7 +587,7 @@
         <item>10</item>
         <item>10 Pro</item>
     </string-array>
-    <string-array name="PocoModels">
+    <string-array name="POCO">
         <item>F1</item>
         <item>X2</item>
         <item>X3</item>

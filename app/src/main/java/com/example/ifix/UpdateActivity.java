@@ -66,10 +66,10 @@ public class UpdateActivity extends AppCompatActivity {
         updateColour= findViewById(R.id.updateColour);
         updatePassword = findViewById(R.id.updatePassword);
         updateComplaint = findViewById(R.id.updateComplaint);
+        updateStatus =findViewById(R.id.updateStatus);
 
         String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Statuslist);
-        updateStatus =findViewById(R.id.updateStatus);
         updateStatus.setAdapter(arrayAdapter);
         updateStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

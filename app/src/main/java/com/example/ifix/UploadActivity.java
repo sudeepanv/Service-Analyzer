@@ -1,16 +1,22 @@
 package com.example.ifix;
 
+import static com.google.android.material.internal.ViewUtils.hideKeyboard;
+
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -19,6 +25,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -53,25 +61,143 @@ public class UploadActivity extends AppCompatActivity {
 
     private LinearLayout imageContainer;
     private Button  saveButton;
+    String[] Modellist;
     private ImageButton addImageButton;
     private int maxjob;
     private List<DataClass> dataList = new ArrayList<>();
     private List<Uri> imageUris = new ArrayList<>();
     private List<String> imageUrls = new ArrayList<>();
     private Uri currentImageUri;
+    int arrayResourceId;
+    ArrayAdapter<String> arrayAdapter;
+    String Status,Brand,Model,Colour,Complaint;
 
-    private EditText uploadBrand, uploadName, uploadPhone, uploadModel, uploadPassword, uploadComplaint;
-    private AutoCompleteTextView uploadStatus, uploadColour;
+    private EditText  uploadName, uploadPhone,  uploadPassword;
+    private AutoCompleteTextView uploadStatus, uploadColour,uploadModel,uploadBrand;
+    private MultiAutoCompleteTextView uploadComplaint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
-        initializeViews();
-        setupDropdowns();
-        fetchDataList();
+        imageContainer = findViewById(R.id.imageContainer);
+        addImageButton = findViewById(R.id.addImageButton);
+        saveButton = findViewById(R.id.saveButton);
+        uploadName = findViewById(R.id.uploadName);
+        uploadPhone = findViewById(R.id.uploadPhone);
+        uploadBrand = findViewById(R.id.uploadBrand);
+        uploadModel = findViewById(R.id.uploadModel);
+        uploadColour = findViewById(R.id.uploadColour);
+        uploadPassword = findViewById(R.id.uploadPassword);
+        uploadComplaint = findViewById(R.id.uploadComplaint);
+        uploadStatus = findViewById(R.id.uploadStatus);
 
+        String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Statuslist);
+        uploadStatus.setAdapter(arrayAdapter);
+        uploadStatus.setText(Statuslist[0], false);
+
+        uploadStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Status=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        uploadStatus.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                uploadStatus.showDropDown();
+            }
+        });
+        uploadStatus.setOnClickListener(v -> uploadStatus.showDropDown());
+
+        String[] Colourlist = getResources().getStringArray(R.array.Colourlist);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Colourlist);
+        uploadColour.setAdapter(arrayAdapter);
+        uploadColour.setThreshold(0);
+        uploadColour.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        uploadColour.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    // Move focus to the next view
+                    View nextView = findViewById(R.id.uploadPassword); // Replace with the ID of your next view
+                    nextView.requestFocus();
+                    return true; // Consume the event
+                }
+                return false; // Allow default behavior for other actions
+            }
+        });
+        uploadColour.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Colour=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        uploadColour.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                uploadColour.showDropDown();
+            }
+        });
+        uploadColour.setOnClickListener(v -> uploadColour.showDropDown());
+
+        String[] Complaintlist = getResources().getStringArray(R.array.Complaintlist);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Complaintlist);
+        uploadComplaint.setAdapter(arrayAdapter);
+        uploadComplaint.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        uploadComplaint.setThreshold(0);
+
+        uploadComplaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Complaint=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        uploadComplaint.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                uploadComplaint.showDropDown();
+            }
+        });
+        uploadComplaint.setOnClickListener(v -> uploadComplaint.showDropDown());
+
+        String[] Brandlist = getResources().getStringArray(R.array.Brandlist);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Brandlist);
+        uploadBrand.setAdapter(arrayAdapter);
+        uploadBrand.setThreshold(0);
+        uploadBrand.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        uploadBrand.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    // Move focus to the next view
+                    View nextView = findViewById(R.id.uploadModel); // Replace with the ID of your next view
+                    nextView.requestFocus();
+                    return true; // Consume the event
+                }
+                return false; // Allow default behavior for other actions
+            }
+        });
+        uploadBrand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Brand=adapterView.getItemAtPosition(position).toString();
+                arrayResourceId = getResources().getIdentifier(Brand, "array", getPackageName());
+                Modellist = getResources().getStringArray(arrayResourceId);
+                modelcall();
+            }
+
+        });
+        uploadBrand.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                uploadBrand.showDropDown();
+            }
+        });
+        uploadBrand.setOnClickListener(v -> uploadBrand.showDropDown());
+
+
+
+
+        fetchDataList();
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,62 +216,130 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void initializeViews() {
-        imageContainer = findViewById(R.id.imageContainer);
-        addImageButton = findViewById(R.id.addImageButton);
-        saveButton = findViewById(R.id.saveButton);
-        uploadName = findViewById(R.id.uploadName);
-        uploadPhone = findViewById(R.id.uploadPhone);
-        uploadBrand = findViewById(R.id.uploadBrand);
-        uploadModel = findViewById(R.id.uploadModel);
-        uploadColour = findViewById(R.id.uploadColour);
-        uploadPassword = findViewById(R.id.uploadPassword);
-        uploadComplaint = findViewById(R.id.uploadComplaint);
-        uploadStatus = findViewById(R.id.uploadStatus);
-    }
-
-    private void setupDropdowns() {
-        setupDropdown1(uploadStatus, R.array.Statuslist, new AdapterView.OnItemClickListener() {
+    private void modelcall(){
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Modellist);
+        uploadModel.setAdapter(arrayAdapter);
+        uploadModel.setThreshold(0);
+        uploadModel.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        uploadModel.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    // Move focus to the next view
+                    View nextView = findViewById(R.id.uploadColour); // Replace with the ID of your next view
+                    nextView.requestFocus();
+                    return true; // Consume the event
+                }
+                return false; // Allow default behavior for other actions
+            }
+        });
+        uploadModel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                uploadStatus.setText(adapterView.getItemAtPosition(position).toString(), false);
+                Model=adapterView.getItemAtPosition(position).toString();
             }
         });
-
-        setupDropdown2(uploadColour, R.array.Colourlist, new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                uploadColour.setText(adapterView.getItemAtPosition(position).toString(), false);
+        uploadModel.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                uploadModel.showDropDown();
             }
         });
+        uploadModel.setOnClickListener(v -> uploadModel.showDropDown());
     }
 
-    private void setupDropdown1(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
-        String[] items = getResources().getStringArray(arrayResourceId);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
-        dropdown.setAdapter(adapter);
-        dropdown.setText(items[0], false);
-        dropdown.setOnItemClickListener(onItemClickListener);
-        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                dropdown.showDropDown();
-            }
-        });
-        dropdown.setOnClickListener(v -> dropdown.showDropDown());
-    }
-    private void setupDropdown2(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
-        String[] items = getResources().getStringArray(arrayResourceId);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
-        dropdown.setAdapter(adapter);
-        dropdown.setText(items[3], false);
-        dropdown.setOnItemClickListener(onItemClickListener);
-        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                dropdown.showDropDown();
-            }
-        });
-        dropdown.setOnClickListener(v -> dropdown.showDropDown());
+
+//    private void setupDropdowns() {
+//        setupDropdown1(uploadStatus, R.array.Statuslist, new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//                uploadStatus.setText(adapterView.getItemAtPosition(position).toString(), false);
+//            }
+//        });
+//
+//        setupDropdown2(uploadColour, R.array.Colourlist, new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//                uploadColour.setText(adapterView.getItemAtPosition(position).toString(), false);
+//            }
+//        });
+//        setupDropdown3(uploadBrand, R.array.Brandlist, new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//                uploadBrand.setText(adapterView.getItemAtPosition(position).toString(), false);
+//            }
+//        });
+//
+//        setupDropdown4(uploadModel,uploadBrand.getText().toString(), new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//                uploadBrand.setText(adapterView.getItemAtPosition(position).toString(), false);
+//            }
+//        });
+//
+//    }
+
+//    private void setupDropdown1(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
+//        String[] items = getResources().getStringArray(arrayResourceId);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
+//        dropdown.setAdapter(adapter);
+//        dropdown.setText(items[0], false);
+//        dropdown.setOnItemClickListener(onItemClickListener);
+//        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
+//            if (hasFocus) {
+//                dropdown.showDropDown();
+//            }
+//        });
+//        dropdown.setOnClickListener(v -> dropdown.showDropDown());
+//    }
+//    private void setupDropdown2(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
+//        String[] items = getResources().getStringArray(arrayResourceId);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
+//        dropdown.setAdapter(adapter);
+//        dropdown.setText(items[3], false);
+//        dropdown.setOnItemClickListener(onItemClickListener);
+//        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
+//            if (hasFocus) {
+//                dropdown.showDropDown();
+//            }
+//        });
+//        dropdown.setOnClickListener(v -> dropdown.showDropDown());
+//    }
+//    private void setupDropdown3(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
+//        String[] items = getResources().getStringArray(arrayResourceId);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
+//        dropdown.setAdapter(adapter);
+//        dropdown.setOnItemClickListener(onItemClickListener);
+//        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
+//            if (hasFocus) {
+//                dropdown.showDropDown();
+//            }
+//        });
+//        dropdown.setOnClickListener(v -> dropdown.showDropDown());
+//    }
+    private void setupDropdown4(AutoCompleteTextView dropdown, String arrayName, AdapterView.OnItemClickListener onItemClickListener) {
+        // Get the resource ID of the string array using its name
+        int arrayResourceId = getResources().getIdentifier(arrayName, "array", getPackageName());
+
+        // Check if the resource ID is valid
+        if (arrayResourceId != 0) {
+            // Retrieve the string array
+            String[] items = getResources().getStringArray(arrayResourceId);
+
+            // Set up your dropdown using the retrieved string array
+            // For example:
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
+            dropdown.setAdapter(adapter);
+            dropdown.setOnItemClickListener(onItemClickListener);
+            dropdown.setOnFocusChangeListener((v, hasFocus) -> {
+                if (hasFocus) {
+                    dropdown.showDropDown();
+                }
+            });
+            dropdown.setOnClickListener(v -> dropdown.showDropDown());
+        } else {
+            // Handle the case where the string array resource is not found
+            showToast("Not Found");
+        }
     }
 
     private void fetchDataList() {

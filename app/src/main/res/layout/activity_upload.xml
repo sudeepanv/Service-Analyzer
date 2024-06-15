@@ -102,9 +102,10 @@
                 android:layout_height="60dp"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/uploadBrand"
@@ -117,14 +118,15 @@
                 android:layout_height="60dp"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:singleLine="true"
-                    android:inputType="textCapCharacters"
                     android:id="@+id/uploadModel"
+                    android:inputType="textCapCharacters"
+                    android:singleLine="true"
                     android:hint="Model"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -139,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/uploadColour"
-                    android:inputType="none"
+                    android:inputType="textCapCharacters"
                     android:singleLine="true"
                     android:hint="Colour"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -162,13 +164,15 @@
                 android:layout_height="60dp"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <MultiAutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/uploadComplaint"
                     android:inputType="textCapCharacters"
+                    android:imeOptions="actionDone"
                     android:singleLine="true"
                     android:hint="Complaint"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -184,6 +188,8 @@
                     android:id="@+id/uploadStatus"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:inputType="none"
                     android:hint="Status" />
             </com.google.android.material.textfield.TextInputLayout>
