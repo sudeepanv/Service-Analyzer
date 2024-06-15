@@ -76,7 +76,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("Time", dataList.get(holder.getAdapterPosition()).getDataTime());
-                intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
+                intent.putStringArrayListExtra("Images", (ArrayList<String>) dataList.get(holder.getAdapterPosition()).getDataImage());
                 intent.putExtra("Phone", dataList.get(holder.getAdapterPosition()).getDataPhone());
                 intent.putExtra("Name", dataList.get(holder.getAdapterPosition()).getDataName());
                 intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());

@@ -33,6 +33,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class UpdateActivity extends AppCompatActivity {
@@ -40,8 +42,9 @@ public class UpdateActivity extends AppCompatActivity {
     ImageView updateImage;
     Button updateButton;
     EditText updateName, updatePhone, updateBrand, updateModel,updatePassword,updateComplaint;
-    String imageUrl,Status,Colour;
-    String key, oldImageURL, jobno;
+    String Status,Colour;
+    String key, jobno;
+    List<String> oldImageURL,imageUrl;
     Uri uri;
     AutoCompleteTextView updateStatus,updateColour;
     ArrayAdapter<String> arrayAdapter;
@@ -125,9 +128,9 @@ public class UpdateActivity extends AppCompatActivity {
             updateStatus.setText(bundle.getString("Status"));
             jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
-            oldImageURL = bundle.getString("Image");
+            oldImageURL = bundle.getStringArrayList("Image");
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(key);
+        databaseReference = FirebaseDatabase.getInstance().getReference("EntryList").child(key);
 
         updateImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +168,7 @@ public class UpdateActivity extends AppCompatActivity {
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!uriTask.isComplete());
                     Uri urlImage = uriTask.getResult();
-                    imageUrl = urlImage.toString();
+                    imageUrl = Collections.singletonList(urlImage.toString());
                     updateData();
                     dialog.dismiss();
                 }
@@ -195,7 +198,7 @@ public class UpdateActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
                     if (uri != null) {
-                        StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImageURL);
+                        StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImageURL.toString());
                         reference.delete();
                     }
                     Toast.makeText(UpdateActivity.this, "Updated", Toast.LENGTH_SHORT).show();

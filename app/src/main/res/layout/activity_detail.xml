@@ -24,15 +24,34 @@
             app:popupTheme="@style/Theme.AppCompat"
             app:title="Details"
             app:titleMarginStart="23dp" />
-
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:src="@drawable/imgupload"
-            android:id="@+id/detailImage"
+            android:layout_marginHorizontal="2dp"
             android:layout_marginTop="10dp"
-            android:scaleType="fitCenter"/>
-            <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/blue_border">
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:padding="3dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:id="@+id/imageContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"

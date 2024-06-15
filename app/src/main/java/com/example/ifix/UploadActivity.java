@@ -1,18 +1,11 @@
 package com.example.ifix;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,7 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -51,69 +46,33 @@ import java.util.Objects;
 
 public class UploadActivity extends AppCompatActivity {
 
-    ImageView uploadImage;
-    Button saveButton;
-    int maxjob;
-    List<DataClass> dataList = new ArrayList<>();
-
-    EditText uploadBrand, uploadName, uploadPhone, uploadModel, uploadPassword, uploadComplaint;
-    String imageURL, Status, Colour;
-    AutoCompleteTextView uploadStatus, uploadColour;
-    Uri uri;
-
     private static final int REQUEST_IMAGE_CAPTURE = 1;
-    String currentPhotoPath;
+    private static final String IMAGE_PREFIX = "JPEG_";
+    private static final String IMAGE_SUFFIX = ".jpg";
+    private static final String IMAGE_DIR = "Android Images";
+
+    private LinearLayout imageContainer;
+    private Button  saveButton;
+    private ImageButton addImageButton;
+    private int maxjob;
+    private List<DataClass> dataList = new ArrayList<>();
+    private List<Uri> imageUris = new ArrayList<>();
+    private List<String> imageUrls = new ArrayList<>();
+    private Uri currentImageUri;
+
+    private EditText uploadBrand, uploadName, uploadPhone, uploadModel, uploadPassword, uploadComplaint;
+    private AutoCompleteTextView uploadStatus, uploadColour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
-        uploadImage = findViewById(R.id.uploadImage);
-        uploadName = findViewById(R.id.uploadName);
-        uploadPhone = findViewById(R.id.uploadPhone);
-        uploadBrand = findViewById(R.id.uploadBrand);
-        uploadModel = findViewById(R.id.uploadModel);
-        uploadColour = findViewById(R.id.uploadColour);
-        uploadPassword = findViewById(R.id.uploadPassword);
-        uploadComplaint = findViewById(R.id.uploadComplaint);
-        uploadStatus = findViewById(R.id.uploadStatus);
-        saveButton = findViewById(R.id.saveButton);
+        initializeViews();
+        setupDropdowns();
+        fetchDataList();
 
-        String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, Statuslist);
-        uploadStatus.setAdapter(arrayAdapter);
-        uploadStatus.setText(Statuslist[0], false);
-        uploadStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Status=adapterView.getItemAtPosition(position).toString();
-            }
-        });
-        uploadStatus.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                uploadStatus.showDropDown();
-            }
-        });
-        uploadStatus.setOnClickListener(v -> uploadStatus.showDropDown());
-
-        String[] Colourlist = getResources().getStringArray(R.array.Colourlist);
-        ArrayAdapter<String> ColourAdapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, Colourlist);
-        uploadColour.setAdapter(ColourAdapter);
-        uploadColour.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Colour=adapterView.getItemAtPosition(position).toString();
-            }
-        });
-        uploadColour.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                uploadColour.showDropDown();
-            }
-        });
-        uploadColour.setOnClickListener(v -> uploadColour.showDropDown());
-
-        uploadImage.setOnClickListener(new View.OnClickListener() {
+        addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dispatchTakePictureIntent();
@@ -123,19 +82,74 @@ public class UploadActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (uri != null) {
-                    saveData();
+                if (!imageUris.isEmpty()) {
+                    saveImages();
                 } else {
-//                    Toast.makeText(UploadActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
                     uploadData();
                 }
             }
         });
-        fetchDataList();
+    }
+
+    private void initializeViews() {
+        imageContainer = findViewById(R.id.imageContainer);
+        addImageButton = findViewById(R.id.addImageButton);
+        saveButton = findViewById(R.id.saveButton);
+        uploadName = findViewById(R.id.uploadName);
+        uploadPhone = findViewById(R.id.uploadPhone);
+        uploadBrand = findViewById(R.id.uploadBrand);
+        uploadModel = findViewById(R.id.uploadModel);
+        uploadColour = findViewById(R.id.uploadColour);
+        uploadPassword = findViewById(R.id.uploadPassword);
+        uploadComplaint = findViewById(R.id.uploadComplaint);
+        uploadStatus = findViewById(R.id.uploadStatus);
+    }
+
+    private void setupDropdowns() {
+        setupDropdown1(uploadStatus, R.array.Statuslist, new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                uploadStatus.setText(adapterView.getItemAtPosition(position).toString(), false);
+            }
+        });
+
+        setupDropdown2(uploadColour, R.array.Colourlist, new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                uploadColour.setText(adapterView.getItemAtPosition(position).toString(), false);
+            }
+        });
+    }
+
+    private void setupDropdown1(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
+        String[] items = getResources().getStringArray(arrayResourceId);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
+        dropdown.setAdapter(adapter);
+        dropdown.setText(items[0], false);
+        dropdown.setOnItemClickListener(onItemClickListener);
+        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                dropdown.showDropDown();
+            }
+        });
+        dropdown.setOnClickListener(v -> dropdown.showDropDown());
+    }
+    private void setupDropdown2(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
+        String[] items = getResources().getStringArray(arrayResourceId);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
+        dropdown.setAdapter(adapter);
+        dropdown.setText(items[3], false);
+        dropdown.setOnItemClickListener(onItemClickListener);
+        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                dropdown.showDropDown();
+            }
+        });
+        dropdown.setOnClickListener(v -> dropdown.showDropDown());
     }
 
     private void fetchDataList() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -143,14 +157,8 @@ public class UploadActivity extends AppCompatActivity {
                     DataClass dataClass = itemSnapshot.getValue(DataClass.class);
                     if (dataClass != null) {
                         dataList.add(dataClass);
-                        int job;
-                        try {
-                            job = Integer.parseInt(dataClass.getDataJobNo());
-                        } catch (NumberFormatException e) {
-                            Toast.makeText(UploadActivity.this, "Job error", Toast.LENGTH_SHORT).show();
-                            continue; // Skip this entry if job number is not valid
-                        }
-                        if (maxjob < job) {
+                        int job = parseJobNumber(dataClass.getDataJobNo());
+                        if (job > maxjob) {
                             maxjob = job;
                         }
                     }
@@ -159,47 +167,42 @@ public class UploadActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(UploadActivity.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+                showToast("Failed to fetch data");
             }
         });
     }
 
+    private int parseJobNumber(String jobNo) {
+        try {
+            return Integer.parseInt(jobNo);
+        } catch (NumberFormatException e) {
+            showToast("Invalid job number: " + jobNo);
+            return -1;
+        }
+    }
+
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
             File photoFile = null;
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-                // Error occurred while creating the File
-                Toast.makeText(UploadActivity.this, "Error creating file", Toast.LENGTH_SHORT).show();
+                showToast("Error creating file");
             }
-            // Continue only if the File was successfully created
             if (photoFile != null) {
-                uri = FileProvider.getUriForFile(this,
-                        "com.example.ifix.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                currentImageUri = FileProvider.getUriForFile(this, "com.example.ifix.fileprovider", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, currentImageUri);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         }
     }
 
     private File createImageFile() throws IOException {
-        // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String imageFileName = IMAGE_PREFIX + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
+        File image = File.createTempFile(imageFileName, IMAGE_SUFFIX, storageDir);
         return image;
     }
 
@@ -207,71 +210,122 @@ public class UploadActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            uploadImage.setImageURI(uri);
+            imageUris.add(currentImageUri);
+            // Add all images to the container
+            addImagesToContainer(imageUris);
         }
     }
-    public void saveData() {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
-                .child(Objects.requireNonNull(uri.getLastPathSegment()));
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(UploadActivity.this);
-        builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    private void addImagesToContainer(List<Uri> uris) {
+        // Clear the container before adding images
+        imageContainer.removeAllViews();
 
-        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        for (Uri uri : uris) {
+            ImageView imageView = new ImageView(this);
+            imageView.setImageURI(uri);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(5, 0, 5, 0);
+            imageView.setAdjustViewBounds(true); // Adjust image bounds to maintain aspect ratio
+            imageView.setScaleType(ImageView.ScaleType.FIT_START); // Scale type to fit image inside bounds
+            imageView.setLayoutParams(params); // Set layout params for the image view
+            imageContainer.addView(imageView); // Add the image view to the container
+        }
+    }
+
+
+    private void saveImages() {
+        showProgressDialog();
+        for (Uri uri : imageUris) {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(IMAGE_DIR)
+                    .child(Objects.requireNonNull(uri.getLastPathSegment()));
+            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                imageUrls.add(task.getResult().toString());
+                                if (imageUrls.size() == imageUris.size()) {
+                                    uploadData();
+                                    hideProgressDialog();
+                                }
+                            } else {
+                                showToast("Failed to get image URL");
+                                hideProgressDialog();
+                            }
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    showToast("Failed to upload image");
+                    hideProgressDialog();
+                }
+            });
+        }
+    }
+
+    private void uploadData() {
+        String name = uploadName.getText().toString();
+        String phone = uploadPhone.getText().toString();
+        String brand = uploadBrand.getText().toString();
+        String model = uploadModel.getText().toString();
+        String password = uploadPassword.getText().toString();
+        String complaint = uploadComplaint.getText().toString();
+        String time = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+
+        if (name.isEmpty() || phone.isEmpty() || brand.isEmpty()) {
+            showToast("Please fill all the fields");
+            return;
+        }
+
+        String job = Integer.toString(maxjob += 1);
+        DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, time, job);
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
+        databaseReference.child(job).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
-                Uri urlImage = uriTask.getResult();
-                imageURL = urlImage.toString();
-                uploadData();
-                dialog.dismiss();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                dialog.dismiss();
-                Toast.makeText(UploadActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    showToast("Data uploaded successfully");
+                    finish();
+                } else {
+                    showToast("Failed to upload data");
+                }
             }
         });
     }
+    private AlertDialog progressDialog;
 
-    public void uploadData() {
-        String Name = uploadName.getText().toString();
-        String Phone = uploadPhone.getText().toString();
-        String Brand = uploadBrand.getText().toString();
-        String Model = uploadModel.getText().toString();
-        String Password = uploadPassword.getText().toString();
-        String Complaint = uploadComplaint.getText().toString();
-        String Time = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+    private void showProgressDialog() {
+        // Inflate the custom progress layout
+        View progressDialogView = getLayoutInflater().inflate(R.layout.progress_layout, null);
 
-        if (Name.isEmpty() || Phone.isEmpty() || Brand.isEmpty()) {
-            Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-            return;
+        // Create an AlertDialog builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(progressDialogView);
+        builder.setCancelable(false);
+
+        // Create the AlertDialog
+        progressDialog = builder.create();
+
+        // Show the progress dialog
+        progressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        // Dismiss the progress dialog if it's showing
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
-        String job =Integer.toString(maxjob+=1);
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status, imageURL,Time,job);
-        FirebaseDatabase.getInstance().getReference("Entry List").child(Time)
-                .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(UploadActivity.this,MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(UploadActivity.this, "Failed to save data", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(UploadActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

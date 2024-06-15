@@ -33,7 +33,7 @@ public class Accounts extends AppCompatActivity {
         Delivered = findViewById(R.id.accountDelivered);
 
         // Initialize Firebase DatabaseReference
-        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List");
+        databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
 
         // Fetch data from Firebase and calculate profit
         fetchDataAndCalculateProfit();

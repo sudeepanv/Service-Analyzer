@@ -24,13 +24,15 @@ import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 public class Delivery extends AppCompatActivity {
 TextView deliveryName,deliveryPhone,deliveryBrand,deliveryModel,deliveryColour,deliveryPassword,deliveryComplaint,deliveryStatus,deliveryTime;
 EditText deliveryExpense,deliveryAmount;
 AutoCompleteTextView payment;
 Button deliver;
-String Payment,key,oldImageURL,jobno;
+String Payment,key,jobno;
+List<String> oldImageURL;
 ArrayAdapter<String> arrayAdapter;
 DatabaseReference databaseReference;
 StorageReference storageReference;
@@ -87,9 +89,9 @@ StorageReference storageReference;
             payment.setText(bundle.getString("Payment"));
             jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
-            oldImageURL = bundle.getString("Image");
+            oldImageURL = bundle.getStringArrayList("Images");
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(key);
+        databaseReference = FirebaseDatabase.getInstance().getReference("EntryList").child(key);
 
         deliver.setOnClickListener(new View.OnClickListener() {
             @Override

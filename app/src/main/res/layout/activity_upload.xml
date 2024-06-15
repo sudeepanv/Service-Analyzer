@@ -19,6 +19,42 @@
             app:popupTheme="@style/Theme.AppCompat"
             app:title="New Entry"
             app:titleMarginStart="23dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:background="@drawable/blue_border">
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:padding="3dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:id="@+id/imageContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal" />
+                    <ImageButton
+                        android:id="@+id/addImageButton"
+                        android:layout_width="100dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_height="100dp"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/imgupload"
+                        android:scaleType="fitStart"
+                        android:layout_gravity="center_vertical" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
 
 
         <LinearLayout
@@ -26,16 +62,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:padding="20dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/imgupload"
-                android:layout_gravity="center"
-                android:id="@+id/uploadImage"
-                android:layout_marginTop="10dp"
-                android:scaleType="fitCenter"/>
+            android:paddingBottom="10dp"
+            android:paddingHorizontal="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

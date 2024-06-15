@@ -1,5 +1,7 @@
 package com.example.ifix;
 
+import java.util.List;
+
 public class DataClass {
 
     private String dataName;
@@ -10,7 +12,7 @@ public class DataClass {
     private String dataPassword;
     private String dataComplaint;
     private String dataStatus;
-    private String dataImage;
+    private List<String> dataImage;
     private String dataExpense;
     private String dataAmount;
     private String dataPaymentVia;
@@ -64,7 +66,7 @@ public class DataClass {
 
 
 //update
-    public String getDataImage() {
+    public List<String> getDataImage() {
         return dataImage;
     }
 //    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, String dataImage,String dataTime, String dataJobNo) {
@@ -81,7 +83,7 @@ public class DataClass {
 //        this.dataJobNo = dataJobNo;
 //    }
 //new entry
-    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, String dataImage,String dataTime,String maxjob) {
+    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, List<String> dataImage,String dataTime,String maxjob) {
         this.dataName = dataName;
         this.dataPhone = dataPhone;
         this.dataBrand = dataBrand;
@@ -95,7 +97,7 @@ public class DataClass {
         this.dataJobNo=maxjob;
     }
     //delivery
-    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus,String dataTime, String dataImage,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime,String jobno) {
+    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus,String dataTime, List<String> dataImage,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime,String jobno) {
         this.dataName = dataName;
         this.dataPhone = dataPhone;
         this.dataBrand = dataBrand;
