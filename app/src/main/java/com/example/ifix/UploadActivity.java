@@ -181,9 +181,18 @@ public class UploadActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Brand=adapterView.getItemAtPosition(position).toString();
-                arrayResourceId = getResources().getIdentifier(Brand, "array", getPackageName());
-                Modellist = getResources().getStringArray(arrayResourceId);
-                modelcall();
+                try {
+                    arrayResourceId = getResources().getIdentifier(Brand, "array", getPackageName());
+                    Modellist = getResources().getStringArray(arrayResourceId);
+                }catch (Exception e){
+
+                }
+                if (Modellist!=null){
+                    arrayResourceId = getResources().getIdentifier(Brand, "array", getPackageName());
+                    Modellist = getResources().getStringArray(arrayResourceId);
+                    modelcall();
+                }
+
             }
 
         });

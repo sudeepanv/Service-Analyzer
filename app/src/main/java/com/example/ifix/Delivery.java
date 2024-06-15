@@ -3,6 +3,7 @@ package com.example.ifix;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -120,6 +121,7 @@ StorageReference storageReference;
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(Delivery.this, "Delivered", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(Delivery.this,MainActivity.class);
                     finish();
                 }
             }

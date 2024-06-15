@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,6 +56,8 @@ public class DetailActivity extends AppCompatActivity {
         deliveredButton = findViewById(R.id.deliveredButton);
         detailJobNo = findViewById(R.id.detailJobNo);
 
+
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             detailPhone.setText(bundle.getString("Phone"));
@@ -86,6 +89,29 @@ public class DetailActivity extends AppCompatActivity {
                     Glide.with(this).load(imageUrl).into(imageView);
                     imageView.setLayoutParams(params); // Set layout params for the image view
                     imagesContainer.addView(imageView);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // Retrieve the image URI or URL associated with the clicked ImageView
+                            // For example, you can retrieve it from a list or directly from the ImageView's tag
+
+                            // Example: Uri imageUri = (Uri) imageView.getTag();
+
+                            // Once you have the URI or URL, you can open the image using an Intent
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setDataAndType(Uri.parse(imageUrl), "image/*");
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                            // Check if there's an app available to handle the intent
+                            if (intent.resolveActivity(getPackageManager()) != null) {
+                                startActivity(intent);
+                            } else {
+                                // Handle the case where no app can handle the intent
+                                Toast.makeText(getApplicationContext(), "No app available to open image", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
                 }
             }
         }
@@ -140,6 +166,7 @@ public class DetailActivity extends AppCompatActivity {
                         .putExtra("Status", detailStatus.getText().toString())
                         .putExtra("Job", detailJobNo.getText().toString())
                         .putExtra("Images", imageUrls)
+                        .putExtra("Time",detailTime.getText().toString())
                         .putExtra("Key", key);
                 startActivity(intent);
             }

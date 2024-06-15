@@ -43,13 +43,12 @@ public class UpdateActivity extends AppCompatActivity {
     Button updateButton;
     EditText updateName, updatePhone, updateBrand, updateModel,updatePassword,updateComplaint;
     String Status,Colour;
-    String key, jobno;
+    String key, jobno,time;
     List<String> oldImageURL,imageUrl;
     Uri uri;
     AutoCompleteTextView updateStatus,updateColour;
     ArrayAdapter<String> arrayAdapter;
     DatabaseReference databaseReference;
-    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +127,8 @@ public class UpdateActivity extends AppCompatActivity {
             updateStatus.setText(bundle.getString("Status"));
             jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
-            oldImageURL = bundle.getStringArrayList("Image");
+            time = bundle.getString("Time");
+            imageUrl = bundle.getStringArrayList("Images");
         }
         databaseReference = FirebaseDatabase.getInstance().getReference("EntryList").child(key);
 
@@ -143,43 +143,9 @@ public class UpdateActivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveData();
+                updateData();
             }
         });
-    }
-    public void saveData(){
-        if (uri == null) {
-            // No new image selected, update data with old image URL
-            imageUrl = oldImageURL;
-            updateData();
-        } else {
-            // New image selected, upload it
-            storageReference = FirebaseStorage.getInstance().getReference().child("Android Images").child(Objects.requireNonNull(uri.getLastPathSegment()));
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
-            builder.setCancelable(false);
-            builder.setView(R.layout.progress_layout);
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while (!uriTask.isComplete());
-                    Uri urlImage = uriTask.getResult();
-                    imageUrl = Collections.singletonList(urlImage.toString());
-                    updateData();
-                    dialog.dismiss();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    dialog.dismiss();
-                    Toast.makeText(UpdateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
     }
 
     public void updateData(){
@@ -191,7 +157,7 @@ public class UpdateActivity extends AppCompatActivity {
         String Password = updatePassword.getText().toString();
         String Complaint = updateComplaint.getText().toString();
         String Status = updateStatus.getText().toString();
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,imageUrl,key,jobno);
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,imageUrl,time,jobno);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
