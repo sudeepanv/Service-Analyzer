@@ -32,7 +32,7 @@ TextView deliveryName,deliveryPhone,deliveryBrand,deliveryModel,deliveryColour,d
 EditText deliveryExpense,deliveryAmount;
 AutoCompleteTextView payment;
 Button deliver;
-String Payment,key,jobno;
+String Payment,key,jobno,entrytime;
 List<String> oldImageURL;
 ArrayAdapter<String> arrayAdapter;
 DatabaseReference databaseReference;
@@ -90,6 +90,7 @@ StorageReference storageReference;
             payment.setText(bundle.getString("Payment"));
             jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
+            entrytime= bundle.getString("Time");
             oldImageURL = bundle.getStringArrayList("Images");
         }
         databaseReference = FirebaseDatabase.getInstance().getReference("EntryList").child(key);
@@ -114,7 +115,7 @@ StorageReference storageReference;
         String Amount=deliveryAmount.getText().toString();
         String Payment=payment.getText().toString();
         String Time= deliveryTime.getText().toString();
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,key,oldImageURL,Expense,Amount,Payment,Time,jobno);
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,entrytime,oldImageURL,Expense,Amount,Payment,Time,jobno);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

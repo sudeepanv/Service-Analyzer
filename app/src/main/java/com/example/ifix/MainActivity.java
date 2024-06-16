@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                     dataList.add(dataClass);
                 }
                 adapter.notifyDataSetChanged();
+                int lastIndex = dataList.size() - 1;
+                recyclerView.scrollToPosition(lastIndex);
                 dialog.dismiss();
             }
 

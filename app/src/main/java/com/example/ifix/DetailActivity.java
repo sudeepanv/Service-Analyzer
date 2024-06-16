@@ -189,6 +189,7 @@ public class DetailActivity extends AppCompatActivity {
                         .putExtra("Payment", detailPayment.getText().toString())
                         .putExtra("Images", imageUrls)
                         .putExtra("Job", detailJobNo.getText().toString())
+                        .putExtra("Time",detailTime.getText().toString())
                         .putExtra("Key", key);
                 startActivity(intent);
             }
