@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/ifixblue"
+        android:theme="@style/Widget.AppCompat.ActionBar"
+        app:popupTheme="@style/Theme.AppCompat"
+        app:title="Dealer accounts"
+        app:titleMarginStart="23dp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/dealernamebox"
+        android:layout_margin="5dp">
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dealer Name"
+            android:inputType="textCapCharacters"
+            android:id="@+id/dealername"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <androidx.appcompat.widget.SearchView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="12dp"-->
+<!--        android:layout_marginVertical="10dp"-->
+<!--        android:layout_below="@id/toolbar"-->
+<!--        android:id="@+id/search"-->
+<!--        app:iconifiedByDefault="false"-->
+<!--        app:searchHintIcon="@null"-->
+<!--        app:queryHint="Search..."-->
+<!--        android:focusable="false"-->
+<!--        app:closeIcon="@drawable/close"-->
+<!--        app:searchIcon="@drawable/search"-->
+<!--        android:background="@drawable/blue_border"/>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/dealernamebox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView"
+        android:scrollbars="vertical"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:gravity="start|center_vertical">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/balance"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Balance"
+                android:inputType="numberSigned"
+                android:singleLine="true" />
+
+            <requestFocus />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:gravity="start|center_vertical">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Amount Paid"
+                android:inputType="number"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tickbutton"
+            android:background="@drawable/check_small_24px"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -18,7 +18,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/jobno"
+            android:id="@+id/date"
+            android:text="--"
             style="@style/primarytext"
             android:layout_margin="10dp"
             android:textSize="20dp"
@@ -50,16 +51,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:layout_marginHorizontal="5dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recName"
-                    android:text="Name"
-                    style="@style/primarytext"
-                    android:layout_weight="1"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="10dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -69,6 +60,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/recBrand"
                         android:text="Brand"
+                        android:layout_marginStart="10dp"
                         style="@style/primarytext"
                         android:textStyle="bold"
                         android:textSize="20sp"
@@ -96,27 +88,22 @@
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
                 <TextView
-                    android:id="@+id/recPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    style="@style/primarytext"
-                    android:layout_alignParentEnd="true"
-                    android:layout_toEndOf="@id/recName"
-                    android:text="Phone"
                     android:layout_marginStart="10dp"
+                    android:id="@+id/recComplaint"
+                    style="@style/primarytext"
+                    android:text="complaint"
                     android:textAlignment="textStart"
-                    android:textSize="20dp" />
-
+                    android:textSize="20dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/recComplaint"
+                    android:id="@+id/recAmount"
                     style="@style/primarytext"
-                    android:text="complaint"
-                    android:layout_toEndOf="@id/recModel"
-                    android:layout_below="@id/recPhone"
+                    android:text="Amount"
                     android:textAlignment="textStart"
                     android:textSize="20dp"/>
             </LinearLayout>

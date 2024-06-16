@@ -3,4 +3,7 @@
 <item
     android:title="Accounts"
     android:id="@+id/accountmenu"/>
+    <item
+        android:title="Dealer"
+        android:id="@+id/dealer"/>
 </menu>

@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -114,6 +113,10 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.accountmenu) {
             Intent intent = new Intent(MainActivity.this, Accounts.class);
+            startActivity(intent);
+        }
+        if (id == R.id.dealer) {
+            Intent intent = new Intent(MainActivity.this, Dealer.class);
             startActivity(intent);
         }
         return true;

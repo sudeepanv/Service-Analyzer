@@ -19,6 +19,7 @@ public class DataClass {
     private String dataTime;
     private String dataDeliveryTime;
     private String key;
+
     private String dataJobNo;
 
     public String getKey() {
@@ -53,6 +54,7 @@ public class DataClass {
     public String getDataStatus(){return dataStatus;}
     public String getDataExpense(){return dataExpense;}
     public String getDataAmount(){return dataAmount;}
+
     public String getDataPaymentVia(){return dataPaymentVia;}
     public String getDataTime(){return dataTime;}
     public String getDataDeliveryTime(){return dataDeliveryTime;}
@@ -82,6 +84,7 @@ public class DataClass {
 //        this.dataTime=dataTime;
 //        this.dataJobNo = dataJobNo;
 //    }
+
 //new entry
     public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, List<String> dataImage,String dataTime,String maxjob) {
         this.dataName = dataName;

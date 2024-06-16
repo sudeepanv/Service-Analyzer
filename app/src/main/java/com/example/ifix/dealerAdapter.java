@@ -9,40 +9,37 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
+public class dealerAdapter extends RecyclerView.Adapter<dealerViewHolder> {
     private Context context;
     private List<DataClass> dataList;
-
-    public MyAdapter(Context context, List<DataClass> dataList) {
+    public dealerAdapter(Context context, List<DataClass> dataList) {
         this.context = context;
         this.dataList = dataList;
     }
-
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
-        return new MyViewHolder(view);
+    public dealerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_dealer, parent, false);
+        return new dealerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-//        Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
-        holder.recName.setText(dataList.get(position).getDataName());
-        holder.recPhone.setText(dataList.get(position).getDataPhone());
+    public void onBindViewHolder(@NonNull dealerViewHolder holder, int position) {
         holder.recBrand.setText(dataList.get(position).getDataBrand());
         holder.recModel.setText(dataList.get(position).getDataModel());
-        holder.recJob.setText(dataList.get(position).getDataJobNo());
+        if (dataList.get(position).getDataTime().length()>4)
+            holder.recDate.setText(dataList.get(position).getDataTime().substring(0,6));
         holder.recComplaint.setText(dataList.get(position).getDataComplaint());
+        if (dataList.get(position).getDataAmount()!=null)
+            holder.recAmount.setText("₹"+(dataList.get(position).getDataAmount()));
         String Status=dataList.get(position).getDataStatus();
         if(Objects.equals(Status, "DELIVERED")){
             int color = context.getResources().getColor(R.color.ifixblue);
@@ -97,31 +94,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         return dataList.size();
     }
-
     public void searchDataList(ArrayList<DataClass> searchList){
         dataList = searchList;
         notifyDataSetChanged();
     }
+
 }
 
-class MyViewHolder extends RecyclerView.ViewHolder{
+class dealerViewHolder extends RecyclerView.ViewHolder{
 
-    ImageView recImage;
-    TextView recName, recPhone, recBrand, recModel, recComplaint,recJob;
+    TextView recAmount, recBrand, recModel, recComplaint,recDate;
     LinearLayout recColorbar;
     CardView recCard;
 
-    public MyViewHolder(@NonNull View itemView) {
+    public dealerViewHolder(@NonNull View itemView) {
         super(itemView);
 
 //        recImage = itemView.findViewById(R.id.recImage);
         recCard = itemView.findViewById(R.id.recCard);
-        recPhone = itemView.findViewById(R.id.recPhone);
         recBrand = itemView.findViewById(R.id.recBrand);
         recModel = itemView.findViewById(R.id.recModel);
-        recName = itemView.findViewById(R.id.recName);
+        recAmount = itemView.findViewById(R.id.recAmount);
         recComplaint = itemView.findViewById(R.id.recComplaint);
-        recJob=itemView.findViewById(R.id.jobno);
+        recDate=itemView.findViewById(R.id.date);
         recColorbar=itemView.findViewById(R.id.colourbar);
     }
 }

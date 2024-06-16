@@ -65,103 +65,235 @@
         <item>SONY</item>
     </string-array>
     <string-array name="SAMSUNG">
-            <item>S21</item>
-            <item>S21 ULTRA</item>
-            <item>NOTE 20</item>
-            <item>Z FOLD 2</item>
-            <item>A52</item>
-            <item>M31</item>
-            <item>A72</item>
-            <item>M51</item>
-            <item>S20 FE</item>
-            <item>F41</item>
-            <item>S20</item>
-            <item>S20 PLUS</item>
-            <item>S20 ULTRA</item>
-            <item>NOTE 10</item>
-            <item>NOTE 10 PLUS</item>
-            <item>Z FLIP</item>
-            <item>A71</item>
-            <item>A51</item>
-            <item>M21</item>
-            <item>M11</item>
-            <item>A31</item>
-            <item>A21S</item>
-            <item>A11</item>
-            <item>M01</item>
-            <item>M01 CORE</item>
-            <item>A01</item>
-            <item>A01 CORE</item>
-            <item>A02S</item>
             <item>A02</item>
-            <item>M02</item>
-            <item>M02S</item>
+            <item>A02S</item>
+            <item>A3</item>
+            <item>A3 2016</item>
+            <item>A3 2017</item>
+            <item>A03 CORE</item>
+            <item>A03S</item>
+            <item>A04</item>
+            <item>A04S</item>
+            <item>A04E</item>
+            <item>A5</item>
+            <item>A05</item>
+            <item>A05S</item>
+            <item>A5 2016</item>
+            <item>A5 2017</item>
+            <item>A6</item>
+            <item>A6 PLUS</item>
+            <item>A6S</item>
+            <item>A7</item>
+            <item>A7 2016</item>
+            <item>A7 2017</item>
+            <item>A7 2018</item>
+            <item>A8</item>
+            <item>A8 2016</item>
+            <item>A8 2018</item>
+            <item>A8 PLUS 2018</item>
+            <item>A8 STAR</item>
+            <item>A9</item>
+            <item>A9 2016</item>
+            <item>A9 2018</item>
+            <item>A9 PRO 2016</item>
             <item>A10</item>
+            <item>A10E</item>
             <item>A10S</item>
+            <item>A12</item>
+            <item>A13</item>
+            <item>A14</item>
+            <item>A15</item>
             <item>A20</item>
+            <item>A20E</item>
             <item>A20S</item>
+            <item>A22</item>
+            <item>A23</item>
+            <item>A24</item>
+            <item>A25</item>
             <item>A30</item>
             <item>A30S</item>
+            <item>A32</item>
+            <item>A33</item>
+            <item>A34</item>
+            <item>A35</item>
+            <item>A40</item>
+            <item>A42</item>
             <item>A50</item>
             <item>A50S</item>
-            <item>M30</item>
-            <item>M30S</item>
-            <item>M40</item>
-            <item>M10</item>
-            <item>M10S</item>
+            <item>A51</item>
+            <item>A52</item>
+            <item>A53</item>
+            <item>A54</item>
+            <item>A55</item>
+            <item>A60</item>
+            <item>A70</item>
+            <item>A70S</item>
+            <item>A71</item>
+            <item>A72</item>
+            <item>A73</item>
             <item>A80</item>
             <item>A90 5G</item>
-            <item>F62</item>
-            <item>F12</item>
-            <item>F02S</item>
-            <item>F22</item>
-            <item>F42 5G</item>
-            <item>F52 5G</item>
-            <item>S10</item>
-            <item>S10 PLUS</item>
-            <item>S10E</item>
-            <item>S9</item>
-            <item>S9 PLUS</item>
-            <item>S8</item>
-            <item>S8 PLUS</item>
-            <item>NOTE 9</item>
-            <item>NOTE 8</item>
-            <item>A8</item>
-            <item>A8 PLUS</item>
+            <item>J1</item>
+            <item>J1 ACE</item>
+            <item>J1 MINI</item>
+            <item>J1 MINI PRIME</item>
+            <item>J1 NXT</item>
+            <item>J1 NXT PRIME</item>
             <item>J2</item>
+            <item>J2 2016</item>
+            <item>J2 2017</item>
             <item>J2 CORE</item>
+            <item>J2 PRIME</item>
             <item>J3</item>
+            <item>J3 2016</item>
+            <item>J3 2017</item>
+            <item>J3 PRIME</item>
+            <item>J3 PRO</item>
             <item>J4</item>
             <item>J4 PLUS</item>
+            <item>J5</item>
+            <item>J5 2016</item>
+            <item>J5 2017</item>
+            <item>J5 PRIME</item>
+            <item>J5 PRO</item>
             <item>J6</item>
             <item>J6 PLUS</item>
             <item>J7</item>
-            <item>J7 DUO</item>
-            <item>J8</item>
-            <item>ON6</item>
-            <item>ON8</item>
-            <item>C7 PRO</item>
-            <item>C9 PRO</item>
-            <item>A7</item>
-            <item>A5</item>
-            <item>A3</item>
-            <item>J1</item>
-            <item>J1 ACE</item>
-            <item>J1 MINI PRIME</item>
-            <item>J1 NXT</item>
-            <item>J2 PRO</item>
-            <item>J3 PRO</item>
-            <item>J5</item>
-            <item>J5 PRIME</item>
-            <item>J7 PRIME</item>
-            <item>J7 NXT</item>
-            <item>J7 MAX</item>
-            <item>J7 PRO</item>
-            <item>J7 PRIME 2</item>
+            <item>J7 2016</item>
+            <item>J7 2017</item>
             <item>J7 CORE</item>
-            <item>J8 PLUS</item>
-        </string-array>
-    <string-array name="MI">
+            <item>J7 DUO</item>
+            <item>J7 MAX</item>
+            <item>J7 NXT</item>
+            <item>J7 PERX</item>
+            <item>J7 PRIME</item>
+            <item>J7 PRO</item>
+            <item>J7 V</item>
+            <item>J8</item>
+            <item>S1</item>
+            <item>S2</item>
+            <item>S2 LTE</item>
+            <item>S2 PLUS</item>
+            <item>S3</item>
+            <item>S3 LTE</item>
+            <item>S3 MINI</item>
+            <item>S4</item>
+            <item>S4 ACTIVE</item>
+            <item>S4 MINI</item>
+            <item>S4 ZOOM</item>
+            <item>S5</item>
+            <item>S5 ACTIVE</item>
+            <item>S5 DUOS</item>
+            <item>S5 MINI</item>
+            <item>S5 NEO</item>
+            <item>S6</item>
+            <item>S6 ACTIVE</item>
+            <item>S6 EDGE</item>
+            <item>S6 EDGE PLUS</item>
+            <item>S7</item>
+            <item>S7 ACTIVE</item>
+            <item>S7 EDGE</item>
+            <item>S8</item>
+            <item>S8 ACTIVE</item>
+            <item>S8 PLUS</item>
+            <item>S9</item>
+            <item>S9 PLUS</item>
+            <item>S10</item>
+            <item>S10 5G</item>
+            <item>S10 E</item>
+            <item>S10 PLUS</item>
+            <item>S20</item>
+            <item>S20 FE</item>
+            <item>S20 PLUS</item>
+            <item>S20 ULTRA</item>
+            <item>S21</item>
+            <item>S21 FE</item>
+            <item>S21 PLUS</item>
+            <item>S21 ULTRA</item>
+            <item>S22</item>
+            <item>S22 PLUS</item>
+            <item>S22 ULTRA</item>
+            <item>S23</item>
+            <item>S23 PLUS</item>
+            <item>S23 ULTRA</item>
+            <item>M01</item>
+            <item>M01 CORE</item>
+            <item>M01S</item>
+            <item>M02</item>
+            <item>M02S</item>
+            <item>M10</item>
+            <item>M10S</item>
+            <item>M11</item>
+            <item>M12</item>
+            <item>M13</item>
+            <item>M20</item>
+            <item>M21</item>
+            <item>M21 2021 EDITION</item>
+            <item>M22</item>
+            <item>M30</item>
+            <item>M30S</item>
+            <item>M31</item>
+            <item>M31 PRIME EDITION</item>
+            <item>M31S</item>
+            <item>M32</item>
+            <item>M32 5G</item>
+            <item>M33 5G</item>
+            <item>M40</item>
+            <item>M42 5G</item>
+            <item>M51</item>
+            <item>M52 5G</item>
+            <item>M53 5G</item>
+            <item>M62</item>
+            <item>M80S</item>
+            <item>F02S</item>
+            <item>F04</item>
+            <item>F04S</item>
+            <item>F12</item>
+            <item>F13</item>
+            <item>F22</item>
+            <item>F23</item>
+            <item>F41</item>
+            <item>F42</item>
+            <item>F62</item>
+            <item>ON5</item>
+            <item>ON5 PRO</item>
+            <item>ON7</item>
+            <item>ON7 PRO</item>
+            <item>ON6</item>
+            <item>ON7 PRIME</item>
+            <item>ON8</item>
+            <item>ON NXT</item>
+            <item>NOTE</item>
+            <item>NOTE 2</item>
+            <item>NOTE 3</item>
+            <item>NOTE 3 NEO</item>
+            <item>NOTE 4</item>
+            <item>NOTE 5</item>
+            <item>NOTE 5 DUOS</item>
+            <item>NOTE 7</item>
+            <item>NOTE 8</item>
+            <item>NOTE 9</item>
+            <item>NOTE 10</item>
+            <item>NOTE 10 PLUS</item>
+            <item>NOTE 10 LITE</item>
+            <item>NOTE 20</item>
+            <item>NOTE 20 ULTRA</item>
+            <item>C5</item>
+            <item>C5 PRO</item>
+            <item>C7</item>
+            <item>C7 PRO</item>
+            <item>C8</item>
+            <item>C9 PRO</item>
+            <item>TAB A7</item>
+            <item>TAB A9</item>
+            <item>TAB A9PLUS</item>
+            <item>TAB A8</item>
+            <item>TAB S9</item>
+            <item>TAB S7</item>
+            <item>TAB S7PLUS</item>
+            <item>TAB 3LITE</item>
+    </string-array>
+    <string-array name="MI1">
             <item>11 ULTRA</item>
             <item>11 PRO</item>
             <item>11X PRO</item>
@@ -257,8 +389,205 @@
             <item>NOTE 2</item>
             <item>NOTE PRIME</item>
             <item>NOTE</item>
+    </string-array>
+        <string-array name="MI">
+                <item>1</item>
+                <item>1S</item>
+                <item>2</item>
+                <item>2A</item>
+                <item>2S</item>
+                <item>3</item>
+                <item>4</item>
+                <item>4C</item>
+                <item>4I</item>
+                <item>4S</item>
+                <item>5</item>
+                <item>5C</item>
+                <item>5S</item>
+                <item>5S PLUS</item>
+                <item>5X</item>
+                <item>6</item>
+                <item>6X</item>
+                <item>8</item>
+                <item>8 EXPLORER EDITION</item>
+                <item>8 LITE</item>
+                <item>8 SE</item>
+                <item>9</item>
+                <item>9 EXPLORER EDITION</item>
+                <item>9 LITE</item>
+                <item>9 SE</item>
+                <item>9T</item>
+                <item>9T PRO</item>
+                <item>10</item>
+                <item>10 LITE</item>
+                <item>10 PRO</item>
+                <item>10T</item>
+                <item>10T LITE</item>
+                <item>10T PRO</item>
+                <item>11</item>
+                <item>11 LITE</item>
+                <item>11 PRO</item>
+                <item>11 ULTRA</item>
+                <item>11I</item>
+                <item>11X</item>
+                <item>11X PRO</item>
         </string-array>
-    <string-array name="OPPO">
+        <string-array name="REDMI">
+                <item>NOTE PRIME</item>
+                <item>2 PRIME</item>
+                <item>NOTE 3</item>
+                <item>2A</item>
+                <item>2 PRO</item>
+                <item>2</item>
+                <item>3</item>
+                <item>NOTE 3</item>
+                <item>3 PRO</item>
+                <item>3S</item>
+                <item>3X</item>
+                <item>PRO</item>
+                <item>NOTE 2</item>
+                <item>3S PRIME</item>
+                <item>NOTE 4</item>
+                <item>4A</item>
+                <item>4 PRIME</item>
+                <item>NOTE 4X</item>
+                <item>4X</item>
+                <item>5A</item>
+                <item>5</item>
+                <item>Y1</item>
+                <item>Y1 LITE</item>
+                <item>NOTE 5</item>
+                <item>NOTE 5 PRO</item>
+                <item>6A</item>
+                <item>Y2</item>
+                <item>6</item>
+                <item>6 PRO</item>
+                <item>NOTE 6PRO</item>
+                <item>NOTE 7</item>
+                <item>GO</item>
+                <item>7</item>
+                <item>NOTE 7 PRO</item>
+                <item>K20 PRO</item>
+                <item>NOTE 7S</item>
+                <item>7A</item>
+                <item>Y3</item>
+                <item>K20</item>
+                <item>NOTE 8 PRO</item>
+                <item>NOTE 8</item>
+                <item>8A</item>
+                <item>8</item>
+                <item>NOTE 8T</item>
+                <item>K30</item>
+                <item>K30 5G</item>
+                <item>8A DUAL</item>
+                <item>NOTE 9 PRO MAX</item>
+                <item>NOTE 9S</item>
+                <item>NOTE 9</item>
+                <item>K30 PRO ZOOM</item>
+                <item>K30 PRO</item>
+                <item>8A PRO</item>
+                <item>NOTE 9 PRO</item>
+                <item>K30 RACING</item>
+                <item>K30I</item>
+                <item>10X</item>
+                <item>10X 4G</item>
+                <item>10X PRO</item>
+                <item>9</item>
+                <item>9A</item>
+                <item>9C</item>
+                <item>9 PRIME</item>
+                <item>K30 ULTRA</item>
+                <item>9I</item>
+                <item>K30S</item>
+                <item>NOTE 9 4G</item>
+                <item>NOTE 9 5G</item>
+                <item>NOTE 9 PRO 5G</item>
+                <item>9 POWER</item>
+                <item>9T</item>
+                <item>NOTE 9T 5G</item>
+                <item>K40 PRO+</item>
+                <item>K40 PRO</item>
+                <item>K40</item>
+                <item>NOTE 10 5G</item>
+                <item>NOTE 10</item>
+                <item>NOTE 10S</item>
+                <item>NOTE 10 PRO</item>
+                <item>NOTE 8 2021</item>
+                <item>NOTE 10T 5G</item>
+                <item>10 PRIME</item>
+                <item>10</item>
+                <item>NOTE 10 JE</item>
+                <item>9 ACTIV</item>
+                <item>9A SPORT</item>
+                <item>9I SPORT</item>
+                <item>NOTE 10 LITE</item>
+                <item>NOTE 11</item>
+                <item>NOTE 11 PRO</item>
+                <item>NOTE 11 PRO+</item>
+                <item>NOTE 11 4G</item>
+                <item>NOTE 11T 5G</item>
+                <item>NOTE 11 PRO 5G</item>
+                <item>NOTE 11S</item>
+                <item>10 2022</item>
+                <item>K50</item>
+                <item>NOTE 11E</item>
+                <item>NOTE 11E PRO</item>
+                <item>NOTE 11 PRO+ 5G</item>
+                <item>10C</item>
+                <item>K40S</item>
+                <item>K40S</item>
+                <item>K50 PRO</item>
+                <item>10 INDIA</item>
+                <item>10 5G</item>
+                <item>10 PRIME+ 5G</item>
+                <item>11S 5G</item>
+                <item>10A</item>
+                <item>10 POWER</item>
+                <item>10 PRIME 2022</item>
+                <item>NOTE 11 SE</item>
+                <item>NOTE 11T PRO</item>
+                <item>NOTE 11T PRO+</item>
+                <item>K50I</item>
+                <item>K50I PRO</item>
+                <item>K50 ULTRA</item>
+                <item>NOTE 11 SE</item>
+                <item>A1</item>
+                <item>A1+</item>
+                <item>11 PRIME</item>
+                <item>11 PRIME 5G</item>
+                <item>NOTE 11R</item>
+                <item>NOTE 12 PRO</item>
+                <item>NOTE 12</item>
+                <item>NOTE 12 PRO+</item>
+                <item>K60</item>
+                <item>K60E</item>
+                <item>K60</item>
+                <item>NOTE 12 PRO</item>
+                <item>12C</item>
+                <item>A2</item>
+                <item>A2+</item>
+                <item>NOTE 12S</item>
+                <item>NOTE 12 PRO 4G</item>
+                <item>NOTE 12 TURBO</item>
+                <item>NOTE 12R PRO</item>
+                <item>12</item>
+                <item>12R</item>
+                <item>12 5G</item>
+                <item>K60 ULTRA</item>
+                <item>NOTE 13 PRO</item>
+                <item>NOTE 13</item>
+                <item>NOTE 13 PRO+</item>
+                <item>NOTE 12T PRO</item>
+                <item>13C</item>
+                <item>NOTE 13R</item>
+                <item>K70</item>
+                <item>K70E</item>
+                <item>K70 PRO</item>
+                <item>13C</item>
+                <item>13R</item>
+
+        </string-array>
+        <string-array name="OPPO">
             <item>FIND X3 PRO</item>
             <item>FIND X3 NEO</item>
             <item>FIND X3 LITE</item>
@@ -338,7 +667,7 @@
             <item>N1</item>
             <item>N3</item>
             <item>N1 MINI</item>
-        </string-array>
+    </string-array>
     <string-array name="VIVO">
             <item>V21</item>
             <item>V21E</item>
@@ -431,7 +760,7 @@
             <item>IQOO 3</item>
             <item>IQOO 5</item>
             <item>IQOO 5 PRO</item>
-        </string-array>
+    </string-array>
     <string-array name="REALME">
             <item>1</item>
             <item>2</item>
@@ -530,7 +859,7 @@
             <item>6 PRO MAX</item>
             <item>C21Y</item>
             <item>C25Y</item>
-        </string-array>
+    </string-array>
     <string-array name="IPHONE">
         <item>3G</item>
         <item>3GS</item>
@@ -560,6 +889,18 @@
         <item>12</item>
         <item>12 PRO</item>
         <item>12 PRO MAX</item>
+            <item>13 MINI</item>
+            <item>13</item>
+            <item>13 PRO</item>
+            <item>13 PRO MAX</item>
+            <item>14</item>
+            <item>14 PLUS</item>
+            <item>14 PRO</item>
+            <item>14 PRO MAX</item>
+            <item>15</item>
+            <item>15 PLUS</item>
+            <item>15 PRO</item>
+            <item>15 PRO MAX</item>
     </string-array>
     <string-array name="ONEPLUS">
         <item>One</item>
@@ -580,12 +921,33 @@
         <item>8T</item>
         <item>9</item>
         <item>9 Pro</item>
-        <item>Nord</item>
-        <item>Nord N10 5G</item>
-        <item>Nord N100</item>
+            <item>9RT</item>
         <item>9R</item>
         <item>10</item>
+            <item>10R</item>
         <item>10 Pro</item>
+            <item>10T</item>
+            <item>ACE PRO</item>
+            <item>11</item>
+            <item>11R</item>
+            <item>12</item>
+            <item>12R</item>
+            <item>Nord</item>
+            <item>Nord N10</item>
+            <item>Nord N100</item>
+            <item>Nord CE</item>
+            <item>Nord 200</item>
+            <item>Nord 2</item>
+            <item>Nord 2T</item>
+            <item>Nord N20</item>
+            <item>Nord CE2</item>
+            <item>Nord CE2 LITE</item>
+            <item>Nord N300</item>
+            <item>Nord N30</item>
+            <item>Nord CE3 LITE</item>
+            <item>Nord 3</item>
+            <item>Nord CE3</item>
+            <item>Nord CE4</item>
     </string-array>
     <string-array name="POCO">
         <item>F1</item>
@@ -599,12 +961,12 @@
         <item>X2 Pro</item>
         <item>X2 Pro 5G</item>
     </string-array>
+        <string-array name="Dealerlist">
+                <item>JV</item>
+                <item>MITHUNA</item>
+                <item>X3</item>
 
-
-
-
-
-
+        </string-array>
 
 
 </resources>
