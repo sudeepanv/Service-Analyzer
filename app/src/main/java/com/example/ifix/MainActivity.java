@@ -1,5 +1,6 @@
 package com.example.ifix;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,17 +9,22 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -61,27 +67,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
-        dialog.show();
-        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dataList.clear();
-                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
-                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
-                    Objects.requireNonNull(dataClass).setKey(itemSnapshot.getKey());
-                    dataList.add(dataClass);
-                }
-                adapter.notifyDataSetChanged();
-                int lastIndex = dataList.size() - 1;
-                recyclerView.scrollToPosition(lastIndex);
-                dialog.dismiss();
-            }
+        if (NetworkUtils.isNetworkAvailable(this)) {
+            loadInitialData(dialog);
+            dialog.show();
+        } else {
+            loadOfflineData(dialog);
+            fab.setEnabled(false);
+            fab.setBackgroundColor(getResources().getColor(R.color.grey));
+            Toast.makeText(MainActivity.this, "NO NETWORK", Toast.LENGTH_LONG).show();
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                dialog.dismiss();
-            }
-        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -104,6 +99,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void loadInitialData(AlertDialog dialog){
+        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList.clear();
+                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
+                    Objects.requireNonNull(dataClass).setKey(itemSnapshot.getKey());
+                    dataList.add(dataClass);
+                }
+                adapter.notifyDataSetChanged();
+                int lastIndex = dataList.size() - 1;
+                recyclerView.scrollToPosition(lastIndex);
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+    private void loadOfflineData(AlertDialog dialog) {
+        databaseReference.keepSynced(true);
+        // Order by key and limit to the last 50 entries
+        Query query = databaseReference.orderByKey().limitToLast(50);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList.clear();
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
+                    Objects.requireNonNull(dataClass).setKey(itemSnapshot.getKey());
+                    dataList.add(dataClass);
+                }
+                recyclerView.scrollToPosition(dataList.size() - 1);
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                dialog.dismiss();
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
@@ -131,5 +172,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         adapter.searchDataList(searchList);
+    }
+}
+
+class NetworkUtils {
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
     }
 }
