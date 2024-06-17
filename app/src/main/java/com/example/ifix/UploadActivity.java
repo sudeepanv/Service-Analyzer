@@ -480,7 +480,13 @@ public class UploadActivity extends AppCompatActivity {
         String model = uploadModel.getText().toString();
         String password = uploadPassword.getText().toString();
         String complaint = uploadComplaint.getText().toString();
-        String time = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+        Date time = Calendar.getInstance().getTime();
+        // Define the desired format pattern
+        // Create a SimpleDateFormat instance with the desired format pattern
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+        // Format the current date and time
+        String entrytime = sdf.format(time);
+
 
         if (name.isEmpty() || phone.isEmpty() || brand.isEmpty()) {
             showToast("Please fill all the fields");
@@ -488,7 +494,7 @@ public class UploadActivity extends AppCompatActivity {
         }
 
         String job = Integer.toString(maxjob += 1);
-        DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, time, job);
+        DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, entrytime, job);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
         databaseReference.child(job).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -99,7 +99,13 @@ public class Dealer extends AppCompatActivity {
                         // Display or use the new balance
                         // For example, set it to a TextView
                         balance.setText(String.valueOf(newBalance));
-                        DealerClass dealerClass=new DealerClass(Integer.toString(newBalance), DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
+                        Date paytime = Calendar.getInstance().getTime();
+                        // Define the desired format pattern
+                        // Create a SimpleDateFormat instance with the desired format pattern
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+                        // Format the current date and time
+                        String paidtime = sdf.format(paytime);
+                        DealerClass dealerClass=new DealerClass(Integer.toString(newBalance), paidtime);
                         dealerreference = FirebaseDatabase.getInstance().getReference("DealerAccounts").child(dealerName.getText().toString());
                         dealerreference.setValue(dealerClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -216,8 +222,15 @@ public class Dealer extends AppCompatActivity {
                                     searchList.add(dataClass);
                                     if (dataClass.getDataStatus().equals("DELIVERED")) {
                                         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+                                        SimpleDateFormat fdf = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
                                         try {
                                             String deliveryTime = dataClass.getDataDeliveryTime();
+//                                            if (lastpaidtime!=null){
+//                                                if (lastpaidtime.charAt(0)=='J'){
+//                                                    Date date = fdf.parse(deliveryTime);
+//                                                    lastpaidtime = sdf.format(date);
+//                                                }
+//                                            }
                                             if (deliveryTime != null && lastpaidtime != null) {
                                                 Date deliverydate = sdf.parse(dataClass.getDataDeliveryTime());
                                                 Date lastpay = sdf.parse(lastpaidtime);

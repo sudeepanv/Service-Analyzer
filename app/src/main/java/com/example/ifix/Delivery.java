@@ -24,7 +24,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Delivery extends AppCompatActivity {
@@ -84,7 +86,13 @@ StorageReference storageReference;
             deliveryPassword.setText(bundle.getString("Password"));
             deliveryComplaint.setText(bundle.getString("Complaint"));
             deliveryStatus.setText(bundle.getString("Status"));
-            deliveryTime.setText(DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
+            Date deltimedate = Calendar.getInstance().getTime();
+            // Define the desired format pattern
+            // Create a SimpleDateFormat instance with the desired format pattern
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+            // Format the current date and time
+            String deltime = sdf.format(deltimedate);
+            deliveryTime.setText(deltime);
             deliveryExpense.setText(bundle.getString("Expense"));
             deliveryAmount.setText(bundle.getString("Amount"));
             payment.setText(bundle.getString("Payment"));
