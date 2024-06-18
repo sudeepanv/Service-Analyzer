@@ -97,7 +97,6 @@ public class UploadActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Statuslist);
         uploadStatus.setAdapter(arrayAdapter);
         uploadStatus.setText(Statuslist[0], false);
-
         uploadStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -110,7 +109,6 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
         uploadStatus.setOnClickListener(v -> uploadStatus.showDropDown());
-
         String[] Colourlist = getResources().getStringArray(R.array.Colourlist);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Colourlist);
         uploadColour.setAdapter(arrayAdapter);
@@ -140,13 +138,11 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
         uploadColour.setOnClickListener(v -> uploadColour.showDropDown());
-
         String[] Complaintlist = getResources().getStringArray(R.array.Complaintlist);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Complaintlist);
         uploadComplaint.setAdapter(arrayAdapter);
         uploadComplaint.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         uploadComplaint.setThreshold(0);
-
         uploadComplaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -159,7 +155,6 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
         uploadComplaint.setOnClickListener(v -> uploadComplaint.showDropDown());
-
         String[] Brandlist = getResources().getStringArray(R.array.Brandlist);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Brandlist);
         uploadBrand.setAdapter(arrayAdapter);
@@ -202,10 +197,6 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
         uploadBrand.setOnClickListener(v -> uploadBrand.showDropDown());
-
-
-
-
         fetchDataList();
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,7 +204,6 @@ public class UploadActivity extends AppCompatActivity {
                 dispatchTakePictureIntent();
             }
         });
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -255,102 +245,6 @@ public class UploadActivity extends AppCompatActivity {
         });
         uploadModel.setOnClickListener(v -> uploadModel.showDropDown());
     }
-
-
-//    private void setupDropdowns() {
-//        setupDropdown1(uploadStatus, R.array.Statuslist, new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                uploadStatus.setText(adapterView.getItemAtPosition(position).toString(), false);
-//            }
-//        });
-//
-//        setupDropdown2(uploadColour, R.array.Colourlist, new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                uploadColour.setText(adapterView.getItemAtPosition(position).toString(), false);
-//            }
-//        });
-//        setupDropdown3(uploadBrand, R.array.Brandlist, new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                uploadBrand.setText(adapterView.getItemAtPosition(position).toString(), false);
-//            }
-//        });
-//
-//        setupDropdown4(uploadModel,uploadBrand.getText().toString(), new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                uploadBrand.setText(adapterView.getItemAtPosition(position).toString(), false);
-//            }
-//        });
-//
-//    }
-
-//    private void setupDropdown1(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
-//        String[] items = getResources().getStringArray(arrayResourceId);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
-//        dropdown.setAdapter(adapter);
-//        dropdown.setText(items[0], false);
-//        dropdown.setOnItemClickListener(onItemClickListener);
-//        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
-//            if (hasFocus) {
-//                dropdown.showDropDown();
-//            }
-//        });
-//        dropdown.setOnClickListener(v -> dropdown.showDropDown());
-//    }
-//    private void setupDropdown2(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
-//        String[] items = getResources().getStringArray(arrayResourceId);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
-//        dropdown.setAdapter(adapter);
-//        dropdown.setText(items[3], false);
-//        dropdown.setOnItemClickListener(onItemClickListener);
-//        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
-//            if (hasFocus) {
-//                dropdown.showDropDown();
-//            }
-//        });
-//        dropdown.setOnClickListener(v -> dropdown.showDropDown());
-//    }
-//    private void setupDropdown3(AutoCompleteTextView dropdown, int arrayResourceId, AdapterView.OnItemClickListener onItemClickListener) {
-//        String[] items = getResources().getStringArray(arrayResourceId);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
-//        dropdown.setAdapter(adapter);
-//        dropdown.setOnItemClickListener(onItemClickListener);
-//        dropdown.setOnFocusChangeListener((v, hasFocus) -> {
-//            if (hasFocus) {
-//                dropdown.showDropDown();
-//            }
-//        });
-//        dropdown.setOnClickListener(v -> dropdown.showDropDown());
-//    }
-    private void setupDropdown4(AutoCompleteTextView dropdown, String arrayName, AdapterView.OnItemClickListener onItemClickListener) {
-        // Get the resource ID of the string array using its name
-        int arrayResourceId = getResources().getIdentifier(arrayName, "array", getPackageName());
-
-        // Check if the resource ID is valid
-        if (arrayResourceId != 0) {
-            // Retrieve the string array
-            String[] items = getResources().getStringArray(arrayResourceId);
-
-            // Set up your dropdown using the retrieved string array
-            // For example:
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, items);
-            dropdown.setAdapter(adapter);
-            dropdown.setOnItemClickListener(onItemClickListener);
-            dropdown.setOnFocusChangeListener((v, hasFocus) -> {
-                if (hasFocus) {
-                    dropdown.showDropDown();
-                }
-            });
-            dropdown.setOnClickListener(v -> dropdown.showDropDown());
-        } else {
-            // Handle the case where the string array resource is not found
-            showToast("Not Found");
-        }
-    }
-
     private void fetchDataList() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -402,7 +296,7 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
         String imageFileName = IMAGE_PREFIX + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName, IMAGE_SUFFIX, storageDir);
@@ -487,6 +381,10 @@ public class UploadActivity extends AppCompatActivity {
         // Format the current date and time
         String entrytime = sdf.format(time);
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        Date currentDate = new Date();
+        String Date = formatter.format(currentDate);
+
 
         if (name.isEmpty() || phone.isEmpty() || brand.isEmpty()) {
             showToast("Please fill all the fields");
@@ -497,7 +395,7 @@ public class UploadActivity extends AppCompatActivity {
         DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, entrytime, job);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
-        databaseReference.child(job).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+        databaseReference.child(Date).child(job).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

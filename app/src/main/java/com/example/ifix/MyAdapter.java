@@ -16,6 +16,18 @@ import java.util.Objects;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+class DateViewHolder extends RecyclerView.ViewHolder {
+    TextView dateTextView;
+
+    public DateViewHolder(@NonNull View itemView) {
+        super(itemView);
+        dateTextView = itemView.findViewById(R.id.dateTextView); // Assume your date layout has this ID
+    }
+
+    public void bind(String date) {
+        dateTextView.setText(date);
+    }
+}
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
@@ -33,6 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
         return new MyViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {

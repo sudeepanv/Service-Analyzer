@@ -73,9 +73,10 @@
                 android:layout_height="60dp"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/updateBrand"
@@ -88,9 +89,10 @@
                 android:layout_height="60dp"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:singleLine="true"
@@ -132,9 +134,10 @@
                 android:layout_height="60dp"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/updateComplaint"

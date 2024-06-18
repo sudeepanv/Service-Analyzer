@@ -12,14 +12,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -41,12 +45,14 @@ public class UpdateActivity extends AppCompatActivity {
 
     ImageView updateImage;
     Button updateButton;
-    EditText updateName, updatePhone, updateBrand, updateModel,updatePassword,updateComplaint;
+    String[] Modellist;
+    int arrayResourceId;
+    EditText updateName, updatePhone,updatePassword;
     String Status,Colour;
-    String key, jobno,time;
+    String key, jobno,time,Brand,Model;
     List<String> oldImageURL,imageUrl;
     Uri uri;
-    AutoCompleteTextView updateStatus,updateColour;
+    AutoCompleteTextView updateStatus,updateColour, updateBrand, updateModel,updateComplaint;
     ArrayAdapter<String> arrayAdapter;
     DatabaseReference databaseReference;
 
@@ -83,6 +89,22 @@ public class UpdateActivity extends AppCompatActivity {
         });
         updateStatus.setOnClickListener(v -> updateStatus.showDropDown());
 
+        String[] Complaintlist = getResources().getStringArray(R.array.Complaintlist);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Complaintlist);
+        updateComplaint.setAdapter(arrayAdapter);
+        updateComplaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String Complaint = adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        updateComplaint.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                updateComplaint.showDropDown();
+            }
+        });
+        updateComplaint.setOnClickListener(v -> updateComplaint.showDropDown());
+
         String[] Colourlist = getResources().getStringArray(R.array.Colourlist);
         ArrayAdapter<String> ColourAdapter = new ArrayAdapter<>(this, R.layout.dropdownstatus, Colourlist);
         updateColour.setAdapter(ColourAdapter);
@@ -98,6 +120,49 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
         updateColour.setOnClickListener(v -> updateColour.showDropDown());
+
+        String[] Brandlist = getResources().getStringArray(R.array.Brandlist);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Brandlist);
+        updateBrand.setAdapter(arrayAdapter);
+        updateBrand.setThreshold(0);
+        updateBrand.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        updateBrand.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    // Move focus to the next view
+                    View nextView = findViewById(R.id.uploadModel); // Replace with the ID of your next view
+                    nextView.requestFocus();
+                    return true; // Consume the event
+                }
+                return false; // Allow default behavior for other actions
+            }
+        });
+        updateBrand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Brand=adapterView.getItemAtPosition(position).toString();
+                try {
+                    arrayResourceId = getResources().getIdentifier(Brand, "array", getPackageName());
+                    Modellist = getResources().getStringArray(arrayResourceId);
+                }catch (Exception e){
+
+                }
+                if (Modellist!=null){
+                    arrayResourceId = getResources().getIdentifier(Brand, "array", getPackageName());
+                    Modellist = getResources().getStringArray(arrayResourceId);
+                    modelcall();
+                }
+
+            }
+
+        });
+        updateBrand.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                updateBrand.showDropDown();
+            }
+        });
+        updateBrand.setOnClickListener(v -> updateBrand.showDropDown());
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -146,6 +211,36 @@ public class UpdateActivity extends AppCompatActivity {
                 updateData();
             }
         });
+    }
+    private void modelcall(){
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Modellist);
+        updateModel.setAdapter(arrayAdapter);
+        updateModel.setThreshold(0);
+        updateModel.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        updateModel.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    // Move focus to the next view
+                    View nextView = findViewById(R.id.uploadColour); // Replace with the ID of your next view
+                    nextView.requestFocus();
+                    return true; // Consume the event
+                }
+                return false; // Allow default behavior for other actions
+            }
+        });
+        updateModel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Model=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        updateModel.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                updateModel.showDropDown();
+            }
+        });
+        updateModel.setOnClickListener(v -> updateModel.showDropDown());
     }
 
     public void updateData(){
