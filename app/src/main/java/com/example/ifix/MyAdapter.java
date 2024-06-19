@@ -64,6 +64,13 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return dataList.size();
     }
 
+    public void searchDataList(ArrayList<Object> searchList) {
+    }
+    public void updateDataList(List<Object> newDataList) {
+        this.dataList = newDataList;
+        notifyDataSetChanged();
+    }
+
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
         TextView headerText;
 
