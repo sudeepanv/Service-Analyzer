@@ -1550,10 +1550,18 @@
         <item>JV</item>
         <item>MITHUNA</item>
         <item>JJ MANI</item>
-
+        <item>MANI MOBILE</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="Shoplist">
+        <item>CHAMUNDA</item>
+        <item>CELLCARE</item>
+        <item>KEVAI</item>
+        <item>MR</item>
+        <item>HANUMAN</item>
+        <item>AMBAY</item>
+        <item>SURYA</item>
+        <item>SHIV</item>
+    </string-array>
 
 
 </resources>

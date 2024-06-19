@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +35,9 @@ public class Delivery extends AppCompatActivity {
 TextView deliveryName,deliveryPhone,deliveryBrand,deliveryModel,deliveryColour,deliveryEstimate,deliveryComplaint,deliveryStatus,deliveryTime;
 EditText deliveryExpense,deliveryAmount;
 AutoCompleteTextView payment;
+MultiAutoCompleteTextView sparefrom;
 Button deliver;
-String Payment,key,jobno,entrytime,dateOnly,Password;
+String Payment,key,jobno,entrytime,dateOnly,Password,shop;
 List<String> oldImageURL;
 ArrayAdapter<String> arrayAdapter;
 DatabaseReference databaseReference;
@@ -45,6 +47,7 @@ StorageReference storageReference;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.deliveryscreen);
         deliveryName=findViewById(R.id.deliveryName);
+        sparefrom=findViewById(R.id.sparefrom);
         deliveryPhone=findViewById(R.id.deliveryPhone);
         deliveryBrand=findViewById(R.id.deliveryBrand);
         deliveryModel=findViewById(R.id.deliveryModel);
@@ -77,6 +80,26 @@ StorageReference storageReference;
         // Show suggestions when the field is clicked
         payment.setOnClickListener(v -> payment.showDropDown());
 
+        String[] Shoplist = getResources().getStringArray(R.array.Shoplist);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Shoplist);
+        sparefrom.setAdapter(arrayAdapter);
+        sparefrom.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        sparefrom.setThreshold(0);
+        sparefrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                shop=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        sparefrom.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                sparefrom.showDropDown();
+            }
+        });
+
+        // Show suggestions when the field is clicked
+        sparefrom.setOnClickListener(v -> sparefrom.showDropDown());
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
             deliveryName.setText(bundle.getString("Name"));
@@ -87,13 +110,14 @@ StorageReference storageReference;
             deliveryEstimate.setText(bundle.getString("Estimate"));
             deliveryComplaint.setText(bundle.getString("Complaint"));
             deliveryStatus.setText(bundle.getString("Status"));
-            Date deltimedate = Calendar.getInstance().getTime();
-            // Define the desired format pattern
-            // Create a SimpleDateFormat instance with the desired format pattern
-            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
-            // Format the current date and time
-            String deltime = sdf.format(deltimedate);
-            deliveryTime.setText(deltime);
+            sparefrom.setText(bundle.getString("Sparefrom"));
+            deliveryTime.setText(bundle.getString("Delivery"));
+            if (deliveryTime.getText().toString().length()<5){
+                Date deltimedate = Calendar.getInstance().getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+                String deltime = sdf.format(deltimedate);
+                deliveryTime.setText(deltime);
+            }
             deliveryExpense.setText(bundle.getString("Expense"));
             deliveryAmount.setText(bundle.getString("Amount"));
             payment.setText(bundle.getString("Payment"));
@@ -121,7 +145,7 @@ StorageReference storageReference;
         String Time= deliveryTime.getText().toString();
         DataClass dataClass = new DataClass(deliveryName.getText().toString(), deliveryPhone.getText().toString(), deliveryBrand.getText().toString(),
                 deliveryModel.getText().toString(), deliveryColour.getText().toString(), Password, deliveryComplaint.getText().toString(),
-                Status, oldImageURL, entrytime, jobno,deliveryEstimate.getText().toString(),Expense,Amount,Payment,Time);
+                Status, oldImageURL, entrytime, jobno,deliveryEstimate.getText().toString(),Expense,Amount,Payment,Time,sparefrom.getText().toString());
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -129,6 +153,7 @@ StorageReference storageReference;
                 if (task.isSuccessful()){
                     Toast.makeText(Delivery.this, "Delivered", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(Delivery.this,MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             }

@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="5dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -175,7 +175,6 @@
                     android:id="@+id/estimate"
                     android:textSize="25dp"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:background="@drawable/blue_border"
@@ -197,7 +196,21 @@
             </LinearLayout>
 
         </LinearLayout>
-    <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="start|center_vertical"
+            android:layout_marginHorizontal="20dp"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+            <MultiAutoCompleteTextView
+                android:id="@+id/sparefrom"
+                android:layout_width="match_parent"
+                android:hint="Spare From"
+                android:layout_height="match_parent"
+                android:inputType="textCapCharacters" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
@@ -241,7 +254,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="start|center_vertical"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <AutoCompleteTextView
             android:id="@+id/payment"
@@ -253,7 +266,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         app:cornerRadius="20dp"
         android:id="@+id/deliver"
         android:text="DELIVER"

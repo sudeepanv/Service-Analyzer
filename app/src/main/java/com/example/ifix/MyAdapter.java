@@ -144,6 +144,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         intent.putExtra("Brand", data.getDataBrand());
                         intent.putExtra("Model", data.getDataModel());
                         intent.putExtra("Colour", data.getDataColour());
+                        intent.putExtra("Sparefrom", data.getDataBoughtfrom());
                         intent.putExtra("Password", data.getDataPassword());
                         intent.putExtra("Complaint", data.getDataComplaint());
                         intent.putExtra("Status", data.getDataStatus());

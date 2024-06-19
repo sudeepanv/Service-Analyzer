@@ -49,10 +49,11 @@ public class UpdateActivity extends AppCompatActivity {
     int arrayResourceId;
     EditText updateName, updatePhone,updatePassword,updateEstimate;
     String Status,Colour,dateonly;
-    String key, jobno,time,Brand,Model;
+    String key, jobno,time,Brand,Model,Expense,Amount,Payment,Time,sparefrom;
     List<String> oldImageURL,imageUrl;
     Uri uri;
-    AutoCompleteTextView updateStatus,updateColour, updateBrand, updateModel,updateComplaint;
+    AutoCompleteTextView updateStatus,updateColour, updateBrand, updateModel;
+    MultiAutoCompleteTextView updateComplaint;
     ArrayAdapter<String> arrayAdapter;
     DatabaseReference databaseReference;
 
@@ -93,6 +94,8 @@ public class UpdateActivity extends AppCompatActivity {
         String[] Complaintlist = getResources().getStringArray(R.array.Complaintlist);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Complaintlist);
         updateComplaint.setAdapter(arrayAdapter);
+        updateComplaint.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        updateComplaint.setThreshold(0);
         updateComplaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -132,7 +135,7 @@ public class UpdateActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
                     // Move focus to the next view
-                    View nextView = findViewById(R.id.uploadModel); // Replace with the ID of your next view
+                    View nextView = findViewById(R.id.updateModel); // Replace with the ID of your next view
                     nextView.requestFocus();
                     return true; // Consume the event
                 }
@@ -194,6 +197,11 @@ public class UpdateActivity extends AppCompatActivity {
             updateStatus.setText(bundle.getString("Status"));
             jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
+            Expense = bundle.getString("Expense");
+            Amount = bundle.getString("Amount");
+            Payment = bundle.getString("Payment");
+            Time = bundle.getString("Delivery");
+            sparefrom = bundle.getString("Sparefrom");
             time = bundle.getString("Time");
             dateonly = bundle.getString("Date");
             imageUrl = bundle.getStringArrayList("Images");
@@ -225,7 +233,7 @@ public class UpdateActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
                     // Move focus to the next view
-                    View nextView = findViewById(R.id.uploadColour); // Replace with the ID of your next view
+                    View nextView = findViewById(R.id.updateColour); // Replace with the ID of your next view
                     nextView.requestFocus();
                     return true; // Consume the event
                 }
@@ -256,7 +264,7 @@ public class UpdateActivity extends AppCompatActivity {
         String Complaint = updateComplaint.getText().toString();
         String Status = updateStatus.getText().toString();
         String Estimate = updateEstimate.getText().toString();
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,imageUrl,time,jobno,Estimate);
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,imageUrl,time,jobno,Estimate,Expense,Amount,Payment,Time,sparefrom);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

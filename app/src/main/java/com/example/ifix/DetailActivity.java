@@ -31,7 +31,7 @@ import java.util.Date;
 
 public class DetailActivity extends AppCompatActivity {
 
-    TextView detailJobNo,detailEstimate, detailDelivery, detailTime, detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus, detailExpense, detailAmount, detailPayment;
+    TextView detailJobNo,detailFrom,detailEstimate, detailDelivery, detailTime, detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus, detailExpense, detailAmount, detailPayment;
     LinearLayout imagesContainer;
     Button deleteButton, editButton, deliveredButton;
     ImageButton phone;
@@ -45,6 +45,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         detailTime = findViewById(R.id.detailTime);
+        detailFrom = findViewById(R.id.detailFrom);
         detailPhone = findViewById(R.id.detailPhone);
         imagesContainer = findViewById(R.id.imageContainer);
         detailName = findViewById(R.id.detailName);
@@ -92,6 +93,7 @@ public class DetailActivity extends AppCompatActivity {
             detailTime.setText(bundle.getString("Time", ""));
             detailDelivery.setText(bundle.getString("Delivery", ""));
             detailJobNo.setText(bundle.getString("Job", ""));
+            detailFrom.setText(bundle.getString("Sparefrom", ""));
             key = bundle.getString("Key", "");
             imageUrls = bundle.getStringArrayList("Images");
             if (imageUrls != null && !imageUrls.isEmpty()) {
@@ -166,7 +168,7 @@ public class DetailActivity extends AppCompatActivity {
                 DataClass dataClass=new DataClass(detailName.getText().toString(), detailPhone.getText().toString(), detailBrand.getText().toString(),detailModel.getText().toString(),
                         detailColour.getText().toString(), detailPassword.getText().toString(), detailComplaint.getText().toString(),
                         detailStatus.getText().toString(), imageUrls, detailTime.getText().toString(), detailJobNo.getText().toString(),
-                        detailEstimate.getText().toString(),detailExpense.getText().toString(),detailAmount.getText().toString(),detailPayment.getText().toString(),detailDelivery.getText().toString());
+                        detailEstimate.getText().toString(),detailExpense.getText().toString(),detailAmount.getText().toString(),detailPayment.getText().toString(),detailDelivery.getText().toString(),detailFrom.getText().toString());
 //                    reference.child(key).removeValue();
 //                    Toast.makeText(DetailActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
@@ -215,10 +217,15 @@ public class DetailActivity extends AppCompatActivity {
                         .putExtra("Complaint", detailComplaint.getText().toString())
                         .putExtra("Status", detailStatus.getText().toString())
                         .putExtra("Job", detailJobNo.getText().toString())
+                        .putExtra("Expense", detailExpense.getText().toString())
+                        .putExtra("Amount", detailAmount.getText().toString())
+                        .putExtra("Payment", detailPayment.getText().toString())
+                        .putExtra("Delivery", detailDelivery.getText().toString())
                         .putExtra("Images", imageUrls)
                         .putExtra("Time",detailTime.getText().toString())
                         .putExtra("Estimate",detailEstimate.getText().toString())
                         .putExtra("Key", key)
+                        .putExtra("Sparefrom", detailFrom.getText().toString())
                         .putExtra("Date", dateOnly);
                 startActivity(intent);
             }
@@ -243,6 +250,8 @@ public class DetailActivity extends AppCompatActivity {
                         .putExtra("Images", imageUrls)
                         .putExtra("Job", detailJobNo.getText().toString())
                         .putExtra("Time",detailTime.getText().toString())
+                        .putExtra("Delivery",detailDelivery.getText().toString())
+                        .putExtra("Sparefrom",detailFrom.getText().toString())
                         .putExtra("Key", key)
                         .putExtra("Date", dateOnly);
                 startActivity(intent);
