@@ -131,6 +131,15 @@
                         android:hint="-"
                         android:id="@+id/detailPhone"
                         android:textSize="25dp"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:id="@+id/phonebutton"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/phone"
+                        android:backgroundTint="@color/green" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -35,7 +35,7 @@ TextView deliveryName,deliveryPhone,deliveryBrand,deliveryModel,deliveryColour,d
 EditText deliveryExpense,deliveryAmount;
 AutoCompleteTextView payment;
 Button deliver;
-String Payment,key,jobno,entrytime,dateOnly;
+String Payment,key,jobno,entrytime,dateOnly,Password;
 List<String> oldImageURL;
 ArrayAdapter<String> arrayAdapter;
 DatabaseReference databaseReference;
@@ -99,6 +99,7 @@ StorageReference storageReference;
             payment.setText(bundle.getString("Payment"));
             jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
+            Password = bundle.getString("Password");
             entrytime= bundle.getString("Time");
             dateOnly=bundle.getString("Date");
             oldImageURL = bundle.getStringArrayList("eImages");
@@ -118,7 +119,9 @@ StorageReference storageReference;
         String Amount=deliveryAmount.getText().toString();
         String Payment=payment.getText().toString();
         String Time= deliveryTime.getText().toString();
-        DataClass dataClass = new DataClass(Status,Expense,Amount,Payment,Time);
+        DataClass dataClass = new DataClass(deliveryName.getText().toString(), deliveryPhone.getText().toString(), deliveryBrand.getText().toString(),
+                deliveryModel.getText().toString(), deliveryColour.getText().toString(), Password, deliveryComplaint.getText().toString(),
+                Status, oldImageURL, entrytime, jobno,deliveryEstimate.getText().toString(),Expense,Amount,Payment,Time);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

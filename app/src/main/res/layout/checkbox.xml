@@ -1,0 +1,74 @@
+<LinearLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBox
+        android:id="@+id/phoneCriteriaCheckbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:text="Phone" />
+
+    <CheckBox
+        android:id="@+id/nameCriteriaCheckbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:checked="true"
+        android:text="Name" />
+
+    <CheckBox
+        android:id="@+id/modelCriteriaCheckbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:checked="true"
+        android:text="Model" />
+
+    <CheckBox
+        android:id="@+id/amountCriteriaCheckbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:checked="true"
+        android:text="Amount" />
+
+    <CheckBox
+        android:id="@+id/complaintCriteriaCheckbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:checked="true"
+        android:text="Complaint" />
+
+    <CheckBox
+        android:id="@+id/brandCriteriaCheckbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:checked="true"
+        android:text="Brand" />
+    <CheckBox
+        android:id="@+id/statusCriteriaCheckbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:checked="true"
+        android:text="Status" />
+</LinearLayout>

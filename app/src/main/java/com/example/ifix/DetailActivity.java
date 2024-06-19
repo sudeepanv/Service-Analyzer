@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView detailJobNo,detailEstimate, detailDelivery, detailTime, detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus, detailExpense, detailAmount, detailPayment;
     LinearLayout imagesContainer;
     Button deleteButton, editButton, deliveredButton;
+    ImageButton phone;
     String key,dateOnly;
     DatabaseReference databaseReference;
     ArrayList<String> imageUrls;
@@ -59,10 +61,19 @@ public class DetailActivity extends AppCompatActivity {
         detailDelivery = findViewById(R.id.detailDelivery);
         deleteButton = findViewById(R.id.deleteButton);
         editButton = findViewById(R.id.editButton);
+        phone = findViewById(R.id.phonebutton);
         deliveredButton = findViewById(R.id.deliveredButton);
         detailJobNo = findViewById(R.id.detailJobNo);
 
-
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNumber = detailPhone.getText().toString(); // Replace with the phone number you want to dial
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+phoneNumber));
+                startActivity(intent);
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

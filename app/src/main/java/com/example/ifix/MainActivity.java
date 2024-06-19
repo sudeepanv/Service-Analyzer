@@ -16,9 +16,11 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -44,8 +46,16 @@ public class MainActivity extends AppCompatActivity {
     private List<Object> dataList;
     FloatingActionButton fab;
     DatabaseReference databaseReference;
+    AlertDialog dialog;
     ValueEventListener eventListener;
     SearchView searchView;
+    private boolean phone = true;
+    private boolean name = true;
+    private boolean model = true;
+    private boolean brand = true;
+    private boolean complaint = true;
+    private boolean amount = true;
+    private boolean status = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
+        dialog = builder.create();
         dialog.show();
         databaseReference = FirebaseDatabase.getInstance().getReference("Entry List");
         if (NetworkUtils.isNetworkAvailable(this)) {
@@ -168,8 +178,101 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.calendar) {
             openCalendarDialog();
         }
-        return true;
+        if (id == R.id.showall) {
+                dataList.clear();
+                loadInitialData(dialog);
+                adapter.notifyDataSetChanged();
+        }
+        if (id == R.id.criteria) {
+            showCriteriaPopup();
+        }
+//        if (id == R.id.namecriteria) {
+//            name=!name;
+//            item.setChecked(name);
+//            return true;
+//        }
+//        if (id == R.id.modelcriteria) {
+//            model=!model;
+//            item.setChecked(model);
+//            return true;
+//        }
+//        if (id == R.id.amountcriteria) {
+//            amount=!amount;
+//            item.setChecked(amount);
+//            return true;
+//        }
+//        if (id == R.id.complaintcriteria) {
+//            complaint=!complaint;
+//            item.setChecked(complaint);
+//            return true;
+//        }
+//        if (id == R.id.brandcriteria) {
+//            brand=!brand;
+//            item.setChecked(brand);
+//            return true;
+//        }
+        return super.onOptionsItemSelected(item);
     }
+    private void showCriteriaPopup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.checkbox, null);
+        builder.setView(dialogView);
+
+        CheckBox phoneCheckBox = dialogView.findViewById(R.id.phoneCriteriaCheckbox);
+        CheckBox nameCheckBox = dialogView.findViewById(R.id.nameCriteriaCheckbox);
+        CheckBox modelCheckBox = dialogView.findViewById(R.id.modelCriteriaCheckbox);
+        CheckBox amountCheckBox = dialogView.findViewById(R.id.amountCriteriaCheckbox);
+        CheckBox complaintCheckBox = dialogView.findViewById(R.id.complaintCriteriaCheckbox);
+        CheckBox brandCheckBox = dialogView.findViewById(R.id.brandCriteriaCheckbox);
+        CheckBox statusCheckBox = dialogView.findViewById(R.id.statusCriteriaCheckbox);
+
+        phoneCheckBox.setChecked(phone);
+        nameCheckBox.setChecked(name);
+        modelCheckBox.setChecked(model);
+        amountCheckBox.setChecked(amount);
+        complaintCheckBox.setChecked(complaint);
+        brandCheckBox.setChecked(brand);
+        brandCheckBox.setChecked(status);
+
+        phoneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> phone = isChecked);
+        nameCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> name = isChecked);
+        modelCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> model = isChecked);
+        amountCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> amount = isChecked);
+        complaintCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> complaint = isChecked);
+        brandCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> brand = isChecked);
+        statusCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> status = isChecked);
+
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            // Handle "OK" action
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            // Handle "Cancel" action
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+//    public void onCheckboxClicked(View view) {
+//        // Check which checkbox was clicked
+//        CheckBox checkBox = (CheckBox) view;
+//        int id = checkBox.getId();
+//        if (id==R.id.phoneCriteriaCheckbox)
+//                phone = checkBox.isChecked();
+//        if (id==R.id.phoneCriteriaCheckbox)
+//                name = checkBox.isChecked();
+//        if (id==R.id.phoneCriteriaCheckbox)
+//                model = checkBox.isChecked();
+//        if (id==R.id.phoneCriteriaCheckbox)
+//                amount = checkBox.isChecked();
+//        if (id==R.id.phoneCriteriaCheckbox)
+//                complaint = checkBox.isChecked();
+//        if (id==R.id.phoneCriteriaCheckbox)
+//                brand = checkBox.isChecked();
+//    }
+
     private void openCalendarDialog() {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -251,11 +354,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean matchesSearchCriteria(DataClass data, String query) {
-        return data.getDataPhone().contains(query);
-//                data.getDataPhone().toLowerCase().contains(query.toLowerCase()) ||
-//                data.getDataBrand().toLowerCase().contains(query.toLowerCase()) ||
-//                data.getDataModel().toLowerCase().contains(query.toLowerCase()) ||
-//                data.getDataComplaint().toLowerCase().contains(query.toLowerCase());
+        return  (phone && data.getDataPhone() != null && data.getDataPhone().contains(query)) ||
+                (name && data.getDataName() != null && data.getDataName().toUpperCase().contains(query.toUpperCase())) ||
+                (brand && data.getDataBrand() != null && data.getDataBrand().toUpperCase().contains(query.toUpperCase())) ||
+                (model && data.getDataModel() != null && data.getDataModel().toUpperCase().contains(query.toUpperCase())) ||
+                (status && data.getDataStatus() != null && data.getDataStatus().toUpperCase().contains(query.toUpperCase())) ||
+                (amount && data.getDataAmount() != null && data.getDataAmount().contains(query)) ||
+                (complaint && data.getDataComplaint() != null && data.getDataComplaint().toUpperCase().contains(query.toUpperCase()));
+
     }
 
 

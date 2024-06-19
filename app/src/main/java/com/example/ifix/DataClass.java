@@ -103,13 +103,13 @@ public class DataClass {
         this.dataEstimate=estimate;
     }
     //delivery
-    public DataClass(String dataStatus,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime) {
-        this.dataStatus = dataStatus;
-        this.dataExpense = dataExpense;
-        this.dataAmount= dataAmount;
-        this.dataPaymentVia =dataPaymentvia;
-        this.dataDeliveryTime=dataDeliveryTime;
-    }
+//    public DataClass(String dataStatus,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime) {
+//        this.dataStatus = dataStatus;
+//        this.dataExpense = dataExpense;
+//        this.dataAmount= dataAmount;
+//        this.dataPaymentVia =dataPaymentvia;
+//        this.dataDeliveryTime=dataDeliveryTime;
+//    }
     public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, List<String> dataImage,String dataTime,String maxjob,String estimate,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime) {
         this.dataName = dataName;
         this.dataPhone = dataPhone;

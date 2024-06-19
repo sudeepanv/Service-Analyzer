@@ -133,6 +133,12 @@
             android:hint=""
             android:textSize="25dp"/>
     </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/alert"
+            android:layout_gravity="center"
+            android:textSize="18dp"/>
 
 </LinearLayout>
     </LinearLayout>
