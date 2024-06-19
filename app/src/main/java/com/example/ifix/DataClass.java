@@ -63,7 +63,7 @@ public class DataClass {
         return dataJobNo;
     }
     public String getDataJobNo(){
-        return Integer.toString(Integer.parseInt(dataJobNo));
+        return dataJobNo;
     }
 
 

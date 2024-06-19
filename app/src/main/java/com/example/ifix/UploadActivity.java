@@ -69,6 +69,7 @@ public class UploadActivity extends AppCompatActivity {
     private List<String> imageUrls = new ArrayList<>();
     private Uri currentImageUri;
     int arrayResourceId;
+    String Date;
     ArrayAdapter<String> arrayAdapter;
     String Status,Brand,Model,Colour,Complaint;
 
@@ -92,6 +93,9 @@ public class UploadActivity extends AppCompatActivity {
         uploadPassword = findViewById(R.id.uploadPassword);
         uploadComplaint = findViewById(R.id.uploadComplaint);
         uploadStatus = findViewById(R.id.uploadStatus);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        Date currentDate = new Date();
+        Date = formatter.format(currentDate);
 
         String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Statuslist);
@@ -246,7 +250,7 @@ public class UploadActivity extends AppCompatActivity {
         uploadModel.setOnClickListener(v -> uploadModel.showDropDown());
     }
     private void fetchDataList() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(Date);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -381,9 +385,7 @@ public class UploadActivity extends AppCompatActivity {
         // Format the current date and time
         String entrytime = sdf.format(time);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-        Date currentDate = new Date();
-        String Date = formatter.format(currentDate);
+
 
 
         if (name.isEmpty() || phone.isEmpty() || brand.isEmpty()) {
@@ -394,8 +396,8 @@ public class UploadActivity extends AppCompatActivity {
         String job = Integer.toString(maxjob += 1);
         DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, entrytime, job);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
-        databaseReference.child(Date).child(job).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(Date);
+        databaseReference.child(job).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
