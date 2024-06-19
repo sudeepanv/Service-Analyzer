@@ -24,17 +24,18 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class Delivery extends AppCompatActivity {
-TextView deliveryName,deliveryPhone,deliveryBrand,deliveryModel,deliveryColour,deliveryPassword,deliveryComplaint,deliveryStatus,deliveryTime;
+TextView deliveryName,deliveryPhone,deliveryBrand,deliveryModel,deliveryColour,deliveryEstimate,deliveryComplaint,deliveryStatus,deliveryTime;
 EditText deliveryExpense,deliveryAmount;
 AutoCompleteTextView payment;
 Button deliver;
-String Payment,key,jobno,entrytime;
+String Payment,key,jobno,entrytime,dateOnly;
 List<String> oldImageURL;
 ArrayAdapter<String> arrayAdapter;
 DatabaseReference databaseReference;
@@ -48,7 +49,7 @@ StorageReference storageReference;
         deliveryBrand=findViewById(R.id.deliveryBrand);
         deliveryModel=findViewById(R.id.deliveryModel);
         deliveryColour=findViewById(R.id.deliveryColour);
-        deliveryPassword=findViewById(R.id.deliveryPassword);
+        deliveryEstimate=findViewById(R.id.estimate);
         deliveryComplaint=findViewById(R.id.deliveryComplaint);
         deliveryStatus=findViewById(R.id.deliveryStatus);
         deliveryTime=findViewById(R.id.deliveryTime);
@@ -83,7 +84,7 @@ StorageReference storageReference;
             deliveryBrand.setText(bundle.getString("Brand"));
             deliveryModel.setText(bundle.getString("Model"));
             deliveryColour.setText(bundle.getString("Colour"));
-            deliveryPassword.setText(bundle.getString("Password"));
+            deliveryEstimate.setText(bundle.getString("Estimate"));
             deliveryComplaint.setText(bundle.getString("Complaint"));
             deliveryStatus.setText(bundle.getString("Status"));
             Date deltimedate = Calendar.getInstance().getTime();
@@ -99,9 +100,10 @@ StorageReference storageReference;
             jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
             entrytime= bundle.getString("Time");
-            oldImageURL = bundle.getStringArrayList("Images");
+            dateOnly=bundle.getString("Date");
+            oldImageURL = bundle.getStringArrayList("eImages");
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("EntryList").child(key);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(dateOnly).child(jobno);
 
         deliver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,19 +113,12 @@ StorageReference storageReference;
         });
     }
     public void updateData(){
-        String Name = deliveryName.getText().toString();
-        String Phone = deliveryPhone.getText().toString();
-        String Brand = deliveryBrand.getText().toString();
-        String Model = deliveryModel.getText().toString();
-        String Colour = deliveryColour.getText().toString();
-        String Password = deliveryPassword.getText().toString();
-        String Complaint = deliveryComplaint.getText().toString();
         String Status = "DELIVERED";
         String Expense=deliveryExpense.getText().toString();
         String Amount=deliveryAmount.getText().toString();
         String Payment=payment.getText().toString();
         String Time= deliveryTime.getText().toString();
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,entrytime,oldImageURL,Expense,Amount,Payment,Time,jobno);
+        DataClass dataClass = new DataClass(Status,Expense,Amount,Payment,Time);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

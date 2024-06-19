@@ -73,7 +73,7 @@ public class UploadActivity extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     String Status,Brand,Model,Colour,Complaint;
 
-    private EditText  uploadName, uploadPhone,  uploadPassword;
+    private EditText  uploadName, uploadPhone,  uploadPassword,uploadEstimate;
     private AutoCompleteTextView uploadStatus, uploadColour,uploadModel,uploadBrand;
     private MultiAutoCompleteTextView uploadComplaint;
 
@@ -93,6 +93,7 @@ public class UploadActivity extends AppCompatActivity {
         uploadPassword = findViewById(R.id.uploadPassword);
         uploadComplaint = findViewById(R.id.uploadComplaint);
         uploadStatus = findViewById(R.id.uploadStatus);
+        uploadEstimate = findViewById(R.id.uploadEstimate);
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
         Date currentDate = new Date();
         Date = formatter.format(currentDate);
@@ -250,17 +251,18 @@ public class UploadActivity extends AppCompatActivity {
         uploadModel.setOnClickListener(v -> uploadModel.showDropDown());
     }
     private void fetchDataList() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(Date);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
-                    if (dataClass != null) {
-                        dataList.add(dataClass);
-                        int job = parseJobNumber(dataClass.getDataJobNo());
-                        if (job > maxjob) {
-                            maxjob = job;
+                for (DataSnapshot dateSnapshot : snapshot.getChildren()) {
+                    for (DataSnapshot jobSnapshot : dateSnapshot.getChildren()) {
+                        DataClass dataClass = jobSnapshot.getValue(DataClass.class);
+                        if (dataClass != null) {
+                            int job = parseJobNumber(dataClass.getDataJobNo());
+                            if (job > maxjob) {
+                                maxjob = job;
+                            }
                         }
                     }
                 }
@@ -378,6 +380,7 @@ public class UploadActivity extends AppCompatActivity {
         String model = uploadModel.getText().toString();
         String password = uploadPassword.getText().toString();
         String complaint = uploadComplaint.getText().toString();
+        String Estimate = uploadEstimate.getText().toString();
         Date time = Calendar.getInstance().getTime();
         // Define the desired format pattern
         // Create a SimpleDateFormat instance with the desired format pattern
@@ -394,7 +397,7 @@ public class UploadActivity extends AppCompatActivity {
         }
 
         String job = Integer.toString(maxjob += 1);
-        DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, entrytime, job);
+        DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, entrytime, job,Estimate);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(Date);
         databaseReference.child(job).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {

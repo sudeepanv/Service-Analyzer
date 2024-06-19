@@ -6,4 +6,7 @@
     <item
         android:title="Dealer"
         android:id="@+id/dealer"/>
+    <item
+        android:title="Calendar"
+        android:id="@+id/calendar"/>
 </menu>

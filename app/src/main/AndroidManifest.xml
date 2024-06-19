@@ -7,16 +7,19 @@
         android:maxSdkVersion="32" />
 
     <application
+        android:name=".ifix"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ifixicon"
         android:label="@string/app_name"
-        android:name=".ifix"
         android:roundIcon="@mipmap/ifixiconround"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.IFix"
         tools:targetApi="31">
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="false" />
         <activity
             android:name=".Dealer"
             android:exported="false" />

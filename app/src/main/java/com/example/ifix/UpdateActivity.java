@@ -47,8 +47,8 @@ public class UpdateActivity extends AppCompatActivity {
     Button updateButton;
     String[] Modellist;
     int arrayResourceId;
-    EditText updateName, updatePhone,updatePassword;
-    String Status,Colour;
+    EditText updateName, updatePhone,updatePassword,updateEstimate;
+    String Status,Colour,dateonly;
     String key, jobno,time,Brand,Model;
     List<String> oldImageURL,imageUrl;
     Uri uri;
@@ -66,6 +66,7 @@ public class UpdateActivity extends AppCompatActivity {
         updateImage = findViewById(R.id.updateImage);
         updateName = findViewById(R.id.updateName);
         updatePhone = findViewById(R.id.updatePhone);
+        updateEstimate = findViewById(R.id.updateEstimate);
         updateBrand = findViewById(R.id.updateBrand);
         updateModel = findViewById(R.id.updateModel);
         updateColour= findViewById(R.id.updateColour);
@@ -189,13 +190,15 @@ public class UpdateActivity extends AppCompatActivity {
             updateColour.setText(bundle.getString("Colour"));
             updatePassword.setText(bundle.getString("Password"));
             updateComplaint.setText(bundle.getString("Complaint"));
+            updateEstimate.setText(bundle.getString("Estimate"));
             updateStatus.setText(bundle.getString("Status"));
             jobno=(bundle.getString("Job"));
             key = bundle.getString("Key");
             time = bundle.getString("Time");
+            dateonly = bundle.getString("Date");
             imageUrl = bundle.getStringArrayList("Images");
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("EntryList").child(key);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(dateonly).child(jobno);
 
         updateImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,7 +255,8 @@ public class UpdateActivity extends AppCompatActivity {
         String Password = updatePassword.getText().toString();
         String Complaint = updateComplaint.getText().toString();
         String Status = updateStatus.getText().toString();
-        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,imageUrl,time,jobno);
+        String Estimate = updateEstimate.getText().toString();
+        DataClass dataClass = new DataClass(Name, Phone, Brand,Model,Colour,Password,Complaint,Status,imageUrl,time,jobno,Estimate);
 
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

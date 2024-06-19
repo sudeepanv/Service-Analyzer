@@ -19,6 +19,7 @@ public class DataClass {
     private String dataTime;
     private String dataDeliveryTime;
     private String key;
+    private String dataEstimate;
 
     private String dataJobNo;
 
@@ -53,6 +54,7 @@ public class DataClass {
     }
     public String getDataStatus(){return dataStatus;}
     public String getDataExpense(){return dataExpense;}
+    public String getDataEstimate(){return dataEstimate;}
     public String getDataAmount(){return dataAmount;}
 
     public String getDataPaymentVia(){return dataPaymentVia;}
@@ -71,21 +73,6 @@ public class DataClass {
     public List<String> getDataImage() {
         return dataImage;
     }
-//    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, String dataImage,String dataTime, String dataJobNo) {
-//        this.dataName = dataName;
-//        this.dataPhone = dataPhone;
-//        this.dataBrand = dataBrand;
-//        this.dataModel = dataModel;
-//        this.dataColour = dataColour;
-//        this.dataPassword = dataPassword;
-//        this.dataComplaint = dataComplaint;
-//        this.dataImage = dataImage;
-//        this.dataStatus = dataStatus;
-//        this.dataTime=dataTime;
-//        this.dataJobNo = dataJobNo;
-//    }
-
-//new entry
     public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, List<String> dataImage,String dataTime,String maxjob) {
         this.dataName = dataName;
         this.dataPhone = dataPhone;
@@ -99,8 +86,9 @@ public class DataClass {
         this.dataTime=dataTime;
         this.dataJobNo=maxjob;
     }
-    //delivery
-    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus,String dataTime, List<String> dataImage,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime,String jobno) {
+
+//new entry
+    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, List<String> dataImage,String dataTime,String maxjob,String estimate) {
         this.dataName = dataName;
         this.dataPhone = dataPhone;
         this.dataBrand = dataBrand;
@@ -110,13 +98,35 @@ public class DataClass {
         this.dataComplaint = dataComplaint;
         this.dataImage = dataImage;
         this.dataStatus = dataStatus;
-        this.dataTime = dataTime;
+        this.dataTime=dataTime;
+        this.dataJobNo=maxjob;
+        this.dataEstimate=estimate;
+    }
+    //delivery
+    public DataClass(String dataStatus,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime) {
+        this.dataStatus = dataStatus;
         this.dataExpense = dataExpense;
         this.dataAmount= dataAmount;
         this.dataPaymentVia =dataPaymentvia;
         this.dataDeliveryTime=dataDeliveryTime;
-        this.dataJobNo= jobno;
-
+    }
+    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, List<String> dataImage,String dataTime,String maxjob,String estimate,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime) {
+        this.dataName = dataName;
+        this.dataPhone = dataPhone;
+        this.dataBrand = dataBrand;
+        this.dataModel = dataModel;
+        this.dataColour = dataColour;
+        this.dataPassword = dataPassword;
+        this.dataComplaint = dataComplaint;
+        this.dataImage = dataImage;
+        this.dataStatus = dataStatus;
+        this.dataTime=dataTime;
+        this.dataJobNo=maxjob;
+        this.dataEstimate=estimate;
+        this.dataExpense = dataExpense;
+        this.dataAmount= dataAmount;
+        this.dataPaymentVia =dataPaymentvia;
+        this.dataDeliveryTime=dataDeliveryTime;
     }
     public DataClass(){
 

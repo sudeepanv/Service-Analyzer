@@ -149,6 +149,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:gravity="start|center_vertical"
+                android:textColor="@color/lavender"
+                android:layout_marginTop="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/updateEstimate"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:hint="Estimate"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="start|center_vertical"
                 android:layout_marginTop="20dp"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 >

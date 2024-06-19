@@ -159,7 +159,7 @@ public class Dealer extends AppCompatActivity {
         adapter = new dealerAdapter(Dealer.this, dataList);
         recyclerView.setAdapter(adapter);
 
-        entryreference = FirebaseDatabase.getInstance().getReference("EntryList");
+        entryreference = FirebaseDatabase.getInstance().getReference("Entry List");
         dealerreference = FirebaseDatabase.getInstance().getReference("DealerAccounts");
         dealerName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -209,10 +209,13 @@ public class Dealer extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         dataList.clear();
-                        for (DataSnapshot itemSnapshot: snapshot.getChildren()){
-                            DataClass dataClass = itemSnapshot.getValue(DataClass.class);
-                            Objects.requireNonNull(dataClass).setKey(itemSnapshot.getKey());
-                            dataList.add(dataClass);
+                        if (snapshot.exists()) {
+                            for (DataSnapshot dateSnapshot : snapshot.getChildren()) {
+                                for (DataSnapshot jobSnapshot : dateSnapshot.getChildren()) {
+                                    DataClass dataClass = jobSnapshot.getValue(DataClass.class);
+                                    dataList.add(dataClass);
+                                }
+                            }
                         }
                         if (chosendealer!=null){
 

@@ -2,12 +2,14 @@ package com.example.ifix;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,24 +132,48 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             recCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
-                    intent.putExtra("Time", data.getDataTime());
-                    intent.putStringArrayListExtra("Images", (ArrayList<String>) data.getDataImage());
-                    intent.putExtra("Phone", data.getDataPhone());
-                    intent.putExtra("Name", data.getDataName());
-                    intent.putExtra("Key", data.getKey());
-                    intent.putExtra("Brand", data.getDataBrand());
-                    intent.putExtra("Model", data.getDataModel());
-                    intent.putExtra("Colour", data.getDataColour());
-                    intent.putExtra("Password", data.getDataPassword());
-                    intent.putExtra("Complaint", data.getDataComplaint());
-                    intent.putExtra("Status", data.getDataStatus());
-                    intent.putExtra("Expense", data.getDataExpense());
-                    intent.putExtra("Amount", data.getDataAmount());
-                    intent.putExtra("Payment", data.getDataPaymentVia());
-                    intent.putExtra("Delivery", data.getDataDeliveryTime());
-                    intent.putExtra("Job", data.getDataJobNo());
-                    itemView.getContext().startActivity(intent);
+                    try {
+                        Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+                        intent.putExtra("Job", data.getDataJobNo());
+                        intent.putExtra("Time", data.getDataTime());
+                        intent.putStringArrayListExtra("Images", (ArrayList<String>) data.getDataImage());
+                        intent.putExtra("Phone", data.getDataPhone());
+                        intent.putExtra("Name", data.getDataName());
+                        intent.putExtra("Key", data.getKey());
+                        intent.putExtra("Estimate", data.getDataEstimate());
+                        intent.putExtra("Brand", data.getDataBrand());
+                        intent.putExtra("Model", data.getDataModel());
+                        intent.putExtra("Colour", data.getDataColour());
+                        intent.putExtra("Password", data.getDataPassword());
+                        intent.putExtra("Complaint", data.getDataComplaint());
+                        intent.putExtra("Status", data.getDataStatus());
+                        intent.putExtra("Expense", data.getDataExpense());
+                        intent.putExtra("Amount", data.getDataAmount());
+                        intent.putExtra("Payment", data.getDataPaymentVia());
+                        intent.putExtra("Delivery", data.getDataDeliveryTime());
+
+                        // Log the intent extras to debug
+                        Log.d("IntentData", "Time: " + data.getDataTime());
+                        Log.d("IntentData", "Images: " + data.getDataImage());
+                        Log.d("IntentData", "Phone: " + data.getDataPhone());
+                        Log.d("IntentData", "Name: " + data.getDataName());
+                        Log.d("IntentData", "Key: " + data.getKey());
+                        Log.d("IntentData", "Brand: " + data.getDataBrand());
+                        Log.d("IntentData", "Model: " + data.getDataModel());
+                        Log.d("IntentData", "Colour: " + data.getDataColour());
+                        Log.d("IntentData", "Password: " + data.getDataPassword());
+                        Log.d("IntentData", "Complaint: " + data.getDataComplaint());
+                        Log.d("IntentData", "Status: " + data.getDataStatus());
+                        Log.d("IntentData", "Expense: " + data.getDataExpense());
+                        Log.d("IntentData", "Amount: " + data.getDataAmount());
+                        Log.d("IntentData", "Payment: " + data.getDataPaymentVia());
+                        Log.d("IntentData", "Delivery: " + data.getDataDeliveryTime());
+
+                        itemView.getContext().startActivity(intent);
+                    } catch (Exception e) {
+                        Log.e("IntentError", "Error starting DetailActivity", e);
+                        Toast.makeText(itemView.getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }

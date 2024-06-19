@@ -33,7 +33,7 @@ public class Accounts extends AppCompatActivity {
         Delivered = findViewById(R.id.accountDelivered);
 
         // Initialize Firebase DatabaseReference
-        databaseReference = FirebaseDatabase.getInstance().getReference("EntryList");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List");
 
         // Fetch data from Firebase and calculate profit
         fetchDataAndCalculateProfit();
@@ -44,13 +44,15 @@ public class Accounts extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
-                    Objects.requireNonNull(dataClass).setKey(itemSnapshot.getKey());
-                    dataList.add(dataClass);
-                    entry+=1;
+                if (snapshot.exists()) {
+                    for (DataSnapshot dateSnapshot : snapshot.getChildren()) {
+                        for (DataSnapshot jobSnapshot : dateSnapshot.getChildren()) {
+                            DataClass dataClass = jobSnapshot.getValue(DataClass.class);
+                            dataList.add(dataClass);
+                            entry+=1;
+                        }
+                    }
                 }
-
                 // Calculate profit after data is fetched
                 int totalProfit=0;
                 int totalExpense=0;
