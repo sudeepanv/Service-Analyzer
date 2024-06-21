@@ -28,7 +28,9 @@
     <string-array name="Complaintlist">
         <item>DISPLAY</item>
         <item>DISPLAY FITTING</item>
-        <item>BATTERY</item><item>NETWORK</item><item>DEAD</item>
+        <item>BATTERY</item>
+        <item>NETWORK</item>
+        <item>DEAD</item>
         <item>CC</item>
         <item>CHARGING</item>
         <item>ON/OFF</item>
@@ -1564,6 +1566,8 @@
         <item>SURYA</item>
         <item>SHIV</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
-    android:title="Accounts"
-    android:id="@+id/accountmenu"/>
     <item
-        android:title="Dealer"
-        android:id="@+id/dealer"/>
+        android:id="@+id/search"
+        android:icon="@drawable/search"
+        android:title="Search"
+        app:showAsAction="always" />
     <item
         android:title="Select Date"
-        android:id="@+id/calendar">
+        android:id="@+id/calendar"
+        android:icon="@drawable/calendar"
+        app:showAsAction="always">
     </item>
     <item
         android:title="Show ALL"
@@ -17,42 +18,9 @@
     </item>
     <item
         android:title="Search Criteria"
-        app:showAsAction="never"
+        app:showAsAction="always"
+        android:icon="@drawable/manage_search"
         android:id="@+id/criteria">
-        <menu xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-
-<!--            <item-->
-<!--                android:id="@+id/phonecriteria"-->
-<!--                android:checkable="true"-->
-<!--                android:checked="true"-->
-<!--                android:title="Phone Number"/>-->
-<!--            <item-->
-<!--                android:id="@+id/namecriteria"-->
-<!--                android:checkable="true"-->
-<!--                android:checked="true"-->
-<!--                android:title="Name"/>-->
-<!--            <item-->
-<!--                android:id="@+id/modelcriteria"-->
-<!--                android:checkable="true"-->
-<!--                android:checked="true"-->
-<!--                android:title="Model"/>-->
-<!--            <item-->
-<!--                android:id="@+id/amountcriteria"-->
-<!--                android:checkable="true"-->
-<!--                android:checked="true"-->
-<!--                android:title="Amount"/>-->
-<!--            <item-->
-<!--                android:id="@+id/complaintcriteria"-->
-<!--                android:checkable="true"-->
-<!--                android:checked="true"-->
-<!--                android:title="Complaint"/>-->
-<!--            <item-->
-<!--                android:id="@+id/brandcriteria"-->
-<!--                android:checkable="true"-->
-<!--                android:checked="true"-->
-<!--                android:title="Brand"/>-->
-
-        </menu>
     </item>
+
 </menu>
