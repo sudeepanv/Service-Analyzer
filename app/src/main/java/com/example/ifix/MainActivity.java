@@ -359,14 +359,11 @@ public class MainActivity extends AppCompatActivity {
                 (brand && data.getDataBrand() != null && data.getDataBrand().toUpperCase().contains(query.toUpperCase())) ||
                 (model && data.getDataModel() != null && data.getDataModel().toUpperCase().contains(query.toUpperCase())) ||
                 (status && data.getDataStatus() != null && data.getDataStatus().toUpperCase().contains(query.toUpperCase())) ||
+                (data.getDataPaymentVia() != null && data.getDataPaymentVia().toUpperCase().contains(query.toUpperCase())) ||
                 (amount && data.getDataAmount() != null && data.getDataAmount().contains(query)) ||
                 (complaint && data.getDataComplaint() != null && data.getDataComplaint().toUpperCase().contains(query.toUpperCase()));
-
     }
-
-
 }
-
 class NetworkUtils {
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager =

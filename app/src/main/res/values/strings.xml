@@ -13,6 +13,7 @@
         <item>CASH</item>
         <item>G-PAY</item>
         <item>PHONEPE</item>
+        <item>CREDIT</item>
         <item>BOTH</item>
     </string-array>
     <string-array name="Colourlist">
@@ -26,7 +27,8 @@
     </string-array>
     <string-array name="Complaintlist">
         <item>DISPLAY</item>
-        <item>BATTERY</item>
+        <item>DISPLAY FITTING</item>
+        <item>BATTERY</item><item>NETWORK</item><item>DEAD</item>
         <item>CC</item>
         <item>CHARGING</item>
         <item>ON/OFF</item>
