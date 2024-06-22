@@ -276,8 +276,8 @@ public class UpdateActivity extends AppCompatActivity {
                     }
                     Toast.makeText(UpdateActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(UpdateActivity.this,MainActivity.class);
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {

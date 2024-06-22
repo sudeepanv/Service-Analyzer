@@ -40,6 +40,8 @@ public class dealerAdapter extends RecyclerView.Adapter<dealerViewHolder> {
         holder.recComplaint.setText(dataList.get(position).getDataComplaint());
         if (dataList.get(position).getDataAmount()!=null)
             holder.recAmount.setText("₹"+(dataList.get(position).getDataAmount()));
+        else
+            holder.recAmount.setText("₹");
         String Status=dataList.get(position).getDataStatus();
         if(Objects.equals(Status, "DELIVERED")){
             int color = context.getResources().getColor(R.color.ifixblue);

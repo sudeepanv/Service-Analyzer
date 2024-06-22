@@ -97,7 +97,11 @@ public class UploadActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
         Date currentDate = new Date();
         Date = formatter.format(currentDate);
-
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            uploadPhone.setText(bundle.getString("Phone", ""));
+            uploadName.setText(bundle.getString("Name", ""));
+        }
         String[] Statuslist = getResources().getStringArray(R.array.Statuslist);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Statuslist);
         uploadStatus.setAdapter(arrayAdapter);

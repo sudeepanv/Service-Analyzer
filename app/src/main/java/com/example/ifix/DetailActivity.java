@@ -188,8 +188,8 @@ public class DetailActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(DetailActivity.this, "Moved to BIN", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-                                        startActivity(intent);
                                         finish();
+                                        startActivity(intent);
                                     } else {
                                         Toast.makeText(DetailActivity.this, "Failed to DELETE", Toast.LENGTH_SHORT).show();
                                     }

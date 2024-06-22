@@ -100,6 +100,12 @@ public class EntryFragment extends Fragment {
                 if (imm != null) {
                     imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
                 }
+                searchView.setQuery("",false);
+                int lastIndex = dataList.size() - 1;
+                recyclerView.scrollToPosition(lastIndex);
+//                dataList.clear();
+//                loadInitialData(dialog);
+//                adapter.notifyDataSetChanged();
             }
         });
 
@@ -178,13 +184,20 @@ public class EntryFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
-                    Objects.requireNonNull(dataClass).setKey(itemSnapshot.getKey());
-                    dataList.add(dataClass);
+                if (snapshot.exists()) {
+                    for (DataSnapshot dateSnapshot : snapshot.getChildren()) {
+                        String header = dateSnapshot.getKey();
+                        dataList.add(header);
+                        for (DataSnapshot jobSnapshot : dateSnapshot.getChildren()) {
+                            DataClass dataClass = jobSnapshot.getValue(DataClass.class);
+                            dataList.add(dataClass);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                    int lastIndex = dataList.size() - 1;
+                    recyclerView.scrollToPosition(lastIndex);
+                    dialog.dismiss();
                 }
-                recyclerView.scrollToPosition(dataList.size() - 1);
-                dialog.dismiss();
             }
 
             @Override
@@ -204,12 +217,6 @@ public class EntryFragment extends Fragment {
         int id = item.getItemId();
         if (id == R.id.calendar) {
             openCalendarDialog();
-            return true;
-        }
-        if (id == R.id.showall) {
-            dataList.clear();
-            loadInitialData(dialog);
-            adapter.notifyDataSetChanged();
             return true;
         }
         if (id == R.id.criteria) {

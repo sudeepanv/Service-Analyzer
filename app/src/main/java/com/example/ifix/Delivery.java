@@ -153,8 +153,8 @@ StorageReference storageReference;
                 if (task.isSuccessful()){
                     Toast.makeText(Delivery.this, "Delivered", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(Delivery.this,MainActivity.class);
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {

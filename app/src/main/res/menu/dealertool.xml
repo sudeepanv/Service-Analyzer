@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+        android:id="@+id/adddealer"
+        android:icon="@drawable/person_add_24px"
+        android:title="Add dealer"
+        app:showAsAction="always" />
+    <item
+        android:title="Accounts"
+        android:id="@+id/updateaccount"
+        android:icon="@drawable/currency_rupee_circle_24px"
+        app:showAsAction="always">
+    </item>
+</menu>

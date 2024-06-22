@@ -1,0 +1,35 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="center">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Balance"
+            android:inputType="textCapCharacters"
+            android:textStyle="bold"
+            android:id="@+id/dealerbalance"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center" >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Amount Paid"
+            android:inputType="phone"
+            android:textStyle="bold"
+            android:id="@+id/dealerpaidadd"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

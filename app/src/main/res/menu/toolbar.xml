@@ -13,10 +13,6 @@
         app:showAsAction="always">
     </item>
     <item
-        android:title="Show ALL"
-        android:id="@+id/showall">
-    </item>
-    <item
         android:title="Search Criteria"
         app:showAsAction="always"
         android:icon="@drawable/manage_search"
