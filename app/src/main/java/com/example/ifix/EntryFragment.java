@@ -110,7 +110,7 @@ public class EntryFragment extends Fragment {
         });
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext(),R.style.CustomAlertDialog);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
         dialog = builder.create();
@@ -242,7 +242,7 @@ public class EntryFragment extends Fragment {
         }
     }
     private void showCriteriaPopup() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.CustomAlertDialog);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.checkbox, null);
         builder.setView(dialogView);
@@ -289,7 +289,7 @@ public class EntryFragment extends Fragment {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view, year1, month1, dayOfMonth) -> {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),R.style.CustomAlertDialog, (view, year1, month1, dayOfMonth) -> {
             calendar.set(Calendar.YEAR, year1);
             calendar.set(Calendar.MONTH, month1);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);

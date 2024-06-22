@@ -19,5 +19,13 @@
     <style name="primarytext">
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="CustomAlertDialog" parent="Theme.Material3.Dark.Dialog.Alert">
+        <item name="android:background">@drawable/dialog_background</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="android:windowElevation">24dp</item>
+        <!-- Add more customizations as needed -->
+    </style>
+
 
 </resources>

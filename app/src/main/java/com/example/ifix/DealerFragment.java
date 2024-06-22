@@ -182,7 +182,7 @@ public class DealerFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext(),R.style.CustomAlertDialog);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
         dialog = builder.create();
@@ -246,7 +246,7 @@ public class DealerFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
     private void showaccounts(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.CustomAlertDialog);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dealerbalancepopup, null);
         builder.setView(dialogView);
@@ -299,7 +299,7 @@ public class DealerFragment extends Fragment {
         dialog.show();
     }
     private void adddealerbox(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.CustomAlertDialog);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.adddealerpopup, null);
         builder.setView(dialogView);

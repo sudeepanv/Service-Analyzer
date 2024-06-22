@@ -1,16 +1,26 @@
 package com.example.ifix;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +37,21 @@ import com.google.firebase.storage.StorageReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DetailActivity extends AppCompatActivity {
 
     TextView detailJobNo,detailFrom,detailEstimate, detailDelivery, detailTime, detailPhone, detailName, detailBrand, detailModel, detailColour, detailPassword, detailComplaint, detailStatus, detailExpense, detailAmount, detailPayment;
     LinearLayout imagesContainer;
+    TextView deliveryEstimate,deliveryTime;
+    MultiAutoCompleteTextView sparefrom;
+    EditText deliveryExpense,deliveryAmount;
+    Button deliver,returnbtn;
+String name,num,brand,model,color,comp,jobno,status,Password,entrytime;
+ArrayList oldImageURL;
+    AlertDialog dialog;
+    AutoCompleteTextView payment;
     Button deleteButton, editButton, deliveredButton;
     ImageButton phone;
     String key,dateOnly;
@@ -234,27 +253,138 @@ public class DetailActivity extends AppCompatActivity {
         deliveredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailActivity.this, Delivery.class)
-                        .putExtra("Name", detailName.getText().toString())
-                        .putExtra("Phone", detailPhone.getText().toString())
-                        .putExtra("Brand", detailBrand.getText().toString())
-                        .putExtra("Model", detailModel.getText().toString())
-                        .putExtra("Colour", detailColour.getText().toString())
-                        .putExtra("Password", detailPassword.getText().toString())
-                        .putExtra("Complaint", detailComplaint.getText().toString())
-                        .putExtra("Status", detailStatus.getText().toString())
-                        .putExtra("Expense", detailExpense.getText().toString())
-                        .putExtra("Amount", detailAmount.getText().toString())
-                        .putExtra("Payment", detailPayment.getText().toString())
-                        .putExtra("Estimate",detailEstimate.getText().toString())
-                        .putExtra("Images", imageUrls)
-                        .putExtra("Job", detailJobNo.getText().toString())
-                        .putExtra("Time",detailTime.getText().toString())
-                        .putExtra("Delivery",detailDelivery.getText().toString())
-                        .putExtra("Sparefrom",detailFrom.getText().toString())
-                        .putExtra("Key", key)
-                        .putExtra("Date", dateOnly);
-                startActivity(intent);
+//                        name= detailName.getText().toString())
+//                        num= detailPhone.getText().toString())
+//                        brand= detailBrand.getText().toString())
+//                        model= detailModel.getText().toString())
+//                        .putExtra("Colour", detailColour.getText().toString())
+//                        .putExtra("Password", detailPassword.getText().toString())
+//                        .putExtra("Complaint", detailComplaint.getText().toString())
+//                        .putExtra("Status", detailStatus.getText().toString())
+//                        .putExtra("Expense", detailExpense.getText().toString())
+//                        .putExtra("Amount", detailAmount.getText().toString())
+//                        .putExtra("Payment", detailPayment.getText().toString())
+//                        .putExtra("Estimate",detailEstimate.getText().toString())
+//                        .putExtra("Images", imageUrls)
+//                        .putExtra("Job", detailJobNo.getText().toString())
+//                        .putExtra("Time",detailTime.getText().toString())
+//                        .putExtra("Delivery",detailDelivery.getText().toString())
+//                        .putExtra("Sparefrom",detailFrom.getText().toString())
+//                        .putExtra("Key", key)
+//                        .putExtra("Date", dateOnly);
+//                startActivity(intent);
+                deliver();
+            }
+        });
+    }
+    private void deliver(){
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        CustomDialogFragment customDialogFragment = new CustomDialogFragment();
+//        customDialogFragment.show(fragmentManager, "CustomDialog");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.CustomAlertDialog);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.deliverypopup, null);
+        builder.setView(dialogView);
+        deliveryEstimate=dialogView.findViewById(R.id.estimate);
+        deliveryTime=dialogView.findViewById(R.id.deliveryTime);
+        deliveryExpense=dialogView.findViewById(R.id.expense);
+        deliveryAmount=dialogView.findViewById(R.id.amount);
+        sparefrom=dialogView.findViewById(R.id.sparefrom);
+        payment=dialogView.findViewById(R.id.payment);
+        deliver=dialogView.findViewById(R.id.deliver);
+        returnbtn=dialogView.findViewById(R.id.returnbtn);
+        String[] Paymenylist = getResources().getStringArray(R.array.Paymentlist);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Paymenylist);
+        payment.setAdapter(arrayAdapter);
+
+        payment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String Payment=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        payment.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                payment.showDropDown();
+            }
+        });
+        // Show suggestions when the field is clicked
+        payment.setOnClickListener(v -> payment.showDropDown());
+        String[] Shoplist = getResources().getStringArray(R.array.Shoplist);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.dropdownstatus, Shoplist);
+        sparefrom.setAdapter(arrayAdapter);
+        sparefrom.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        sparefrom.setThreshold(0);
+        sparefrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String shop=adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        sparefrom.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                sparefrom.showDropDown();
+            }
+        });
+
+        // Show suggestions when the field is clicked
+        sparefrom.setOnClickListener(v -> sparefrom.showDropDown());
+
+            deliveryEstimate.setText(detailEstimate.getText().toString());
+            sparefrom.setText(detailFrom.getText().toString());
+            deliveryTime.setText(detailDelivery.getText().toString());
+            if (deliveryTime.getText().toString().length()<5){
+                Date deltimedate = Calendar.getInstance().getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+                String deltime = sdf.format(deltimedate);
+                deliveryTime.setText(deltime);
+            }
+            deliveryExpense.setText(detailExpense.getText().toString());
+            deliveryAmount.setText(detailAmount.getText().toString());
+            payment.setText(detailPayment.getText().toString());
+            jobno=(detailJobNo.getText().toString());
+            Password = detailPassword.getText().toString();
+            entrytime= detailTime.getText().toString();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(dateOnly).child(jobno);
+
+        deliver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateData("DELIVERED");
+            }
+        });
+        returnbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateData("RETURNED");
+            }
+        });
+        dialog = builder.create();
+        dialog.show();
+    }
+    public void updateData(String status){
+        String Expense=deliveryExpense.getText().toString();
+        String Amount=deliveryAmount.getText().toString();
+        String Payment=payment.getText().toString();
+        String Time= deliveryTime.getText().toString();
+        DataClass dataClass = new DataClass(detailName.getText().toString(), detailPhone.getText().toString(), detailBrand.getText().toString(),
+                detailModel.getText().toString(), detailColour.getText().toString(), Password, detailComplaint.getText().toString(),
+                status, imageUrls, entrytime, jobno,deliveryEstimate.getText().toString(),Expense,Amount,Payment,Time,sparefrom.getText().toString());
+
+        databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(DetailActivity.this, "Delivered", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(DetailActivity.this, "Can't Deliver", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }

@@ -17,5 +17,7 @@
     <color name="orange">#FF4F00</color>
     <color name="lightgrey">#EFF3F5</color>
     <color name="ifixblue">#0b7edb</color>
+        <color name="semi_transparent_background">#B3000000</color> <!-- 70% opacity black -->
+
 
 </resources>

@@ -21,9 +21,9 @@ import java.util.Objects;
 
 public class AccountsFragment extends Fragment {
 
-    private int entry, delivered, noexpense,ok,nook,out;
+    private int entry, delivered, noexpense,ok,nook,out,returned;
     private List<DataClass> dataList = new ArrayList<>();
-    private TextView Amount, Entry, Delivered,okay,outside,notok, Profit, Expense, Message;
+    private TextView Amount, Entry, Delivered,returnedtxt,okay,outside,notok, Profit, Expense, Message;
     private DatabaseReference databaseReference;
     private ValueEventListener eventListener;
 
@@ -37,6 +37,7 @@ public class AccountsFragment extends Fragment {
         Expense = view.findViewById(R.id.accountExpense);
         Amount = view.findViewById(R.id.accountAmount);
         Delivered = view.findViewById(R.id.accountDelivered);
+        returnedtxt = view.findViewById(R.id.accountReturn);
         Message = view.findViewById(R.id.alert);
         okay = view.findViewById(R.id.ok);
         notok = view.findViewById(R.id.notok);
@@ -59,6 +60,7 @@ public class AccountsFragment extends Fragment {
                 entry = 0;
                 delivered = 0;
                 noexpense = 0;
+                returned=0;
                 ok=0;
                 nook=0;
                 out=0;
@@ -83,7 +85,9 @@ public class AccountsFragment extends Fragment {
                         if (Objects.equals(dataClass.getDataStatus(), "DELIVERED")) {
                             delivered += 1;
                             Log.d("IntentData", "Key: " + dataClass.getKey());
-                        } else if (Objects.equals(dataClass.getDataStatus(), "OK")) {
+                        } else if (Objects.equals(dataClass.getDataStatus(), "RETURNED")) {
+                            returned+=1;
+                        }else if (Objects.equals(dataClass.getDataStatus(), "OK")) {
                             ok+=1;
                         } else if (Objects.equals(dataClass.getDataStatus(), "NOT STARTED")) {
                             nook+=1;
@@ -122,6 +126,7 @@ public class AccountsFragment extends Fragment {
                 outside.setText(String.valueOf(out));
                 Entry.setText(String.valueOf(entry));
                 Delivered.setText(String.valueOf(delivered));
+                returnedtxt.setText(String.valueOf(returned));
                 Message.setText(noexpense + " deliveries have zero expense");
             }
 
