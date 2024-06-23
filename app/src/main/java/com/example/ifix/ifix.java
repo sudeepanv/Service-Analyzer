@@ -2,7 +2,6 @@ package com.example.ifix;
 
 import android.app.Application;
 
-import androidx.arch.core.executor.ArchTaskExecutor;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.FirebaseDatabase;

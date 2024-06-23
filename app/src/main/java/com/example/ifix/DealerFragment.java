@@ -307,8 +307,11 @@ public class DealerFragment extends Fragment {
         builder.setView(dialogView);
         EditText addname = dialogView.findViewById(R.id.dealernameadd);
         EditText addphone = dialogView.findViewById(R.id.dealerphoneadd);
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+        String fordate = sdf.format(date);
         builder.setPositiveButton("OK", (dialog, which) -> {
-            DealerClass dealerClass = new DealerClass(addname.getText().toString(),addphone.getText().toString(),"","");
+            DealerClass dealerClass = new DealerClass(addname.getText().toString(),addphone.getText().toString(),"0",fordate);
             dealerReference = FirebaseDatabase.getInstance().getReference("DealerAccounts").child(addname.getText().toString());
             dealerReference.setValue(dealerClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -359,6 +362,7 @@ public class DealerFragment extends Fragment {
                                 }
                             }
                         }
+                        int currentBalance;
                         ArrayList<Object> searchList = new ArrayList<>();
                         if (chosenDealer != null) {
                             searchList.clear();
@@ -366,7 +370,7 @@ public class DealerFragment extends Fragment {
                                 if (data instanceof DataClass) {
                                     DataClass dataClass = (DataClass) data;
                                     if (dataClass.getDataName().toUpperCase().equals(chosenDealer)) {
-                                        if (dataClass.getDataStatus().equals("DELIVERED")) {
+                                        if (dataClass.getDataPaymentVia().equals("CREDIT")) {
                                             SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
                                             SimpleDateFormat fdf = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
                                             try {
@@ -376,7 +380,7 @@ public class DealerFragment extends Fragment {
                                                     Date lastPay = sdf.parse(lastPaidTime);
                                                     if (deliveryDate != null && lastPay != null && deliveryDate.after(lastPay)) {
                                                         searchList.add(dataClass);
-                                                        int currentBalance = Balance != null ? Integer.parseInt(Balance) : 0;
+                                                        currentBalance= Balance != null ? Integer.parseInt(Balance) : 0;
                                                         Balance = String.valueOf(currentBalance + Integer.parseInt(dataClass.getDataAmount()));
                                                         balance.setText(Balance);
                                                     }

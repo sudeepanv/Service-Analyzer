@@ -91,20 +91,20 @@ public class DataClass {
     }
 
 //new entry
-    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, List<String> dataImage,String dataTime,String maxjob,String estimate) {
-        this.dataName = dataName;
-        this.dataPhone = dataPhone;
-        this.dataBrand = dataBrand;
-        this.dataModel = dataModel;
-        this.dataColour = dataColour;
-        this.dataPassword = dataPassword;
-        this.dataComplaint = dataComplaint;
-        this.dataImage = dataImage;
-        this.dataStatus = dataStatus;
-        this.dataTime=dataTime;
-        this.dataJobNo=maxjob;
-        this.dataEstimate=estimate;
-    }
+//    public DataClass(String dataName, String dataPhone, String dataBrand, String dataModel, String dataColour, String dataPassword, String dataComplaint, String dataStatus, List<String> dataImage,String dataTime,String maxjob,String estimate) {
+//        this.dataName = dataName;
+//        this.dataPhone = dataPhone;
+//        this.dataBrand = dataBrand;
+//        this.dataModel = dataModel;
+//        this.dataColour = dataColour;
+//        this.dataPassword = dataPassword;
+//        this.dataComplaint = dataComplaint;
+//        this.dataImage = dataImage;
+//        this.dataStatus = dataStatus;
+//        this.dataTime=dataTime;
+//        this.dataJobNo=maxjob;
+//        this.dataEstimate=estimate;
+//    }
     //delivery
 //    public DataClass(String dataStatus,String dataExpense,String dataAmount,String dataPaymentvia,String dataDeliveryTime) {
 //        this.dataStatus = dataStatus;

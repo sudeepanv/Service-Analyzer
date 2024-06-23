@@ -401,7 +401,7 @@ public class UploadActivity extends AppCompatActivity {
         }
 
         String job = Integer.toString(maxjob += 1);
-        DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, entrytime, job,Estimate);
+        DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, entrytime, job,Estimate,"","","","","");
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(Date);
         databaseReference.child(job).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
