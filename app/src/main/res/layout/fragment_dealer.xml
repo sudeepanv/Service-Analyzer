@@ -36,15 +36,61 @@
                 android:hint="    Name">
             </AutoCompleteTextView>
         </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/oldbox"
+            android:layout_below="@id/dealernamebox"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="OLD BALANCE  :  ₹"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/oldbalance"
+                android:textSize="25dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lastpaidtime"
+            android:layout_below="@id/oldbox"
+            android:layout_marginBottom="5dp"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="As of  :  "
+                android:textSize="18dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lasttime"
+                android:textSize="18dp"/>
+        </LinearLayout>
+
+
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/dealernamebox"
+            android:layout_below="@id/lastpaidtime"
             android:layout_above="@id/bottom"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:scrollbars="vertical" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab1"
@@ -54,8 +100,8 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/ifixblue"
             android:src="@drawable/plus"
             app:tint="@color/white"
@@ -66,7 +112,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bottom"
-            android:fadingEdge="vertical"
             android:layout_alignParentBottom="true"
             android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
@@ -85,46 +130,6 @@
                 android:textStyle="bold"
                 android:id="@+id/balance"
                 android:textSize="25dp"/>
-
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginHorizontal="10dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:gravity="start|center_vertical">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/balance"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:hint="Balance"-->
-<!--                    android:inputType="numberSigned"-->
-<!--                    android:singleLine="true" />-->
-
-<!--                <requestFocus />-->
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginHorizontal="10dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:gravity="start|center_vertical">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/amount"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:hint="Amount Paid"-->
-<!--                    android:inputType="number"-->
-<!--                    android:singleLine="true" />-->
-
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-<!--            <androidx.appcompat.widget.AppCompatButton-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:id="@+id/tickbutton"-->
-<!--                android:background="@drawable/check_small_24px"/>-->
         </LinearLayout>
 
     </RelativeLayout>

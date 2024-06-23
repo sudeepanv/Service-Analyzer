@@ -355,6 +355,7 @@ public class EntryFragment extends Fragment {
                 (name && data.getDataName() != null && data.getDataName().toUpperCase().contains(query.toUpperCase())) ||
                 (brand && data.getDataBrand() != null && data.getDataBrand().toUpperCase().contains(query.toUpperCase())) ||
                 (model && data.getDataModel() != null && data.getDataModel().toUpperCase().contains(query.toUpperCase())) ||
+                (data.getDataBoughtfrom() != null && data.getDataBoughtfrom().toUpperCase().contains(query.toUpperCase())) ||
                 (status && data.getDataStatus() != null && data.getDataStatus().toUpperCase().contains(query.toUpperCase())) ||
                 (data.getDataPaymentVia() != null && data.getDataPaymentVia().toUpperCase().contains(query.toUpperCase())) ||
                 (amount && data.getDataAmount() != null && data.getDataAmount().contains(query)) ||

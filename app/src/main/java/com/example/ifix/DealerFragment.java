@@ -52,12 +52,12 @@ import java.util.Date;
 import java.util.List;
 
 public class DealerFragment extends Fragment {
-    private List<DataClass> dataList = new ArrayList<>();
+    private List<Object> dataList = new ArrayList<>();
     private AutoCompleteTextView dealerName;
     private DatabaseReference entryReference, dealerReference;
     private ValueEventListener entryListener, dealerListener;
     private String chosenDealer, lastPaidTime, Balance,phone;
-    private TextView balance;
+    private TextView balance,oldbalance,lasttime;
     RecyclerView recyclerView;
     Button tick;
     List<String> dealernames=new ArrayList<>();
@@ -75,6 +75,8 @@ public class DealerFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         dealerName = view.findViewById(R.id.dealername);
         balance = view.findViewById(R.id.balance);
+        oldbalance = view.findViewById(R.id.oldbalance);
+        lasttime = view.findViewById(R.id.lasttime);
 
 //        String[] DealerList = getResources().getStringArray(R.array.Dealerlist);
         arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdownstatus, dealernames);
@@ -339,7 +341,9 @@ public class DealerFragment extends Fragment {
                 if (dealerClass != null) {
                     phone=dealerClass.getPhone();
                     Balance = dealerClass.getDataBalance();
+                    oldbalance.setText(Balance);
                     lastPaidTime = dealerClass.getDatalastpaidtime();
+                    lasttime.setText(lastPaidTime);
                 }
                 entryListener = entryReference.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -347,37 +351,46 @@ public class DealerFragment extends Fragment {
                         dataList.clear();
                         if (snapshot.exists()) {
                             for (DataSnapshot dateSnapshot : snapshot.getChildren()) {
+                                String header = dateSnapshot.getKey();
+                                dataList.add(header);
                                 for (DataSnapshot jobSnapshot : dateSnapshot.getChildren()) {
                                     DataClass dataClass = jobSnapshot.getValue(DataClass.class);
                                     dataList.add(dataClass);
                                 }
                             }
                         }
-                        ArrayList<DataClass> searchList = new ArrayList<>();
+                        ArrayList<Object> searchList = new ArrayList<>();
                         if (chosenDealer != null) {
                             searchList.clear();
-                            for (DataClass dataClass : dataList) {
-                                if (dataClass.getDataName().toUpperCase().equals(chosenDealer)) {
-                                    searchList.add(dataClass);
-                                    if (dataClass.getDataStatus().equals("DELIVERED")) {
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
-                                        SimpleDateFormat fdf = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
-                                        try {
-                                            String deliveryTime = dataClass.getDataDeliveryTime();
-                                            if (deliveryTime != null && lastPaidTime != null) {
-                                                Date deliveryDate = sdf.parse(dataClass.getDataDeliveryTime());
-                                                Date lastPay = sdf.parse(lastPaidTime);
-                                                if (deliveryDate != null && lastPay != null && deliveryDate.after(lastPay)) {
-                                                    int currentBalance = Balance != null ? Integer.parseInt(Balance) : 0;
-                                                    Balance = String.valueOf(currentBalance + Integer.parseInt(dataClass.getDataAmount()));
-                                                    balance.setText(Balance);
+                            for (Object data : dataList) {
+                                if (data instanceof DataClass) {
+                                    DataClass dataClass = (DataClass) data;
+                                    if (dataClass.getDataName().toUpperCase().equals(chosenDealer)) {
+                                        if (dataClass.getDataStatus().equals("DELIVERED")) {
+                                            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+                                            SimpleDateFormat fdf = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
+                                            try {
+                                                String deliveryTime = dataClass.getDataDeliveryTime();
+                                                if (deliveryTime != null && lastPaidTime != null) {
+                                                    Date deliveryDate = sdf.parse(dataClass.getDataDeliveryTime());
+                                                    Date lastPay = sdf.parse(lastPaidTime);
+                                                    if (deliveryDate != null && lastPay != null && deliveryDate.after(lastPay)) {
+                                                        searchList.add(dataClass);
+                                                        int currentBalance = Balance != null ? Integer.parseInt(Balance) : 0;
+                                                        Balance = String.valueOf(currentBalance + Integer.parseInt(dataClass.getDataAmount()));
+                                                        balance.setText(Balance);
+                                                    }
                                                 }
+                                            } catch (ParseException e) {
+                                                throw new RuntimeException(e);
                                             }
-                                        } catch (ParseException e) {
-                                            throw new RuntimeException(e);
                                         }
                                     }
+                                }else if (data instanceof String) {
+                                    String header = (String) data;
+                                    searchList.add(header);
                                 }
+
                             }
                             balance.setText(Balance);
                             adapter.searchDataList(searchList);

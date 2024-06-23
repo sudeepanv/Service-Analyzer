@@ -127,6 +127,9 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             } else if (Objects.equals(status, "OK")) {
                 int color = itemView.getResources().getColor(R.color.darkgreen);
                 recColorbar.setBackgroundColor(color);
+            }else if (Objects.equals(status, "RETURNED")) {
+                int color = itemView.getResources().getColor(R.color.purple_200);
+                recColorbar.setBackgroundColor(color);
             }
 
             recCard.setOnClickListener(new View.OnClickListener() {
