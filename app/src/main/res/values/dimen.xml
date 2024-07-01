@@ -1,0 +1,8 @@
+<!-- res/values/dimens.xml -->
+<resources>
+    <!-- Icon sizes -->
+    <dimen name="toolbar_icon_size">28dp</dimen>
+    <dimen name="tab_icon_size">24dp</dimen>
+    <dimen name="button_icon_size">36dp</dimen>
+    <dimen name="drawer_icon_size">48dp</dimen>
+</resources>

@@ -128,7 +128,7 @@ StorageReference storageReference;
             dateOnly=bundle.getString("Date");
             oldImageURL = bundle.getStringArrayList("eImages");
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(dateOnly).child(jobno);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Test List").child(dateOnly).child(jobno);
 
         deliver.setOnClickListener(new View.OnClickListener() {
             @Override

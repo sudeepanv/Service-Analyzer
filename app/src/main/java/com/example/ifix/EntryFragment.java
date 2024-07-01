@@ -116,7 +116,7 @@ public class EntryFragment extends Fragment {
         dialog = builder.create();
         dialog.show();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Test List");
 
         if (NetworkUtils.isNetworkAvailable(getContext())) {
             loadInitialData(dialog);
@@ -306,7 +306,7 @@ public class EntryFragment extends Fragment {
     }
 
     private void fetchEntriesForDate(String date) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(date);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Test List").child(date);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

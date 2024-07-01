@@ -193,7 +193,7 @@ public class DealerFragment extends Fragment {
         adapter = new dealerAdapter(requireContext(), dataList);
         recyclerView.setAdapter(adapter);
 
-        entryReference = FirebaseDatabase.getInstance().getReference("Entry List");
+        entryReference = FirebaseDatabase.getInstance().getReference("Test List");
         dealerReference = FirebaseDatabase.getInstance().getReference("DealerAccounts");
         dealerName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

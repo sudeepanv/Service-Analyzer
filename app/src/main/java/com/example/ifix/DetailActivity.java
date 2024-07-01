@@ -5,12 +5,16 @@ import static java.security.AccessController.getContext;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,7 +61,9 @@ ArrayList oldImageURL;
     String key,dateOnly;
     DatabaseReference databaseReference;
     ArrayList<String> imageUrls;
-
+    Toolbar tool;
+    private MenuItem privacyEyeMenuItem;
+    private boolean isTextVisible = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +82,9 @@ ArrayList oldImageURL;
         detailComplaint = findViewById(R.id.detailComplaint);
         detailStatus = findViewById(R.id.detailStatus);
         detailExpense = findViewById(R.id.detailExpense);
+        detailExpense.setVisibility(View.INVISIBLE);
         detailAmount = findViewById(R.id.detailAmount);
+        detailAmount.setVisibility(View.INVISIBLE);
         detailPayment = findViewById(R.id.detailPayment);
         detailDelivery = findViewById(R.id.detailDelivery);
         deleteButton = findViewById(R.id.deleteButton);
@@ -84,6 +92,8 @@ ArrayList oldImageURL;
         phone = findViewById(R.id.phonebutton);
         deliveredButton = findViewById(R.id.deliveredButton);
         detailJobNo = findViewById(R.id.detailJobNo);
+        tool = findViewById(R.id.toolbar);
+        setSupportActionBar(tool);
 
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +162,11 @@ ArrayList oldImageURL;
                     });
 
                 }
+            }else {
+                LinearLayout lay = findViewById(R.id.imagelayout);
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imagesContainer.getLayoutParams();
+                layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                lay.setLayoutParams(layoutParams);
             }
             SimpleDateFormat inputFormat = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
             SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
@@ -166,7 +181,7 @@ ArrayList oldImageURL;
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Entry List").child(dateOnly).child(detailJobNo.getText().toString());
+                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Test List").child(dateOnly).child(detailJobNo.getText().toString());
                 if (imageUrls != null && !imageUrls.isEmpty()) {
                     for (String imageUrl : imageUrls) {
                         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -277,6 +292,47 @@ ArrayList oldImageURL;
             }
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detailtool, menu);
+        privacyEyeMenuItem = menu.findItem(R.id.action_privacy_eye);
+        updatePrivacyEyeIcon();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_privacy_eye) {
+            togglePasswordVisibility();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    private void togglePasswordVisibility() {
+        if (isTextVisible) {
+            detailAmount.setVisibility(View.INVISIBLE);
+            detailExpense.setVisibility(View.INVISIBLE);
+            isTextVisible = false;
+            updatePrivacyEyeIcon();
+
+        } else {
+            detailAmount.setVisibility(View.VISIBLE);
+            detailExpense.setVisibility(View.VISIBLE);
+            isTextVisible = true;
+            updatePrivacyEyeIcon();
+        }
+    }
+    private void updatePrivacyEyeIcon() {
+        if (privacyEyeMenuItem != null) {
+            if (isTextVisible) {
+                privacyEyeMenuItem.setIcon(R.drawable.visibility_off_24px);
+            } else {
+                privacyEyeMenuItem.setIcon(R.drawable.visibility_24px);
+            }
+        }
+    }
     private void deliver(){
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        CustomDialogFragment customDialogFragment = new CustomDialogFragment();
@@ -346,7 +402,7 @@ ArrayList oldImageURL;
             Password = detailPassword.getText().toString();
             entrytime= detailTime.getText().toString();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(dateOnly).child(jobno);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Test List").child(dateOnly).child(jobno);
 
         deliver.setOnClickListener(new View.OnClickListener() {
             @Override

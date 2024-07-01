@@ -255,7 +255,7 @@ public class UploadActivity extends AppCompatActivity {
         uploadModel.setOnClickListener(v -> uploadModel.showDropDown());
     }
     private void fetchDataList() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Test List");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -403,7 +403,7 @@ public class UploadActivity extends AppCompatActivity {
         String job = Integer.toString(maxjob += 1);
         DataClass dataClass = new DataClass(name, phone, brand, model, uploadColour.getText().toString(), password, complaint, uploadStatus.getText().toString(), imageUrls, entrytime, job,Estimate,"","","","","");
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(Date);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Test List").child(Date);
         databaseReference.child(job).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
