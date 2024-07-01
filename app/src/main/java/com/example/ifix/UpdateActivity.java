@@ -63,8 +63,6 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
 
         updateButton = findViewById(R.id.updateButton);
-
-        updateImage = findViewById(R.id.updateImage);
         updateName = findViewById(R.id.updateName);
         updatePhone = findViewById(R.id.updatePhone);
         updateEstimate = findViewById(R.id.updateEstimate);
@@ -168,24 +166,8 @@ public class UpdateActivity extends AppCompatActivity {
         });
         updateBrand.setOnClickListener(v -> updateBrand.showDropDown());
 
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK){
-                            Intent data = result.getData();
-                            uri = Objects.requireNonNull(data).getData();
-                            updateImage.setImageURI(uri);
-                        } else {
-                            Toast.makeText(UpdateActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-        );
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
-            Glide.with(UpdateActivity.this).load(bundle.getString("Image")).into(updateImage);
             updateName.setText(bundle.getString("Name"));
             updatePhone.setText(bundle.getString("Phone"));
             updateBrand.setText(bundle.getString("Brand"));
@@ -206,16 +188,8 @@ public class UpdateActivity extends AppCompatActivity {
             dateonly = bundle.getString("Date");
             imageUrl = bundle.getStringArrayList("Images");
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("Entry List").child(dateonly).child(jobno);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Test List").child(dateonly).child(jobno);
 
-        updateImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent photoPicker = new Intent(Intent.ACTION_PICK);
-                photoPicker.setType("image/*");
-                activityResultLauncher.launch(photoPicker);
-            }
-        });
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

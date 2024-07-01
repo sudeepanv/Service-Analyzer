@@ -15,7 +15,9 @@ public class ifix extends Application {
         FirebaseApp.initializeApp(this);
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
+
         // Set up other global configurations or initializations
         // ...
     }
+
 }

@@ -1,4 +1,4 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,220 +6,219 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".UploadActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/ifixblue"
+            app:titleTextColor="@color/ifixblue"
             android:theme="@style/Widget.AppCompat.ActionBar"
             app:popupTheme="@style/Theme.AppCompat"
-            app:title="New Entry"
+            app:title="𝗡𝗲𝘄 𝗘𝗻𝘁𝗿𝘆"
             app:titleMarginStart="23dp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:background="@drawable/blue_border">
-
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:padding="3dp"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:id="@+id/imageContainer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal" />
-                    <ImageButton
-                        android:id="@+id/addImageButton"
-                        android:layout_width="100dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_height="100dp"
-                        android:adjustViewBounds="true"
-                        android:background="@drawable/imgupload"
-                        android:scaleType="fitStart"
-                        android:layout_gravity="center_vertical" />
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
-
-        </LinearLayout>
-
-
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="10dp"
-            android:paddingHorizontal="20dp">
-
-            <com.google.android.material.textfield.TextInputLayout
+            android:orientation="vertical">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:background="@drawable/blue_border">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:padding="3dp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:id="@+id/imageContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal" />
+                        <ImageButton
+                            android:id="@+id/addImageButton"
+                            android:layout_width="45dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_height="45dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/imgupload"
+                            android:scaleType="fitStart"
+                            android:layout_gravity="center_vertical" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="8dp"
+                android:paddingHorizontal="20dp">
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/uploadName"
-                    android:inputType="textCapCharacters"
-                    android:singleLine="true"
-                    android:hint="Name"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/lavender"
+                    android:layout_marginTop="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/uploadName"
+                        android:inputType="textCapCharacters"
+                        android:singleLine="true"
+                        android:hint="Name"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/uploadPhone"
-                    android:inputType="phone"
-                    android:singleLine="true"
-                    android:hint="Phone No"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:layout_marginTop="20dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/lavender"
+                    android:layout_marginTop="10dp">
 
-                <AutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/uploadPhone"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        android:hint="Phone No"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/uploadBrand"
-                    android:inputType="textCapCharacters"
-                    android:singleLine="true"
-                    android:hint="Brand"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:layout_marginTop="20dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/lavender"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <AutoCompleteTextView
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/uploadBrand"
+                        android:inputType="textCapCharacters"
+                        android:singleLine="true"
+                        android:hint="Brand"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/uploadModel"
-                    android:inputType="textCapCharacters"
-                    android:singleLine="true"
-                    android:hint="Model"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:layout_marginTop="20dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/lavender"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <AutoCompleteTextView
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/uploadModel"
+                        android:inputType="textCapCharacters"
+                        android:singleLine="true"
+                        android:hint="Model"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/uploadColour"
-                    android:inputType="textCapCharacters"
-                    android:singleLine="true"
-                    android:hint="Colour"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/lavender"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/uploadColour"
+                        android:inputType="textCapCharacters"
+                        android:singleLine="true"
+                        android:hint="Colour"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/uploadPassword"
-                    android:singleLine="true"
-                    android:hint="Password"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:layout_marginTop="20dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/lavender"
+                    android:layout_marginTop="10dp">
 
-                <MultiAutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/uploadPassword"
+                        android:singleLine="true"
+                        android:hint="Password"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/uploadComplaint"
-                    android:inputType="textCapCharacters"
-                    android:imeOptions="actionDone"
-                    android:singleLine="true"
-                    android:hint="Complaint"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:layout_marginTop="20dp">
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/lavender"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                    <MultiAutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/uploadComplaint"
+                        android:inputType="textCapCharacters"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:hint="Complaint"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/uploadEstimate"
-                    android:inputType="phone"
-                    android:singleLine="true"
-                    android:hint="Estimate"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/lavender"
+                    android:layout_marginTop="10dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:layout_marginTop="20dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/uploadEstimate"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        android:hint="Estimate"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <AutoCompleteTextView
-                    android:id="@+id/uploadStatus"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:inputType="none"
-                    android:hint="Status" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Save"
-                android:id="@+id/saveButton"
-                android:textSize="18sp"
-                android:layout_marginTop="20dp"
-                app:cornerRadius="20dp"/>
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/lavender"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/uploadStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="none"
+                        android:hint="Status" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:id="@+id/saveButton"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    app:rippleColor="@color/darkgreen"
+                    app:cornerRadius="10dp"/>
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
